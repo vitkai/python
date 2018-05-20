@@ -6,6 +6,6 @@
 
 #directories
 dirs:
-  inp_dir:  ""
-  outp_dir:  "/out"
+  inp_dir:  "files_to_proc"
+  outp_dir:  "out"
   #outp_dir:  "c:/Users/corvit/Documents/GitHub/python/out"
