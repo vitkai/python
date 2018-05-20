@@ -8,7 +8,8 @@ import __main__ as main
 import logging
 import pandas as pd
 import ruamel.yaml as yml
-#from functools import reduce
+import codecs
+# from functools import reduce
 from os import path#, listdir, remove, makedirs
 #from shutil import copy2
 
@@ -41,7 +42,7 @@ def load_cfg():
     """
     # importing configuration
     yaml_name = path.splitext(filename)[0] + ".yaml"
-    with open(full_path + "/" + yaml_name, 'r') as yaml_file:
+    with codecs.open(full_path + "/" + yaml_name, 'r', encoding='utf-8') as yaml_file:
     # with open(full_path + "/time_rec_proc.yaml", 'r') as yaml_file:
         cfg = yml.safe_load(yaml_file)
 
@@ -90,15 +91,17 @@ def imp_df(src_dir):
     # substitute tracked items values
     df_imported[imp_columns[1]] = df_imported[imp_columns[1]].replace(subst_items, regex=True)
     df_imported[imp_columns[2]] = df_imported[imp_columns[2]].replace(subst_items, regex=True)
+
+    # substitute months names
     df_imported[imp_columns[0]] = df_imported[imp_columns[0]].replace(subst_month, regex=True)
     df_imported[imp_columns[0]] = df_imported[imp_columns[0]].replace(subst_other, regex=True)
 
-    print(df_imported[imp_columns[0]].head())
-
-    #, subst_month, subst_other,
+    # convert 1st column to date format
+    df_imported[imp_columns[0]] = pd.to_datetime(df_imported[imp_columns[0]])
 
     logger.debug("DF imported from csv:\n{0}".format(df_imported.head()))
 
+    return df_imported
 
 # main starts here
 logger = logging_setup()
@@ -110,7 +113,7 @@ logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 #inp_dir, outp_dir = load_cfg()
 load_cfg()
 
-imp_df(inp_dir)
+df_imported = imp_df(inp_dir)
 
 # some cool stuff to be added here here
 
