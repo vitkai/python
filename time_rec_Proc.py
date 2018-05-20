@@ -32,13 +32,33 @@ def logging_setup():
 
     return logger
 
+def load_cfg():
+    # importing configuration
+    yaml_name = path.splitext(filename)[0] + ".yaml"
+    with open(full_path + "/" + yaml_name, 'r') as yaml_file:
+    #with open(full_path + "/time_rec_proc.yaml", 'r') as yaml_file:
+        cfg = yml.safe_load(yaml_file)
+
+    logger.debug("config in {0}:\n{1}".format(yaml_name, cfg))
+    inp_dir = cfg['dirs']['inp_dir']
+    outp_dir = cfg['dirs']['outp_dir']
+
+    if inp_dir == "":
+        inp_dir = full_path
+
+    if not path.isabs(outp_dir):
+        outp_dir = full_path + "/" + outp_dir
+
+    logger.debug("Dirs: Input: {0} || Output: {1}".format(inp_dir, outp_dir))
+
+
 logger = logging_setup()
 
-#importing configuration
-with open("time_rec_proc.yaml", 'r') as yaml_file:
-    cfg = yml.safe_load(yaml_file)
+#get script path
+full_path, filename = path.split(__file__)
+logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 
-logger.debug("YAML config:\n%s", cfg)
+load_cfg()
 
 #some cool stuff to be added here here
 

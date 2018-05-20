@@ -7,4 +7,5 @@
 #directories
 dirs:
   inp_dir:  ""
-  outp_dir:  ""
+  outp_dir:  "/out"
+  #outp_dir:  "c:/Users/corvit/Documents/GitHub/python/out"
