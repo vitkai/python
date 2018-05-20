@@ -6,7 +6,7 @@ Created: Sun May 20 2018 08:15
 
 import __main__ as main
 import logging
-#import pandas as pd
+import pandas as pd
 import ruamel.yaml as yml
 #from functools import reduce
 from os import path#, listdir, remove, makedirs
@@ -32,11 +32,12 @@ def logging_setup():
 
     return logger
 
+
 def load_cfg():
     # importing configuration
     yaml_name = path.splitext(filename)[0] + ".yaml"
     with open(full_path + "/" + yaml_name, 'r') as yaml_file:
-    #with open(full_path + "/time_rec_proc.yaml", 'r') as yaml_file:
+    # with open(full_path + "/time_rec_proc.yaml", 'r') as yaml_file:
         cfg = yml.safe_load(yaml_file)
 
     logger.debug("config in {0}:\n{1}".format(yaml_name, cfg))
@@ -52,15 +53,21 @@ def load_cfg():
     logger.debug("Dirs: Input: {0} || Output: {1}".format(inp_dir, outp_dir))
 
 
+def imp_df():
+    """importing pandas dataframe from csv file"""
+    pass
+
 logger = logging_setup()
 
-#get script path
+# get script path
 full_path, filename = path.split(__file__)
 logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 
 load_cfg()
 
-#some cool stuff to be added here here
+imp_df()
+
+# some cool stuff to be added here here
 
 logger.debug("That's all folks")
 print("That's all folks")
