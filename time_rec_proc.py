@@ -110,12 +110,13 @@ logger = logging_setup()
 full_path, filename = path.split(__file__)
 logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 
-#inp_dir, outp_dir = load_cfg()
 load_cfg()
 
 df_imported = imp_df(inp_dir)
 
-# some cool stuff to be added here here
+# TODO 1) export/store .xlsx file with years as sheet names
+# TODO 2) imported file to be merged with stored file making sure that dates range was not in stored file before
+# TODO 2) a) perhaps we need to store index of date ranges in a separate sheet?
 
 logger.debug("That's all folks")
 print("That's all folks")
