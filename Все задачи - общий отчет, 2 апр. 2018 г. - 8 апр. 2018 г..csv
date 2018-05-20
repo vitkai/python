@@ -1,0 +1,37 @@
+Ветвь;Задача;Суммарное время;Собственное время
+/;Pers.Time;84:20:15;0:00:00
+/Pers.Time/;Trip;36:54:52;0:00:07
+/Pers.Time/Trip/;Hotel;19:05:09;19:05:09
+/Pers.Time/Trip/;Car;17:49:35;0:00:00
+/Pers.Time/Trip/Car/;Family;17:49:35;0:00:00
+/Pers.Time/Trip/Car/Family/;Children;17:49:35;17:49:35
+/Pers.Time/;Family;14:16:18;0:00:00
+/Pers.Time/Family/;Children;14:16:18;0:00:00
+/Pers.Time/Family/Children/;Movie;14:16:18;14:16:18
+/Pers.Time/;WL;11:09:10;0:00:00
+/Pers.Time/WL/;Family;11:09:10;0:01:51
+/Pers.Time/WL/Family/;Children;11:07:18;11:07:18
+/Pers.Time/;Domesticity;7:59:30;7:59:30
+/Pers.Time/;Food1;7:17:54;0:00:00
+/Pers.Time/Food1/;Family;7:17:54;0:00:00
+/Pers.Time/Food1/Family/;Children;7:17:54;7:17:54
+/Pers.Time/;Leisure;6:38:43;0:00:00
+/Pers.Time/Leisure/;CG;6:02:40;6:02:40
+/Pers.Time/Leisure/;Inet;0:36:02;0:36:02
+/Pers.Time/;SelfImprovement;0:03:46;0:00:00
+/Pers.Time/SelfImprovement/;ProfCourses;0:03:23;0:03:23
+/Pers.Time/SelfImprovement/;Finance;0:00:15;0:00:15
+/Pers.Time/SelfImprovement/;FuturePlanning;0:00:07;0:00:07
+/;SL:;67:18:28;67:18:28
+/;TravelCity;16:13:45;0:00:00
+/TravelCity/;Foot;12:08:28;12:08:28
+/TravelCity/;Organizations;2:11:15;0:00:05
+/TravelCity/Organizations/;Family;2:11:09;0:00:00
+/TravelCity/Organizations/Family/;Children;2:11:09;2:11:09
+/TravelCity/;Shopping;0:44:56;0:00:00
+/TravelCity/Shopping/;Family;0:44:56;0:00:00
+/TravelCity/Shopping/Family/;Children;0:44:56;0:44:56
+/TravelCity/;Car;0:35:27;0:35:27
+/TravelCity/;Metro;0:33:30;0:33:30
+/TravelCity/;Bus/Tram;0:00:07;0:00:07
+;Все задачи (Итого);0:00:00;0:00:00

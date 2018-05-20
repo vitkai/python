@@ -7,7 +7,7 @@ Created: Sun May 20 2018 08:15
 import __main__ as main
 import logging
 #import pandas as pd
-#import yaml as yml
+import ruamel.yaml as yml
 #from functools import reduce
 from os import path#, listdir, remove, makedirs
 #from shutil import copy2
@@ -34,7 +34,13 @@ def logging_setup():
 
 logger = logging_setup()
 
-#some cool stuff here
+#importing configuration
+with open("time_rec_proc.yaml", 'r') as yaml_file:
+    cfg = yml.safe_load(yaml_file)
+
+logger.debug("YAML config:\n%s", cfg)
+
+#some cool stuff to be added here here
 
 logger.debug("That's all folks")
 print("That's all folks")

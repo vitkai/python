@@ -1,0 +1,10 @@
+#"""
+#Descr: yaml configuration file for time management records processing for QTimeRec software
+#@author: vitkai
+#Created: Sun May 20 2018 08:45
+#"""
+
+#directories
+dirs:
+  inp_dir:  ""
+  outp_dir:  ""
