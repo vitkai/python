@@ -9,3 +9,34 @@ dirs:
   inp_dir:  "files_to_proc"
   outp_dir:  "out"
   #outp_dir:  "c:/Users/corvit/Documents/GitHub/python/out"
+
+csv_parameters:
+  columns:
+    - Date
+    - Branch
+    - Task
+    - TimeSum
+    - TimeSelf
+
+  separator:  ';'
+
+  substs:
+    months:
+      января: Jan
+      февраля: Feb
+      марта: Mar
+      апреля: Apr
+      мая: May
+      июня: Jun
+      июля: Jul
+      августа: Aug
+      сентября: Sep
+      октября: Oct
+      ноября: Nov
+      декабря: Dec
+    items:
+      Jobtime1: Jobtime
+      "SL:":  SL
+      Food1:  Food
+    other:
+      " г.": ""

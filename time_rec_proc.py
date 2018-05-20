@@ -46,20 +46,33 @@ def load_cfg():
         cfg = yml.safe_load(yaml_file)
 
     logger.debug("config in {0}:\n{1}".format(yaml_name, cfg))
-    src_dir = cfg['dirs']['inp_dir']
-    dst_dir = cfg['dirs']['outp_dir']
 
-    if src_dir == "":
-        src_dir = full_path + "/"
+    # process directories
+    global inp_dir, outp_dir
+    inp_dir = cfg['dirs']['inp_dir']
+    outp_dir = cfg['dirs']['outp_dir']
+
+    if inp_dir == "":
+        inp_dir = full_path + "/"
     else:
-        src_dir += "/"
+        inp_dir += "/"
 
-    if not path.isabs(dst_dir):
-        dst_dir = full_path + "/" + dst_dir + "/"
+    if not path.isabs(outp_dir):
+        outp_dir = full_path + "/" + outp_dir + "/"
 
-    logger.debug("Dirs: Input: {0} || Output: {1}".format(src_dir, dst_dir))
+    logger.debug("Dirs: Input: {0} || Output: {1}".format(inp_dir, outp_dir))
 
-    return src_dir, dst_dir
+    # process csv related parameters
+    global imp_columns, subst_month, subst_other, csv_sep, subst_items
+
+    imp_columns = cfg['csv_parameters']['columns']
+    subst_month = cfg['csv_parameters']['substs']['months']
+    subst_items = cfg['csv_parameters']['substs']['items']
+    subst_other = cfg['csv_parameters']['substs']['other']
+    csv_sep = cfg['csv_parameters']['separator']
+    logger.debug("Substs: \nColumns: {0} || \nMonths: {1} || \nOther: {2} || \nCSV Separator: {3} || \nItems: {4}".format(imp_columns, subst_month, subst_other, csv_sep, subst_items))
+
+    #return src_dir, dst_dir
 
 
 def imp_df(src_dir):
@@ -70,8 +83,19 @@ def imp_df(src_dir):
         src_dir = full_path + '/' + src_dir
         logger.debug("Path is relative")
     logger.debug("Input dir is: {0}|| Full path is: {1}".format(src_dir, full_path))
-    # TODO 1)replace headings in imported files 2)add columns head into yaml cfg
-    df_imported = pd.read_csv(src_dir + "qtimerec_2018_03.csv", encoding='UTF8')
+
+    df_imported = pd.read_csv(src_dir + "qtimerec_2018_03.csv", encoding='utf-8', sep=csv_sep, header=0, names=imp_columns)
+    df_imported = df_imported.dropna()
+
+    # substitute tracked items values
+    df_imported[imp_columns[1]] = df_imported[imp_columns[1]].replace(subst_items, regex=True)
+    df_imported[imp_columns[2]] = df_imported[imp_columns[2]].replace(subst_items, regex=True)
+    df_imported[imp_columns[0]] = df_imported[imp_columns[0]].replace(subst_month, regex=True)
+    df_imported[imp_columns[0]] = df_imported[imp_columns[0]].replace(subst_other, regex=True)
+
+    print(df_imported[imp_columns[0]].head())
+
+    #, subst_month, subst_other,
 
     logger.debug("DF imported from csv:\n{0}".format(df_imported.head()))
 
@@ -83,7 +107,8 @@ logger = logging_setup()
 full_path, filename = path.split(__file__)
 logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 
-inp_dir, outp_dir = load_cfg()
+#inp_dir, outp_dir = load_cfg()
+load_cfg()
 
 imp_df(inp_dir)
 
