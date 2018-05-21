@@ -117,6 +117,8 @@ df_imported = imp_df(inp_dir)
 # TODO 1) export/store .xlsx file with years as sheet names
 # TODO 2) imported file to be merged with stored file making sure that dates range was not in stored file before
 # TODO 2) a) perhaps we need to store index of date ranges in a separate sheet?
+# TODO 3) add new field - year. Store data in separate sheets by year
+# TODO 4) Reading stored data: a) list sheets b) number by years c) read into array of DFs
 
 logger.debug("That's all folks")
 print("That's all folks")
