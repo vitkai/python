@@ -106,7 +106,7 @@ def imp_df(src_dir):
 def load_stored_base():
     """function to load all previously processed data"""
 
-    global base_exists#, stored_base_filename
+    global base_exists, base_filename#, stored_base_filename
     base_exists = False
 
     base_filename = get_abs_path(stored_base_filename, full_path)
@@ -139,9 +139,37 @@ load_stored_base()
 df_imported = imp_df(inp_dir)
 
 # add field Year and group by year
+# TODO [START] move this block to a functions (process and write?)
 df_imported['Year'] = df_imported[imp_columns[0]].dt.year
-#df_imported = df_imported.groupby('Year', as_index=True).agg({"Task":"sum"})
 logger.debug("\nImported DF with 'Year' field added:\n{0}".format(df_imported.head()))
+
+# find what years are included
+years_count = df_imported['Year'].nunique()
+logger.debug("Years entries:%s", years_count)
+
+years_list = df_imported['Year'].unique()
+logger.debug("Years list:%s", years_list)
+
+# Create a Pandas Excel writer using XlsxWriter as the engine.
+logger.debug("Saving to file: %s",base_filename)
+writer = pd.ExcelWriter(base_filename, engine='xlsxwriter')
+
+for yr in years_list:
+    # filter to a separate DF by year
+    logger.debug("Processing year:%s", yr)
+    df_sheet = df_imported[df_imported['Year'] == yr]
+    logger.debug("DF for the year:\n%s", df_sheet.head())
+    # Write each dataframe to a different worksheet
+    # TODO 1) update 'DATE' format since we do not need time there 2)remove index column 3) do we need to store 'Year' column?
+    df_sheet.to_excel(writer, sheet_name=str(yr))
+
+# Close the Pandas Excel writer and output the Excel file.
+writer.save()
+#writer.close()
+
+#df_imported = df_imported.groupby('Year', as_index=True).agg({"Task":"sum"})
+# TODO [END] move this block to a function
+
 
 # TODO 1) export/store .xlsx file with years as sheet names
 # TODO 2) imported file to be merged with stored file making sure that dates range was not in stored file before
