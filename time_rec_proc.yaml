@@ -10,6 +10,8 @@ dirs:
   outp_dir:  "out"
   #outp_dir:  "c:/Users/corvit/Documents/GitHub/python/out"
 
+stored_filename: "qtimerec_base.xlsx"
+
 csv_parameters:
   columns:
     - Date
