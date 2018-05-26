@@ -125,6 +125,41 @@ def get_abs_path(src_path, fullpath):
 
     return src_path
 
+
+def write_base():
+    # add field Year and group by year
+    df_imported['Year'] = df_imported[imp_columns[0]].dt.year
+    logger.debug("\nImported DF with 'Year' field added:\n{0}".format(df_imported.head()))
+
+    # find what years are included
+    years_count = df_imported['Year'].nunique()
+    logger.debug("Years entries:%s", years_count)
+
+    years_list = df_imported['Year'].unique()
+    logger.debug("Years list:%s", years_list)
+
+    # Create a Pandas Excel writer using XlsxWriter as the engine.
+    logger.debug("Saving to file: %s", base_filename)
+    writer = pd.ExcelWriter(base_filename, engine='xlsxwriter', date_format='yyyy-mm-dd')
+
+    for yr in years_list:
+        # filter to a separate DF by year
+        logger.debug("Processing year:%s", yr)
+        df_sheet = df_imported[df_imported['Year'] == yr]
+        logger.debug("DF for the year:\n%s", df_sheet.head())
+        # get rid of "Year" column
+        df_sheet = df_sheet.drop('Year', 1)
+        # convert to date only format
+        df_sheet[imp_columns[0]] = df_sheet[imp_columns[0]].dt.date
+        # df_sheet[imp_columns[0]] = df_sheet.loc[:, imp_columns[0]].dt.date
+        # Write each dataframe to a different worksheet
+        df_sheet.to_excel(writer, sheet_name=str(yr), index=False)
+
+    # Close the Pandas Excel writer and output the Excel file.
+    writer.save()
+    # writer.close()
+
+
 # main starts here
 logger = logging_setup()
 
@@ -135,48 +170,19 @@ logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 load_cfg()
 
 load_stored_base()
-
 df_imported = imp_df(inp_dir)
+write_base()
 
-# add field Year and group by year
-# TODO [START] move this block to a functions (process and write?)
-df_imported['Year'] = df_imported[imp_columns[0]].dt.year
-logger.debug("\nImported DF with 'Year' field added:\n{0}".format(df_imported.head()))
-
-# find what years are included
-years_count = df_imported['Year'].nunique()
-logger.debug("Years entries:%s", years_count)
-
-years_list = df_imported['Year'].unique()
-logger.debug("Years list:%s", years_list)
-
-# Create a Pandas Excel writer using XlsxWriter as the engine.
-logger.debug("Saving to file: %s",base_filename)
-writer = pd.ExcelWriter(base_filename, engine='xlsxwriter')
-
-for yr in years_list:
-    # filter to a separate DF by year
-    logger.debug("Processing year:%s", yr)
-    df_sheet = df_imported[df_imported['Year'] == yr]
-    logger.debug("DF for the year:\n%s", df_sheet.head())
-    # Write each dataframe to a different worksheet
-    # TODO 1) update 'DATE' format since we do not need time there 2)remove index column 3) do we need to store 'Year' column?
-    df_sheet.to_excel(writer, sheet_name=str(yr))
-
-# Close the Pandas Excel writer and output the Excel file.
-writer.save()
-#writer.close()
-
-#df_imported = df_imported.groupby('Year', as_index=True).agg({"Task":"sum"})
-# TODO [END] move this block to a function
-
+# df_imported = df_imported.groupby('Year', as_index=True).agg({"Task":"sum"})
 
 # TODO 1) export/store .xlsx file with years as sheet names
 # TODO 2) imported file to be merged with stored file making sure that dates range was not in stored file before
 # TODO 2) a) perhaps we need to store index of date ranges in a separate sheet?
 # (/) TODO 3) add new field - year.
-# TODO 3) a)Store data in separate sheets by year
+# (+) TODO 3) a)Store data in separate sheets by year
+# TODO 3) b) before storing need to make sure there are no duplicates in imported dataframes
 # TODO 4) Reading stored data: a) list sheets b) number by years c) read into array of DFs
+# TODO 5) all imported data should be checked against alrady stored data for duplicates - see 2)a)
 
 logger.debug("That's all folks")
 print("That's all folks")
