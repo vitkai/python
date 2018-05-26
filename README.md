@@ -1,3 +1,3 @@
-# python
+# time rec proc
 
-This is a test update branch
+This is a test python script to process QTimeRec export file.
