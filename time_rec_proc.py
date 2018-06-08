@@ -74,10 +74,10 @@ def load_cfg():
     #return src_dir, dst_dir
 
 
-def imp_df(src_dir):
+def imp_df(filename):
     """importing pandas dataframe from csv file"""
 
-    src_dir = get_abs_path(src_dir, full_path)
+    #src_dir = get_abs_path(src_dir, full_path)
     """
     if not path.isabs(src_dir):
         src_dir = full_path + '/' + src_dir
@@ -85,7 +85,7 @@ def imp_df(src_dir):
     logger.debug("Input dir is: {0}|| Full path is: {1}".format(src_dir, full_path))
     """
 
-    df_imported = pd.read_csv(src_dir + "qtimerec_2018_03.csv", encoding='utf-8', sep=csv_sep, header=0, names=imp_columns)
+    df_imported = pd.read_csv(filename, encoding='utf-8', sep=csv_sep, header=0, names=imp_columns)
     df_imported = df_imported.dropna()
 
     # substitute tracked items values
@@ -106,12 +106,16 @@ def imp_df(src_dir):
 def load_stored_base():
     """function to load all previously processed data"""
 
-    global base_exists, base_filename#, stored_base_filename
+    global base_exists, base_filename, stored_base_df_keys, stored_base_df
     base_exists = False
 
     base_filename = get_abs_path(stored_base_filename, full_path)
     if path.exists(base_filename):
         base_exists = True
+        stored_base_df = pd.read_excel(base_filename, None)
+        stored_base_df_keys = list(stored_base_df.keys())
+        logger.debug("DF keys: {0}".format(stored_base_df_keys))
+        logger.debug("DF type:{0} | DF with key '{1}': \n {2}".format(type(stored_base_df[stored_base_df_keys[0]]), stored_base_df_keys[0], stored_base_df[stored_base_df_keys[0]].head()))
 
     logger.debug("Base exists: %s", base_exists)
 
@@ -126,39 +130,49 @@ def get_abs_path(src_path, fullpath):
     return src_path
 
 
-def write_base():
-    # add field Year and group by year
-    df_imported['Year'] = df_imported[imp_columns[0]].dt.year
-    logger.debug("\nImported DF with 'Year' field added:\n{0}".format(df_imported.head()))
+def write_base(df_to_save):
+    """Stores final data into base workbook"""
+    if base_exists:
+        print("Base exists. Will not re-write it for now")
+        # we need some checks before writing new data -- see TODO 5)
+    else:
+        print("Base does not exist. Will write it now")
+        # add field Year and group by year
+        df_to_save['Year'] = df_to_save[imp_columns[0]].dt.year
+        logger.debug("\nImported DF with 'Year' field added:\n{0}".format(df_to_save.head()))
 
-    # find what years are included
-    years_count = df_imported['Year'].nunique()
-    logger.debug("Years entries:%s", years_count)
+        # find what years are included
+        years_count = df_to_save['Year'].nunique()
+        logger.debug("Years entries:%s", years_count)
 
-    years_list = df_imported['Year'].unique()
-    logger.debug("Years list:%s", years_list)
+        years_list = df_to_save['Year'].unique()
+        logger.debug("Years list:%s", years_list)
 
-    # Create a Pandas Excel writer using XlsxWriter as the engine.
-    logger.debug("Saving to file: %s", base_filename)
-    writer = pd.ExcelWriter(base_filename, engine='xlsxwriter', date_format='yyyy-mm-dd')
+        # Create a Pandas Excel writer using XlsxWriter as the engine.
+        logger.debug("Saving to file: %s", base_filename)
+        writer = pd.ExcelWriter(base_filename, engine='xlsxwriter', date_format='yyyy-mm-dd')
 
-    for yr in years_list:
-        # filter to a separate DF by year
-        logger.debug("Processing year:%s", yr)
-        df_sheet = df_imported[df_imported['Year'] == yr]
-        logger.debug("DF for the year:\n%s", df_sheet.head())
-        # get rid of "Year" column
-        df_sheet = df_sheet.drop('Year', 1)
-        # convert to date only format
-        df_sheet[imp_columns[0]] = df_sheet[imp_columns[0]].dt.date
-        # df_sheet[imp_columns[0]] = df_sheet.loc[:, imp_columns[0]].dt.date
-        # Write each dataframe to a different worksheet
-        df_sheet.to_excel(writer, sheet_name=str(yr), index=False)
+        for yr in years_list:
+            # filter to a separate DF by year
+            logger.debug("Processing year:%s", yr)
+            df_sheet = df_to_save[df_to_save['Year'] == yr]
+            logger.debug("DF for the year:\n%s", df_sheet.head())
+            # get rid of "Year" column
+            df_sheet = df_sheet.drop('Year', 1)
+            # convert to date only format
+            df_sheet[imp_columns[0]] = df_sheet[imp_columns[0]].dt.date
+            # df_sheet[imp_columns[0]] = df_sheet.loc[:, imp_columns[0]].dt.date
+            # Write each dataframe to a different worksheet
+            df_sheet.to_excel(writer, sheet_name=str(yr), index=False)
 
-    # Close the Pandas Excel writer and output the Excel file.
-    writer.save()
-    # writer.close()
+        # Close the Pandas Excel writer and output the Excel file.
+        writer.save()
+        # writer.close()
 
+def merge_loaded_data():
+    """Checks imported data against loaded base
+    if base does not present, will work on existing data set"""
+    pass
 
 # main starts here
 logger = logging_setup()
@@ -170,19 +184,31 @@ logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 load_cfg()
 
 load_stored_base()
-df_imported = imp_df(inp_dir)
-write_base()
+
+imp_file = "qtimerec_2018_03.csv"
+# TODO cycle through files to import and process them
+imp_file = get_abs_path(inp_dir + imp_file, full_path)
+imported_csv = imp_df(imp_file)
+
+# if base_exists:
+    # [Compare] we comparing all imported data for existing date ranges to avoid duplications
+# else:
+    # we work in the mode of base creation
+    # forming new base from imported data and doing [Compare] steps for every newly loaded data
+    # this situation is only possible when we run for the very 1st time -- that's why nothing is stored as base yet
+
+write_base(imported_csv)
 
 # df_imported = df_imported.groupby('Year', as_index=True).agg({"Task":"sum"})
 
-# TODO 1) export/store .xlsx file with years as sheet names
-# TODO 2) imported file to be merged with stored file making sure that dates range was not in stored file before
-# TODO 2) a) perhaps we need to store index of date ranges in a separate sheet?
+# (+) TODO 1) export/store .xlsx file with years as sheet names -- see #3)
+# (!) TODO 2) imported file to be merged with stored file making sure that dates range was not in stored file before
+# (x) TODO 2) a) perhaps we need to store index of date ranges in a separate sheet? See 3)
 # (/) TODO 3) add new field - year.
 # (+) TODO 3) a)Store data in separate sheets by year
-# TODO 3) b) before storing need to make sure there are no duplicates in imported dataframes
-# TODO 4) Reading stored data: a) list sheets b) number by years c) read into array of DFs
-# TODO 5) all imported data should be checked against alrady stored data for duplicates - see 2)a)
+# (!) TODO 3) b) before storing need to make sure there are no duplicates in imported dataframes
+# (+) TODO 4) Reading stored data: a) list sheets b) number by years c) read into array of DFs (ordered dict)
+# (!) TODO 5) all imported data should be checked against already stored data for duplicates - see 2)a)
 
 logger.debug("That's all folks")
 print("That's all folks")
