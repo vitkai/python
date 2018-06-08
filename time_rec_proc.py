@@ -172,6 +172,11 @@ def write_base(df_to_save):
 def merge_loaded_data():
     """Checks imported data against loaded base
     if base does not present, will work on existing data set"""
+    # check for years in imported DF (see current write_base version)
+    # cycle through years in imported DF
+    # compare date range by year in imported DF vs stored base
+    # remove duplicates in imported DF
+    # merge data with base
     pass
 
 # main starts here
