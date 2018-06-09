@@ -172,6 +172,7 @@ def split_df_by_years(df_to_proc):
     return dict_df, years_list
 
 
+# TODO fix write_base processing
 def write_base(df_to_save):
     """Stores final data into base workbook"""
     if base_exists:
@@ -213,54 +214,50 @@ def merge_loaded_data(inp_df):
     # remove duplicates in imported DF
     # merge data with base
     logger.debug("merge_loaded_data() call")
+    global stored_base_df_years
     inp_df, inp_yrs = split_df_by_years(inp_df)
     # cycle through years in input DF
     clmns = ["Date"]
     for yr in inp_yrs:
+        year_df = pd.DataFrame(inp_df[yr])
         if yr in stored_base_df_years:
             # check for duplicates
             logger.debug("'{0}' found in base years".format(yr))
             # get list of unique dates
-            year_df = pd.DataFrame(inp_df[yr])
-            year_dates_df = year_df["Date"]
-            inp_dates_wo_dups = pd.DataFrame(year_dates_df.unique())#drop_duplicates()
+            #year_df = pd.DataFrame(inp_df[yr])
+            #year_dates_df = year_df["Date"]
+
+            inp_dates_wo_dups = pd.DataFrame(year_df["Date"].unique())#drop_duplicates()
             inp_dates_wo_dups.columns = clmns
-            logger.debug("Input dates - no duplicates:\n{0}".format(inp_dates_wo_dups.head()))
+            logger.debug("Input dates - no duplicates:\n{0}\n...\n{1}".format(inp_dates_wo_dups.head(), inp_dates_wo_dups.tail()))
+
             base_dates = pd.DataFrame(stored_base_df[yr]["Date"].unique())#drop_duplicates()
             base_dates.columns = clmns
-            # check dates that are already in base
-            # compare dates in two sets
-            merged_df = inp_dates_wo_dups.merge(base_dates, how="left", indicator=True)
-            logger.debug("Merged DF:\n{0}\n...\n{1}".format(merged_df.head(), merged_df.tail()))
-            date_mask = (merged_df._merge == 'left_only')
-            logger.debug("Merge mask:\n{0}\n...\n{1}".format(date_mask.head(), date_mask.tail()))
-            # TODO need to filter inp_df with those year_mask["Date"] records where in merged_df._merge == 'left_only'
-            # remove dates that are already in base from list
-            inp_dates_wo_dups = inp_dates_wo_dups[date_mask]
-            # compare DF vs filtered dates list
-            logger.debug("year_dates_df:\n{0}\n ... \n{1}\n inp_dates_wo_dups (count: {2}):\n{3}".format(year_dates_df.head(), year_dates_df.tail(), inp_dates_wo_dups.count(), inp_dates_wo_dups.head()))
-            year_dates_df = pd.DataFrame(year_dates_df)
-            year_dates_df.columns = clmns
 
-            #merged_df = year_dates_df.merge(inp_dates_wo_dups, how="left", indicator=True)
-            #logger.debug("merged_df.count :{0}".format(merged_df.count()))
-            #date_mask = (merged_df._merge == 'both')
-            merged_df = year_df.loc[year_dates_df["Date"].isin(inp_dates_wo_dups["Date"])]
-            logger.debug("merged_df.count :{0}".format(merged_df.count()))
-            # TODO : find out why instead of 526 values in year_df we receive 496 in inp_dates_wo_dups merged/filtered vs base dates list
+            # filter analyzed dates vs base dates excluding those in base
+            merged_df = inp_dates_wo_dups.loc[~inp_dates_wo_dups["Date"].isin(base_dates["Date"])]
+            logger.debug("merged_df:\n{0}".format(merged_df.head()))
 
-            #logger.debug("date mask:\n{0}\n...\n{1}".format(date_mask.head(), date_mask.tail()))
-            #logger.debug("year_df:\n{0}\n...\n{1}".format(year_df.head(), year_df.tail()))
-            #year_df = year_df[date_mask]
+            # apply filtered dates to analyzed DF
+            merged_df = year_df.loc[year_df["Date"].isin(merged_df["Date"])]
+            logger.debug("2nd merged_df:\n{0}\n...\n{1}".format(merged_df.head(), merged_df.tail()))
 
-            #year_mask = year_df["Date"] ==
-            #year_df = year_df.loc[mask]
-            logger.debug("DF with removed intersections:\n{0}".format(year_df.head()))
             # merge base and new dates
+            stored_base_df[yr] = pd.concat([merged_df, stored_base_df[yr]]).sort_values(['Date'], ascending=True).reset_index(drop=True)
+            logger.debug("stored_base_df[yr]:\n{0}\n...\n{1}".format(stored_base_df[yr].head(), stored_base_df[yr].tail()))
 
         else:
             # just add new year to base
-            pass
+            stored_base_df[yr] = year_df
+            stored_base_df_years = list(stored_base_df_years)
+            stored_base_df_years.append(yr)
+            stored_base_df_years.sort()
+            msg = "Base updated with year:{0}".format(yr)
+            print(msg)
+            logger.info(msg)
+            logger.debug("base years: {0}".format(stored_base_df_years))
+
+        #logger.debug("new base state: \n{0}".format(stored_base_df))
 
 def init_base(inp_df):
     """When base does not exist create it to work with it the same way as if we loaded it"""
