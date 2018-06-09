@@ -9,9 +9,10 @@ import logging
 import pandas as pd
 import ruamel.yaml as yml
 import codecs
+import tempfile
 # from functools import reduce
-from os import path#, listdir, remove, makedirs
-#from shutil import copy2
+from os import path, listdir, remove#, makedirs
+from shutil import copy2
 
 
 def logging_setup():
@@ -30,7 +31,7 @@ def logging_setup():
 
     logger.addHandler(handler)
 
-    logger.debug("\n{0}Starting program\n{0} Logging was setup".format('*'*10 + "\n"))
+    logger.debug("\n{0}Starting program\n{0} Logging was setup".format('-'*10 + '='*10 + '-'*10 + "\n"))
 
     return logger
 
@@ -77,29 +78,36 @@ def load_cfg():
 def imp_df(filename):
     """importing pandas dataframe from csv file"""
 
-    #src_dir = get_abs_path(src_dir, full_path)
-    """
-    if not path.isabs(src_dir):
-        src_dir = full_path + '/' + src_dir
-        logger.debug("Path is relative")
-    logger.debug("Input dir is: {0}|| Full path is: {1}".format(src_dir, full_path))
-    """
+    tmp_file = tempfile.gettempdir() + '/time_rec.tmp'
+    logger.debug("Temporary file:{0}".format(tmp_file))
 
-    df_imported = pd.read_csv(filename, encoding='utf-8', sep=csv_sep, header=0, names=imp_columns)
-    df_imported = df_imported.dropna()
+    copy2(filename, tmp_file)
+    file_read_err = False
+    try:
+        df_imported = pd.read_csv(tmp_file, encoding='utf-8', sep=csv_sep, header=0, names=imp_columns)
+    except Exception as e:
+        print(e)
+        logger.error(e)
+        df_imported = pd.DataFrame()
+        file_read_err = True
+    finally:
+        remove(tmp_file)
 
-    # substitute tracked items values
-    df_imported[imp_columns[1]] = df_imported[imp_columns[1]].replace(subst_items, regex=True)
-    df_imported[imp_columns[2]] = df_imported[imp_columns[2]].replace(subst_items, regex=True)
+    if not file_read_err:
+        df_imported = df_imported.dropna()
 
-    # substitute months names
-    df_imported[imp_columns[0]] = df_imported[imp_columns[0]].replace(subst_month, regex=True)
-    df_imported[imp_columns[0]] = df_imported[imp_columns[0]].replace(subst_other, regex=True)
+        # substitute tracked items values
+        df_imported[imp_columns[1]] = df_imported[imp_columns[1]].replace(subst_items, regex=True)
+        df_imported[imp_columns[2]] = df_imported[imp_columns[2]].replace(subst_items, regex=True)
 
-    # convert 1st column to date format
-    df_imported[imp_columns[0]] = pd.to_datetime(df_imported[imp_columns[0]])
+        # substitute months names
+        df_imported[imp_columns[0]] = df_imported[imp_columns[0]].replace(subst_month, regex=True)
+        df_imported[imp_columns[0]] = df_imported[imp_columns[0]].replace(subst_other, regex=True)
 
-    logger.debug("DF imported from csv:\n{0}".format(df_imported.head()))
+        # convert 1st column to date format
+        df_imported[imp_columns[0]] = pd.to_datetime(df_imported[imp_columns[0]])
+
+        logger.debug("DF imported from csv:\n{0}".format(df_imported.head()))
 
     return df_imported
 
@@ -130,6 +138,39 @@ def get_abs_path(src_path, fullpath):
     return src_path
 
 
+def split_df_by_years(df_to_proc):
+    """Checking DataFrame for years and splitting it into dict by years
+    :returns DF splitted by years and years list"""
+
+    df_to_proc['Year'] = df_to_proc[imp_columns[0]].dt.year
+    logger.debug("\nImported DF with 'Year' field added:\n{0}".format(df_to_proc.head()))
+
+    # find what years are included
+    years_count = df_to_proc['Year'].nunique()
+    logger.debug("Years entries:%s", years_count)
+
+    years_list = df_to_proc['Year'].unique()
+    logger.debug("Years list:%s", years_list)
+
+    # convert DF to ordered dict of dataframes
+    dict_df = {}
+    for yr in years_list:
+        # filter to a separate DF by year
+        logger.debug("Processing year:%s", yr)
+        df_sheet = df_to_proc[df_to_proc['Year'] == yr]
+        logger.debug("DF for the year:\n%s", df_sheet.head())
+        # get rid of "Year" column
+        df_sheet = df_sheet.drop('Year', 1)
+        # convert to date only format
+        df_sheet[imp_columns[0]] = df_sheet[imp_columns[0]].dt.date
+        # add each sheet to dict
+        dict_df[yr] = df_sheet
+
+        logger.debug("DF with key '{0}': \n {1}".format(yr, dict_df[yr].head()))
+
+    return dict_df, years_list
+
+
 def write_base(df_to_save):
     """Stores final data into base workbook"""
     if base_exists:
@@ -138,15 +179,8 @@ def write_base(df_to_save):
     else:
         print("Base does not exist. Will write it now")
         # add field Year and group by year
-        df_to_save['Year'] = df_to_save[imp_columns[0]].dt.year
-        logger.debug("\nImported DF with 'Year' field added:\n{0}".format(df_to_save.head()))
 
-        # find what years are included
-        years_count = df_to_save['Year'].nunique()
-        logger.debug("Years entries:%s", years_count)
-
-        years_list = df_to_save['Year'].unique()
-        logger.debug("Years list:%s", years_list)
+        df_to_save, years_list = split_df_by_years(df_to_save)
 
         # Create a Pandas Excel writer using XlsxWriter as the engine.
         logger.debug("Saving to file: %s", base_filename)
@@ -177,7 +211,17 @@ def merge_loaded_data():
     # compare date range by year in imported DF vs stored base
     # remove duplicates in imported DF
     # merge data with base
+    logger.debug("merge_loaded_data() call")
     pass
+
+def init_base(inp_df):
+    """When base does not exist create it to work with it the same way as if we loaded it"""
+    #inp_df, yrs_list = split_df_by_years(inp_df)
+    # save it, load it and we have a base :)
+    global stored_base_df, stored_base_df_keys, base_exists
+    stored_base_df, stored_base_df_keys = split_df_by_years(inp_df)
+    base_exists = True
+
 
 # main starts here
 logger = logging_setup()
@@ -190,19 +234,29 @@ load_cfg()
 
 load_stored_base()
 
-imp_file = "qtimerec_2018_03.csv"
-# TODO cycle through files to import and process them
-imp_file = get_abs_path(inp_dir + imp_file, full_path)
-imported_csv = imp_df(imp_file)
+for imp_file in listdir(get_abs_path(inp_dir, full_path)):
+    imp_file = get_abs_path(inp_dir + imp_file, full_path)
+    msg = "{0}\nReading {1}\n{0}".format('-'*10, imp_file)
+    print(msg)
+    logger.info("\n" + msg)
+    imported_csv = imp_df(imp_file)
 
-# if base_exists:
-    # [Compare] we comparing all imported data for existing date ranges to avoid duplications
-# else:
-    # we work in the mode of base creation
-    # forming new base from imported data and doing [Compare] steps for every newly loaded data
-    # this situation is only possible when we run for the very 1st time -- that's why nothing is stored as base yet
+    if imported_csv.empty:
+        print("Read empty data")
+        logger.info("Read empty data")
+    else:
+        if not base_exists:
+            init_base(imported_csv)
+        else:
+            merge_loaded_data()
+    # if base_exists:
+        # [Compare] we comparing all imported data for existing date ranges to avoid duplications
+    # else:
+        # we work in the mode of base creation
+        #  - forming new base from imported data and doing [Compare] steps for every newly loaded data
+        # this situation is only possible when we run for the very 1st time -- that's why nothing is stored as base yet
 
-write_base(imported_csv)
+    #write_base(imported_csv)
 
 # df_imported = df_imported.groupby('Year', as_index=True).agg({"Task":"sum"})
 
