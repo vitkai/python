@@ -214,7 +214,10 @@ def merge_loaded_data(inp_df):
     # remove duplicates in imported DF
     # merge data with base
     logger.debug("merge_loaded_data() call")
+
     global stored_base_df_years
+    stored_base_df_years = list(stored_base_df_years)
+
     inp_df, inp_yrs = split_df_by_years(inp_df)
     # cycle through years in input DF
     clmns = ["Date"]
@@ -249,7 +252,6 @@ def merge_loaded_data(inp_df):
         else:
             # just add new year to base
             stored_base_df[yr] = year_df
-            stored_base_df_years = list(stored_base_df_years)
             stored_base_df_years.append(yr)
             stored_base_df_years.sort()
             msg = "Base updated with year:{0}".format(yr)
