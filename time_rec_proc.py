@@ -13,6 +13,7 @@ import tempfile
 # from functools import reduce
 from os import path, listdir, remove#, makedirs
 from shutil import copy2
+from pprint import pprint#,pformat
 
 
 def logging_setup():
@@ -86,7 +87,7 @@ def imp_df(filename):
     try:
         df_imported = pd.read_csv(tmp_file, encoding='utf-8', sep=csv_sep, header=0, names=imp_columns)
     except Exception as e:
-        print(e)
+        pprint(e)
         logger.error(e)
         df_imported = pd.DataFrame()
         file_read_err = True
@@ -114,16 +115,16 @@ def imp_df(filename):
 def load_stored_base():
     """function to load all previously processed data"""
 
-    global base_exists, base_filename, stored_base_df_keys, stored_base_df
+    global base_exists, base_filename, stored_base_df_years, stored_base_df
     base_exists = False
 
     base_filename = get_abs_path(stored_base_filename, full_path)
     if path.exists(base_filename):
         base_exists = True
         stored_base_df = pd.read_excel(base_filename, None)
-        stored_base_df_keys = list(stored_base_df.keys())
-        logger.debug("DF keys: {0}".format(stored_base_df_keys))
-        logger.debug("DF type:{0} | DF with key '{1}': \n {2}".format(type(stored_base_df[stored_base_df_keys[0]]), stored_base_df_keys[0], stored_base_df[stored_base_df_keys[0]].head()))
+        stored_base_df_years = list(stored_base_df.keys())
+        logger.debug("DF keys: {0}".format(stored_base_df_years))
+        logger.debug("DF type:{0} | DF with key '{1}': \n {2}".format(type(stored_base_df[stored_base_df_years[0]]), stored_base_df_years[0], stored_base_df[stored_base_df_years[0]].head()))
 
     logger.debug("Base exists: %s", base_exists)
 
@@ -143,7 +144,7 @@ def split_df_by_years(df_to_proc):
     :returns DF splitted by years and years list"""
 
     df_to_proc['Year'] = df_to_proc[imp_columns[0]].dt.year
-    logger.debug("\nImported DF with 'Year' field added:\n{0}".format(df_to_proc.head()))
+    #logger.debug("\nImported DF with 'Year' field added:\n{0}".format(df_to_proc.head()))
 
     # find what years are included
     years_count = df_to_proc['Year'].nunique()
@@ -174,10 +175,10 @@ def split_df_by_years(df_to_proc):
 def write_base(df_to_save):
     """Stores final data into base workbook"""
     if base_exists:
-        print("Base exists. Will not re-write it for now")
+        pprint("Base exists. Will not re-write it for now")
         # we need some checks before writing new data -- see TODO 5)
     else:
-        print("Base does not exist. Will write it now")
+        pprint("Base does not exist. Will write it now")
         # add field Year and group by year
 
         df_to_save, years_list = split_df_by_years(df_to_save)
@@ -203,7 +204,7 @@ def write_base(df_to_save):
         writer.save()
         # writer.close()
 
-def merge_loaded_data():
+def merge_loaded_data(inp_df):
     """Checks imported data against loaded base
     if base does not present, will work on existing data set"""
     # check for years in imported DF (see current write_base version)
@@ -212,14 +213,39 @@ def merge_loaded_data():
     # remove duplicates in imported DF
     # merge data with base
     logger.debug("merge_loaded_data() call")
-    pass
+    inp_df, inp_yrs = split_df_by_years(inp_df)
+    # cycle through years in input DF
+    for yr in inp_yrs:
+        if yr in stored_base_df_years:
+            # check for duplicates
+            logger.debug("'{0}' found in base years".format(yr))
+            # get list of unique dates
+            year_df = pd.DataFrame(inp_df[yr])
+            inp_dates = pd.DataFrame(year_df["Date"].unique())#drop_duplicates()
+            logger.debug("Input dates - no duplicates:\n{0}".format(inp_dates.head()))
+            base_dates = pd.DataFrame(stored_base_df[yr]["Date"].unique())#drop_duplicates()
+            # remove dates that are already in base
+            merged_df = inp_dates.merge(base_dates, how="left", indicator=True)
+            logger.debug("Merged DF:\n{0}\n...\n{1}".format(merged_df.head(), merged_df.tail()))
+            date_mask = (merged_df._merge == 'left_only')
+            logger.debug("Merge mask:\n{0}\n...\n{1}".format(date_mask.head(), date_mask.tail()))
+            logger.debug("year_df type: {0} | year_df:\n{1}".format(type(year_df), year_df.head()))
+            # TODO need to filter those year_mask["Date"] records where in merged_df._merge == 'left_only'
+            #year_mask = year_df["Date"] ==
+            #year_df = year_df.loc[mask]
+            #logger.debug("DF with removed intersections:\n{0}".format(year_df.head()))
+            # merge base and new dates
+
+        else:
+            # just add new year to base
+            pass
 
 def init_base(inp_df):
     """When base does not exist create it to work with it the same way as if we loaded it"""
     #inp_df, yrs_list = split_df_by_years(inp_df)
     # save it, load it and we have a base :)
-    global stored_base_df, stored_base_df_keys, base_exists
-    stored_base_df, stored_base_df_keys = split_df_by_years(inp_df)
+    global stored_base_df, stored_base_df_years, base_exists
+    stored_base_df, stored_base_df_years = split_df_by_years(inp_df)
     base_exists = True
 
 
@@ -242,13 +268,13 @@ for imp_file in listdir(get_abs_path(inp_dir, full_path)):
     imported_csv = imp_df(imp_file)
 
     if imported_csv.empty:
-        print("Read empty data")
+        pprint("Read empty data")
         logger.info("Read empty data")
     else:
         if not base_exists:
             init_base(imported_csv)
         else:
-            merge_loaded_data()
+            merge_loaded_data(imported_csv)
     # if base_exists:
         # [Compare] we comparing all imported data for existing date ranges to avoid duplications
     # else:
@@ -270,4 +296,4 @@ for imp_file in listdir(get_abs_path(inp_dir, full_path)):
 # (!) TODO 5) all imported data should be checked against already stored data for duplicates - see 2)a)
 
 logger.debug("That's all folks")
-print("That's all folks")
+pprint("That's all folks")
