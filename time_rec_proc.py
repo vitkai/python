@@ -212,7 +212,7 @@ def write_base():
             now = now.strftime("%Y-%m-%d_%H-%M")
             copy2(base_filename, path.splitext(base_filename)[0] + '_' + now + path.splitext(base_filename)[1])
 
-        writer = pd.ExcelWriter(base_filename, engine='xlsxwriter', date_format='yyyy-mm-dd')
+        writer = pd.ExcelWriter(base_filename, engine='xlsxwriter', date_format='yyyy-mm-dd', datetime_format='yyyy-mm-dd')
 
         # cycle through years in base dict of DFs
         for yr in stored_base_df_years:
@@ -232,10 +232,12 @@ def write_base():
         finally:
             writer.close()
 
-# TODO need to fix issues with loaded base
-# TODO 1) -- when merging items are being duplicated in output base
-# TODO 1) a) (possibly need to update base write -- (/) not guilty)
-# TODO 2) -- Date field in saved file contains unwanted time 2018-05-31 00:00:00
+# (!) TODO need to fix issues with loaded base
+# (!) TODO 1) -- when merging items are being duplicated in output base
+# (+) TODO 1) a) (possibly need to update base write -- (/) not guilty)
+# (/) TODO 2) -- Date field in saved file contains unwanted time 2018-05-31 00:00:00
+# (/) TODO 3) on base init for some reason base was not merged with May 2018
+# (/) TODO 3) a) 2nd merged_df misses required dates
 def merge_loaded_data(inp_df):
     """Checks imported data against loaded base
     if base does not present, will work on existing data set"""
@@ -244,7 +246,7 @@ def merge_loaded_data(inp_df):
     # compare date range by year in imported DF vs stored base
     # remove duplicates in imported DF
     # merge data with base
-    logger.debug("merge_loaded_data() call")
+    logger.debug("{0}{1}merge_loaded_data() call{1}{0}".format('*'*10, '-'*10))
 
     global stored_base_df_years
     #stored_base_df_years = list(stored_base_df_years)
@@ -255,27 +257,32 @@ def merge_loaded_data(inp_df):
     for yr in inp_yrs:
         yr_idx = str(yr)
         #yr_idx = yr
-        year_df = pd.DataFrame(inp_df[yr_idx])
+        inp_year_df = pd.DataFrame(inp_df[yr_idx])
         if yr_idx in stored_base_df_years:
             # check for duplicates
             logger.debug("'{0}' found in base years".format(yr))
             # get list of unique dates
-            #year_df = pd.DataFrame(inp_df[yr])
-            #year_dates_df = year_df["Date"]
+            #inp_year_df = pd.DataFrame(inp_df[yr])
+            #year_dates_df = inp_year_df["Date"]
 
-            inp_dates_wo_dups = pd.DataFrame(year_df["Date"].unique())#drop_duplicates()
+            inp_dates_wo_dups = pd.DataFrame(inp_year_df["Date"].unique())#drop_duplicates()
             inp_dates_wo_dups.columns = clmns
             logger.debug("Input dates - no duplicates:\n{0}\n...\n{1}".format(inp_dates_wo_dups.head(), inp_dates_wo_dups.tail()))
 
             base_dates = pd.DataFrame(stored_base_df[yr_idx]["Date"].unique())
             base_dates.columns = clmns
+            logger.debug("Base dates - no duplicates:\n{0}\n...\n{1}".format(base_dates.head(), base_dates.tail()))
 
             # filter analyzed dates vs base dates excluding those in base
+            # should stay only dates that are not in the base
             merged_df = inp_dates_wo_dups.loc[~inp_dates_wo_dups["Date"].isin(base_dates["Date"])]
+            merged_df["Date"] = pd.to_datetime(merged_df["Date"], format="%Y-%m-%d")
             logger.debug("merged_df:\n{0}".format(merged_df.head()))
 
             # apply filtered dates to analyzed DF
-            merged_df = year_df.loc[year_df["Date"].isin(merged_df["Date"])]
+            inp_year_all_dates_df = pd.DataFrame(inp_year_df["Date"])
+            inp_year_all_dates_df["Date"] = pd.to_datetime(inp_year_all_dates_df["Date"], format="%Y-%m-%d")
+            merged_df = inp_year_df.loc[inp_year_all_dates_df["Date"].isin(merged_df["Date"])]
             merged_df["Date"] = pd.to_datetime(merged_df["Date"], format="%Y-%m-%d")
             logger.debug("2nd merged_df:\n{0}\n...\n{1}".format(merged_df.head(), merged_df.tail()))
 
@@ -286,7 +293,7 @@ def merge_loaded_data(inp_df):
 
         else:
             # just add new year to base
-            stored_base_df[yr_idx] = year_df
+            stored_base_df[yr_idx] = inp_year_df
             stored_base_df_years.append(yr_idx)
             #stored_base_df_years = stored_base_df_years + yr
             stored_base_df_years.sort()
