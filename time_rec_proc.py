@@ -10,11 +10,11 @@ import pandas as pd
 import ruamel.yaml as yml
 import codecs
 import tempfile
+import datetime
 # from functools import reduce
 from os import path, listdir, remove#, makedirs
 from shutil import copy2
 from pprint import pprint#,pformat
-
 
 def logging_setup():
     logger = logging.getLogger(__name__)
@@ -123,10 +123,24 @@ def load_stored_base():
         base_exists = True
         stored_base_df = pd.read_excel(base_filename, None)
         stored_base_df_years = list(stored_base_df.keys())
-        logger.debug("DF keys: {0}".format(stored_base_df_years))
-        logger.debug("DF type:{0} | DF with key '{1}': \n {2}".format(type(stored_base_df[stored_base_df_years[0]]), stored_base_df_years[0], stored_base_df[stored_base_df_years[0]].head()))
+        logger.debug("Base years-keys: {0}".format(stored_base_df_years))
+        #logger.debug("DF type:{0} | DF with key '{1}': \n {2}".format(type(stored_base_df[stored_base_df_years[0]]), stored_base_df_years[0], stored_base_df[stored_base_df_years[0]].head()))
 
-    logger.debug("Base exists: %s", base_exists)
+    for idx, yr in enumerate(stored_base_df_years):
+        try:
+            stored_base_df_years[idx] = int(yr)
+        except Exception as e:
+            msg = "Error processing stored database sheets. Ignoring loaded base."
+            pprint(msg)
+            pprint(e)
+            logger.error(msg)
+            logger.error(e)
+            base_exists = False
+        finally:
+            pass
+
+    logger.debug("Loaded existing database:{0}".format(base_filename))
+    print("Loaded existing database:", base_filename)
 
 
 def get_abs_path(src_path, fullpath):
@@ -172,38 +186,35 @@ def split_df_by_years(df_to_proc):
     return dict_df, years_list
 
 
-# TODO fix write_base processing
-def write_base(df_to_save):
+def write_base():
     """Stores final data into base workbook"""
-    if base_exists:
-        pprint("Base exists. Will not re-write it for now")
+    if not base_exists:
+        pprint("Base does not exist. Nothing to save...")
+        logger.info("Base does not exist. Nothing to save...")
         # we need some checks before writing new data -- see TODO 5)
     else:
-        pprint("Base does not exist. Will write it now")
+        pprint("Saving base file...")
+        logger.info("Saving base file...")
         # add field Year and group by year
 
-        df_to_save, years_list = split_df_by_years(df_to_save)
+        # make a backup if file exists
+        if path.exists(base_filename):
+            now = datetime.datetime.now()
+            now = now.strftime("%Y-%m-%d_%H-%M")
+            copy2(base_filename, path.splitext(base_filename)[0] + '_' + now + path.splitext(base_filename)[1])
 
-        # Create a Pandas Excel writer using XlsxWriter as the engine.
-        logger.debug("Saving to file: %s", base_filename)
         writer = pd.ExcelWriter(base_filename, engine='xlsxwriter', date_format='yyyy-mm-dd')
 
-        for yr in years_list:
-            # filter to a separate DF by year
-            logger.debug("Processing year:%s", yr)
-            df_sheet = df_to_save[df_to_save['Year'] == yr]
-            logger.debug("DF for the year:\n%s", df_sheet.head())
-            # get rid of "Year" column
-            df_sheet = df_sheet.drop('Year', 1)
-            # convert to date only format
-            df_sheet[imp_columns[0]] = df_sheet[imp_columns[0]].dt.date
-            # df_sheet[imp_columns[0]] = df_sheet.loc[:, imp_columns[0]].dt.date
+        # cycle through years in base dict of DFs
+        for yr in stored_base_df_years:
+            logger.debug("Saving year:%s", yr)
+            df_sheet = stored_base_df[yr]
             # Write each dataframe to a different worksheet
             df_sheet.to_excel(writer, sheet_name=str(yr), index=False)
 
         # Close the Pandas Excel writer and output the Excel file.
         writer.save()
-        # writer.close()
+        writer.close()
 
 def merge_loaded_data(inp_df):
     """Checks imported data against loaded base
@@ -223,6 +234,9 @@ def merge_loaded_data(inp_df):
     clmns = ["Date"]
     for yr in inp_yrs:
         year_df = pd.DataFrame(inp_df[yr])
+        # TODO need to fix issue with stored_base_df_years elements type because of errors (KeyError: 2017 or KeyError: '2017')
+        #yr_idx = str(yr)
+        yr_idx = yr
         if yr in stored_base_df_years:
             # check for duplicates
             logger.debug("'{0}' found in base years".format(yr))
@@ -234,7 +248,7 @@ def merge_loaded_data(inp_df):
             inp_dates_wo_dups.columns = clmns
             logger.debug("Input dates - no duplicates:\n{0}\n...\n{1}".format(inp_dates_wo_dups.head(), inp_dates_wo_dups.tail()))
 
-            base_dates = pd.DataFrame(stored_base_df[yr]["Date"].unique())#drop_duplicates()
+            base_dates = pd.DataFrame(stored_base_df[yr_idx]["Date"].unique())
             base_dates.columns = clmns
 
             # filter analyzed dates vs base dates excluding those in base
@@ -243,16 +257,20 @@ def merge_loaded_data(inp_df):
 
             # apply filtered dates to analyzed DF
             merged_df = year_df.loc[year_df["Date"].isin(merged_df["Date"])]
+            merged_df["Date"] = pd.to_datetime(merged_df["Date"])
             logger.debug("2nd merged_df:\n{0}\n...\n{1}".format(merged_df.head(), merged_df.tail()))
 
             # merge base and new dates
-            stored_base_df[yr] = pd.concat([merged_df, stored_base_df[yr]]).sort_values(['Date'], ascending=True).reset_index(drop=True)
-            logger.debug("stored_base_df[yr]:\n{0}\n...\n{1}".format(stored_base_df[yr].head(), stored_base_df[yr].tail()))
+            stored_base_df[yr_idx]["Date"] = pd.to_datetime(stored_base_df[yr_idx]["Date"])
+            stored_base_df[yr_idx] = pd.concat([merged_df, stored_base_df[yr_idx]]).sort_values(['Date'], ascending=True).reset_index(drop=True)
+            logger.debug("stored_base_df[yr]:\n{0}\n...\n{1}".format(stored_base_df[yr_idx].head(), stored_base_df[yr_idx].tail()))
 
         else:
             # just add new year to base
-            stored_base_df[yr] = year_df
-            stored_base_df_years.append(yr)
+            stored_base_df[yr_idx] = year_df
+            stored_base_df_years.append(int(yr))
+            #stored_base_df_years.add(yr)
+            #stored_base_df_years = stored_base_df_years + yr
             stored_base_df_years.sort()
             msg = "Base updated with year:{0}".format(yr)
             print(msg)
@@ -268,6 +286,12 @@ def init_base(inp_df):
     global stored_base_df, stored_base_df_years, base_exists
     stored_base_df, stored_base_df_years = split_df_by_years(inp_df)
     base_exists = True
+
+    for idx, yr in enumerate(stored_base_df_years):
+        stored_base_df_years[idx] = int(yr)
+
+    pprint("Base initialized with using loaded file")
+    logger.info("Base initialized with using loaded file")
 
 
 # main starts here
@@ -303,18 +327,8 @@ for imp_file in listdir(get_abs_path(inp_dir, full_path)):
         #  - forming new base from imported data and doing [Compare] steps for every newly loaded data
         # this situation is only possible when we run for the very 1st time -- that's why nothing is stored as base yet
 
-    #write_base(imported_csv)
-
-# df_imported = df_imported.groupby('Year', as_index=True).agg({"Task":"sum"})
-
-# (+) TODO 1) export/store .xlsx file with years as sheet names -- see #3)
-# (!) TODO 2) imported file to be merged with stored file making sure that dates range was not in stored file before
-# (x) TODO 2) a) perhaps we need to store index of date ranges in a separate sheet? See 3)
-# (/) TODO 3) add new field - year.
-# (+) TODO 3) a)Store data in separate sheets by year
-# (!) TODO 3) b) before storing need to make sure there are no duplicates in imported dataframes
-# (+) TODO 4) Reading stored data: a) list sheets b) number by years c) read into array of DFs (ordered dict)
-# (!) TODO 5) all imported data should be checked against already stored data for duplicates - see 2)a)
+# save base file
+write_base()
 
 logger.debug("That's all folks")
 pprint("That's all folks")
