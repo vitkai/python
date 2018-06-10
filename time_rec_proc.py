@@ -106,7 +106,7 @@ def imp_df(filename):
         df_imported[imp_columns[0]] = df_imported[imp_columns[0]].replace(subst_other, regex=True)
 
         # convert 1st column to date format
-        df_imported[imp_columns[0]] = pd.to_datetime(df_imported[imp_columns[0]])
+        df_imported[imp_columns[0]] = pd.to_datetime(df_imported[imp_columns[0]])#, format="%Y-%m-%d")
 
         logger.debug("DF imported from csv:\n{0}".format(df_imported.head()))
 
@@ -122,13 +122,20 @@ def load_stored_base():
     if path.exists(base_filename):
         base_exists = True
         stored_base_df = pd.read_excel(base_filename, None)
+
+        # load dict keys into list
         stored_base_df_years = list(stored_base_df.keys())
         logger.debug("Base years-keys: {0}".format(stored_base_df_years))
-        #logger.debug("DF type:{0} | DF with key '{1}': \n {2}".format(type(stored_base_df[stored_base_df_years[0]]), stored_base_df_years[0], stored_base_df[stored_base_df_years[0]].head()))
 
-    for idx, yr in enumerate(stored_base_df_years):
+        for idx, yr in enumerate(stored_base_df_years):
+            str_yr = str(yr)
+            stored_base_df_years[idx] = str_yr
+            stored_base_df[str_yr] = stored_base_df.pop(yr)
+            stored_base_df[str_yr]["Date"] = pd.to_datetime(stored_base_df[str_yr]["Date"])#, format = "%Y-%m-%d")
+
+        """
         try:
-            stored_base_df_years[idx] = int(yr)
+            stored_base_df_years[idx] = str(yr)
         except Exception as e:
             msg = "Error processing stored database sheets. Ignoring loaded base."
             pprint(msg)
@@ -138,6 +145,7 @@ def load_stored_base():
             base_exists = False
         finally:
             pass
+        """
 
     logger.debug("Loaded existing database:{0}".format(base_filename))
     print("Loaded existing database:", base_filename)
@@ -164,7 +172,7 @@ def split_df_by_years(df_to_proc):
     years_count = df_to_proc['Year'].nunique()
     logger.debug("Years entries:%s", years_count)
 
-    years_list = df_to_proc['Year'].unique()
+    years_list = list(df_to_proc['Year'].unique())
     logger.debug("Years list:%s", years_list)
 
     # convert DF to ordered dict of dataframes
@@ -178,10 +186,11 @@ def split_df_by_years(df_to_proc):
         df_sheet = df_sheet.drop('Year', 1)
         # convert to date only format
         df_sheet[imp_columns[0]] = df_sheet[imp_columns[0]].dt.date
-        # add each sheet to dict
-        dict_df[yr] = df_sheet
 
-        logger.debug("DF with key '{0}': \n {1}".format(yr, dict_df[yr].head()))
+        # add each sheet to dict
+        yr_str = str(yr)
+        dict_df[yr_str] = df_sheet
+        logger.debug("DF with key '{0}': \n {1}".format(yr, dict_df[yr_str].head()))
 
     return dict_df, years_list
 
@@ -207,15 +216,26 @@ def write_base():
 
         # cycle through years in base dict of DFs
         for yr in stored_base_df_years:
+            yr_str = str(yr)
             logger.debug("Saving year:%s", yr)
-            df_sheet = stored_base_df[yr]
+            df_sheet = stored_base_df[yr_str]
+            logger.debug("\n{0}".format(df_sheet.head()))
             # Write each dataframe to a different worksheet
-            df_sheet.to_excel(writer, sheet_name=str(yr), index=False)
+            df_sheet.to_excel(writer, sheet_name=yr_str, index=False)
 
         # Close the Pandas Excel writer and output the Excel file.
-        writer.save()
-        writer.close()
+        try:
+            writer.save()
+        except Exception as e:
+            pprint(e)
+            logger.error("Saving error:{0}".format(e))
+        finally:
+            writer.close()
 
+# TODO need to fix issues with loaded base
+# TODO 1) -- when merging items are being duplicated in output base
+# TODO 1) a) (possibly need to update base write -- (/) not guilty)
+# TODO 2) -- Date field in saved file contains unwanted time 2018-05-31 00:00:00
 def merge_loaded_data(inp_df):
     """Checks imported data against loaded base
     if base does not present, will work on existing data set"""
@@ -227,17 +247,16 @@ def merge_loaded_data(inp_df):
     logger.debug("merge_loaded_data() call")
 
     global stored_base_df_years
-    stored_base_df_years = list(stored_base_df_years)
+    #stored_base_df_years = list(stored_base_df_years)
 
     inp_df, inp_yrs = split_df_by_years(inp_df)
     # cycle through years in input DF
     clmns = ["Date"]
     for yr in inp_yrs:
-        year_df = pd.DataFrame(inp_df[yr])
-        # TODO need to fix issue with stored_base_df_years elements type because of errors (KeyError: 2017 or KeyError: '2017')
-        #yr_idx = str(yr)
-        yr_idx = yr
-        if yr in stored_base_df_years:
+        yr_idx = str(yr)
+        #yr_idx = yr
+        year_df = pd.DataFrame(inp_df[yr_idx])
+        if yr_idx in stored_base_df_years:
             # check for duplicates
             logger.debug("'{0}' found in base years".format(yr))
             # get list of unique dates
@@ -257,22 +276,21 @@ def merge_loaded_data(inp_df):
 
             # apply filtered dates to analyzed DF
             merged_df = year_df.loc[year_df["Date"].isin(merged_df["Date"])]
-            merged_df["Date"] = pd.to_datetime(merged_df["Date"])
+            merged_df["Date"] = pd.to_datetime(merged_df["Date"], format="%Y-%m-%d")
             logger.debug("2nd merged_df:\n{0}\n...\n{1}".format(merged_df.head(), merged_df.tail()))
 
             # merge base and new dates
-            stored_base_df[yr_idx]["Date"] = pd.to_datetime(stored_base_df[yr_idx]["Date"])
+            stored_base_df[yr_idx]["Date"] = pd.to_datetime(stored_base_df[yr_idx]["Date"], format="%Y-%m-%d")
             stored_base_df[yr_idx] = pd.concat([merged_df, stored_base_df[yr_idx]]).sort_values(['Date'], ascending=True).reset_index(drop=True)
             logger.debug("stored_base_df[yr]:\n{0}\n...\n{1}".format(stored_base_df[yr_idx].head(), stored_base_df[yr_idx].tail()))
 
         else:
             # just add new year to base
             stored_base_df[yr_idx] = year_df
-            stored_base_df_years.append(int(yr))
-            #stored_base_df_years.add(yr)
+            stored_base_df_years.append(yr_idx)
             #stored_base_df_years = stored_base_df_years + yr
             stored_base_df_years.sort()
-            msg = "Base updated with year:{0}".format(yr)
+            msg = "Base updated with year:{0}".format(yr_idx)
             print(msg)
             logger.info(msg)
             logger.debug("base years: {0}".format(stored_base_df_years))
@@ -287,11 +305,15 @@ def init_base(inp_df):
     stored_base_df, stored_base_df_years = split_df_by_years(inp_df)
     base_exists = True
 
+    stored_base_df_years = list(stored_base_df_years)
     for idx, yr in enumerate(stored_base_df_years):
-        stored_base_df_years[idx] = int(yr)
+        #stored_base_df_years[idx] = int(yr)
+        yr_str = str(yr)
+        stored_base_df_years[idx] = yr_str
+        #stored_base_df[yr_str] = stored_base_df.pop(yr)
 
-    pprint("Base initialized with using loaded file")
-    logger.info("Base initialized with using loaded file")
+    pprint("Base initialized using loaded file")
+    logger.info("Base initialized using loaded file")
 
 
 # main starts here
