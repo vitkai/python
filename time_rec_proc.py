@@ -275,6 +275,8 @@ def merge_loaded_data(inp_df):
 
             # filter analyzed dates vs base dates excluding those in base
             # should stay only dates that are not in the base
+            # TODO this check has to be fixed, as now it returns values that are already in the base, and should be skipped
+            # TODO this issue creates duplicates
             merged_df = inp_dates_wo_dups.loc[~inp_dates_wo_dups["Date"].isin(base_dates["Date"])]
             merged_df["Date"] = pd.to_datetime(merged_df["Date"], format="%Y-%m-%d")
             logger.debug("merged_df:\n{0}".format(merged_df.head()))
