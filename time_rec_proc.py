@@ -232,8 +232,8 @@ def write_base():
         finally:
             writer.close()
 
-# (!) TODO need to fix issues with loaded base
-# (!) TODO 1) -- when merging items are being duplicated in output base
+# (+) TODO need to fix issues with loaded base
+# (+) TODO 1) -- when merging items are being duplicated in output base
 # (+) TODO 1) a) (possibly need to update base write -- (/) not guilty)
 # (/) TODO 2) -- Date field in saved file contains unwanted time 2018-05-31 00:00:00
 # (/) TODO 3) on base init for some reason base was not merged with May 2018
@@ -265,32 +265,20 @@ def merge_loaded_data(inp_df):
             #inp_year_df = pd.DataFrame(inp_df[yr])
             #year_dates_df = inp_year_df["Date"]
 
-            inp_dates_wo_dups = pd.DataFrame(inp_year_df["Date"].unique())#drop_duplicates()
-            inp_dates_wo_dups.columns = clmns
-            logger.debug("Input dates - no duplicates:\n{0}\n...\n{1}".format(inp_dates_wo_dups.head(), inp_dates_wo_dups.tail()))
+            # get only 'Date' columns from input and base DFs and convert them to strings to filter vs base new dates only
+            inp_dates = inp_year_df["Date"].astype(str)
+            base_dates = stored_base_df[yr_idx]["Date"].astype(str)
 
-            base_dates = pd.DataFrame(stored_base_df[yr_idx]["Date"].unique())
-            base_dates.columns = clmns
-            logger.debug("Base dates - no duplicates:\n{0}\n...\n{1}".format(base_dates.head(), base_dates.tail()))
+            # merged_df contains dates of input DF without intersection with base_dates
+            merged_df_dates = inp_dates[~(inp_dates.isin(base_dates))]
+            logger.debug("merged_df_dates:\n{0}\n...\n{1}".format(merged_df_dates.head(), merged_df_dates.tail()))
 
-            # filter analyzed dates vs base dates excluding those in base
-            # should stay only dates that are not in the base
-            # TODO this check has to be fixed, as now it returns values that are already in the base, and should be skipped
-            # TODO this issue creates duplicates
-            merged_df = inp_dates_wo_dups.loc[~inp_dates_wo_dups["Date"].isin(base_dates["Date"])]
-            merged_df["Date"] = pd.to_datetime(merged_df["Date"], format="%Y-%m-%d")
-            logger.debug("merged_df:\n{0}".format(merged_df.head()))
-
-            # apply filtered dates to analyzed DF
-            inp_year_all_dates_df = pd.DataFrame(inp_year_df["Date"])
-            inp_year_all_dates_df["Date"] = pd.to_datetime(inp_year_all_dates_df["Date"], format="%Y-%m-%d")
-            merged_df = inp_year_df.loc[inp_year_all_dates_df["Date"].isin(merged_df["Date"])]
-            merged_df["Date"] = pd.to_datetime(merged_df["Date"], format="%Y-%m-%d")
-            logger.debug("2nd merged_df:\n{0}\n...\n{1}".format(merged_df.head(), merged_df.tail()))
+            # filtered_inp_df contains input DF rows without intersection with base_dates rows
+            filtered_inp_df = inp_year_df[inp_dates.isin(merged_df_dates)]
+            logger.debug("filtered_inp_df:\n{0}\n...\n{1}".format(filtered_inp_df.head(), filtered_inp_df.tail()))
 
             # merge base and new dates
-            stored_base_df[yr_idx]["Date"] = pd.to_datetime(stored_base_df[yr_idx]["Date"], format="%Y-%m-%d")
-            stored_base_df[yr_idx] = pd.concat([merged_df, stored_base_df[yr_idx]]).sort_values(['Date'], ascending=True).reset_index(drop=True)
+            stored_base_df[yr_idx] = pd.concat([filtered_inp_df, stored_base_df[yr_idx]]).sort_values(['Date'], ascending=True).reset_index(drop=True)
             logger.debug("stored_base_df[yr]:\n{0}\n...\n{1}".format(stored_base_df[yr_idx].head(), stored_base_df[yr_idx].tail()))
 
         else:
