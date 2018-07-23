@@ -1,0 +1,31 @@
+#"""
+#Descr: yaml configuration file for time management records processing for QTimeRec software
+#@author: vitkai
+#Created: Mon Jul 23 2018 20:37
+#"""
+
+#directories
+dirs:
+  inp_dir:  "files_to_proc"
+  outp_dir:  "out"
+
+parameters:
+  years:
+    step: 5
+    step_count: 10
+    list:
+      - 0
+      - 5
+      - 10
+      - 15
+      - 20
+      - 25
+      - 30
+      - 35
+
+  payments:
+    month_periodic_payment: 30000
+
+  interests:
+    debt_month_IR: 14.5
+    credit_month_IR: 0
