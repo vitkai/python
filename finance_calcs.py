@@ -56,11 +56,26 @@ def load_cfg():
         outp_dir = full_path + "/" + outp_dir + "/"
 
     logger.debug("Dirs: Input: {0} || Output: {1}".format(inp_dir, outp_dir))
+    return cfg
 
 
 def pva_calc(per_payment, rate_per_period, periods_quant):
     """http://financeformulas.net/Present_Value_of_Annuity.html"""
     return per_payment * ((1-(1+rate_per_period)**(-periods_quant)) / rate_per_period)
+
+
+def period_annuity_calc(debt_amount, debt_period, periods_passed, period_ir):
+    if periods_passed > debt_period:
+        print("Warning: passed period is bigger than debt period")
+        logger.warning("passed period is bigger than debt period")
+    return debt_amount * (period_ir + period_ir /((1+period_ir)**(debt_period-periods_passed) - 1))
+
+
+def plain_counts(inp_data):
+    for yr in inp_data['parameters']['years']['yr_list']:
+
+        debt_remain = inp_data['parameters']['debt_pv']
+        pprint(yr)
 
 
 # main starts here
@@ -70,9 +85,36 @@ logger = logging_setup()
 full_path, filename = path.split(__file__)
 logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 
-load_cfg()
+src_data = load_cfg()
 
-pprint(pva_calc(30000, 14.5, 1))
+# pprint(pva_calc(30000, 14.5, 1))
+# plain_counts(src_data)
+ir_month = 0.1445/12
+#debt = 1230000
+debt = 1228484.63
+debt_remainder = debt
+debt_length = 350 - 47
+months_passed = 0
+month_payment = 30000
+# cycle by periods (months)
+while (months_passed < debt_length) and (debt_remainder > month_payment):
+    print("{0}month = {1}{0}".format('-'*5, months_passed))
+    month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
+    print("month_annuity = {0}".format(month_annuity))
+    month_interest = debt_remainder * ir_month
+    print("month_interest = {0}".format(month_interest))
+    payment_to_debt = month_annuity - month_interest
+    print("payment_to_debt = {0}".format(payment_to_debt))
+    debt_remainder = debt_remainder - payment_to_debt
+    month_payment_extra = month_payment - month_annuity
+    months_passed += 1
+    if month_payment_extra > 0:
+        debt_remainder = debt_remainder - month_payment_extra
+        month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
+    print("debt_remainder = {0}".format(debt_remainder))
+
+months_passed += 1
+print("\n{0}Time total: {1}years {2} months{0}\n".format('-=-'*2, months_passed // 12, months_passed % 12))
 
 logger.debug("That's all folks")
 pprint("That's all folks")

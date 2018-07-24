@@ -12,8 +12,8 @@ dirs:
 parameters:
   years:
     step: 5
-    step_count: 10
-    list:
+    steps_count: 10
+    yr_list:
       - 0
       - 5
       - 10
@@ -23,9 +23,14 @@ parameters:
       - 30
       - 35
 
-  payments:
-    month_periodic_payment: 30000
+  debt_pv: 1300000
 
-  interests:
-    debt_month_IR: 14.5
-    credit_month_IR: 0
+  money_avail: 40000
+
+  payments:
+    month_periodic: 30000
+    month_mandatory_periodic: 15000
+
+  interest_rates:
+    debt_month_ir: 14.45
+    credit_month_ir: 0
