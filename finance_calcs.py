@@ -78,40 +78,42 @@ def plain_counts(inp_data):
         pprint(yr)
 
 
-def calc_pay_off_term(pay_dbl=False):
-    ir_month = 0.1445 / 12
-    # debt = 1230000
-    debt = 1228484.63
-    debt_remainder = debt
-    debt_length = 350 - 47
+def calc_pay_off_term(inp_data, pay_dbl=False):
+    ir_month = inp_data['parameters']['interest_rates']['debt_year_ir'] / (100 * 12)  # 0.1445 / 12
+    debt_remainder = inp_data['parameters']['debt']['pv']  # 1228484.63
+    debt_length = inp_data['parameters']['debt']['term']['periods_total'] - inp_data['parameters']['debt']['term']\
+        ['periods_passed']  # 350 - 47
     months_passed = 0
-    if pay_dbl:
+    month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
+    if inp_data['parameters']['payments']['strategy']['double']:
         month_payment = 0
+        debt_pay_off_sum = month_annuity
     else:
-        month_payment = 30000
+        month_payment = inp_data['parameters']['payments']['month_periodic']  # 30000
+        if month_payment < month_annuity:
+            msg = "Warning: month payment is smaller than annuity!"
+            print(msg)
+            logger.warning(msg)
+        debt_pay_off_sum = month_payment
     # cycle by periods (months)
-    while (months_passed < debt_length) and (debt_remainder > month_payment):
+    while (months_passed < debt_length) and (debt_remainder > debt_pay_off_sum):
         print("{0}month = {1}{0}".format('-' * 5, months_passed))
-        month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
         print("month_annuity = {0}".format(month_annuity))
         month_interest = debt_remainder * ir_month
         print("month_interest = {0}".format(month_interest))
         payment_to_debt = month_annuity - month_interest
         print("payment_to_debt = {0}".format(payment_to_debt))
         debt_remainder = debt_remainder - payment_to_debt
-        # if paying double always just use annuity value
-        # otherwise calculate extra amount
-        if pay_dbl:
-            month_payment_extra = month_annuity
-        else:
-            month_payment_extra = month_payment - month_annuity
+        # if paying double always just use annuity value *2
+        if inp_data['parameters']['payments']['strategy']['double']:
+            month_payment = month_annuity * 2
+        month_payment_extra = month_payment - month_annuity
         months_passed += 1
         if month_payment_extra > 0:
             debt_remainder = debt_remainder - month_payment_extra
-            month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
+        month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
         print("debt_remainder = {0}".format(debt_remainder))
 
-    months_passed += 1
     print("\n{0}Time total: {1}years {2} months{0}\n".format('-=-' * 2, months_passed // 12, months_passed % 12))
 
 
@@ -126,7 +128,7 @@ src_data = load_cfg()
 
 # pprint(pva_calc(30000, 14.5, 1))
 # plain_counts(src_data)
-calc_pay_off_term(True)
+calc_pay_off_term(src_data)
 
 logger.debug("That's all folks")
 pprint("That's all folks")
