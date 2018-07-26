@@ -78,7 +78,7 @@ def plain_counts(inp_data):
         pprint(yr)
 
 
-def calc_pay_off_term(inp_data, pay_dbl=False):
+def calc_pay_off_term(inp_data):
     ir_month = inp_data['parameters']['interest_rates']['debt_year_ir'] / (100 * 12)  # 0.1445 / 12
     debt_remainder = inp_data['parameters']['debt']['pv']  # 1228484.63
     debt_length = inp_data['parameters']['debt']['term']['periods_total'] - inp_data['parameters']['debt']['term']\
