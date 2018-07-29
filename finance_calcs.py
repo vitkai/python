@@ -5,8 +5,9 @@ Created: Mon Jul 23 2018 20:34
 """
 import __main__ as main
 import logging
-import ruamel.yaml as yml
 import codecs
+import pandas as pd
+import ruamel.yaml as yml
 from os import path  # , listdir, remove, makedirs
 from pprint import pprint  # ,pformat
 
@@ -78,14 +79,16 @@ def plain_counts(inp_data):
         pprint(yr)
 
 
-def calc_pay_off_term(inp_data):
+def calc_pay_off_term(inp_data, double):
+    calcs_data_list = []
+
     ir_month = inp_data['parameters']['interest_rates']['debt_year_ir'] / (100 * 12)  # 0.1445 / 12
     debt_remainder = inp_data['parameters']['debt']['pv']  # 1228484.63
     debt_length = inp_data['parameters']['debt']['term']['periods_total'] - inp_data['parameters']['debt']['term']\
         ['periods_passed']  # 350 - 47
-    months_passed = 0
+    months_passed: int = 0
     month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
-    if inp_data['parameters']['payments']['strategy']['double']:
+    if double:
         month_payment = 0
         debt_pay_off_sum = month_annuity
     else:
@@ -105,16 +108,21 @@ def calc_pay_off_term(inp_data):
         print("payment_to_debt = {0}".format(payment_to_debt))
         debt_remainder = debt_remainder - payment_to_debt
         # if paying double always just use annuity value *2
-        if inp_data['parameters']['payments']['strategy']['double']:
+        if double:
             month_payment = month_annuity * 2
         month_payment_extra = month_payment - month_annuity
         months_passed += 1
         if month_payment_extra > 0:
             debt_remainder = debt_remainder - month_payment_extra
-        month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
         print("debt_remainder = {0}".format(debt_remainder))
+        # add row into the list of values
+        calcs_data_list.append([month_annuity, month_interest, payment_to_debt, debt_remainder])
+        # calculate new annuity
+        month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
 
     print("\n{0}Time total: {1}years {2} months{0}\n".format('-=-' * 2, months_passed // 12, months_passed % 12))
+
+    return calcs_data_list, months_passed
 
 
 # main starts here
@@ -128,7 +136,24 @@ src_data = load_cfg()
 
 # pprint(pva_calc(30000, 14.5, 1))
 # plain_counts(src_data)
-calc_pay_off_term(src_data)
+
+debt_columns = ('Annuity', 'Interest', 'Payed to debt', 'Debt Remainder')
+# df_calcs = pd.DataFrame(columns=debt_columns)
+
+all_calcs_dict = {}
+
+for strat in src_data['parameters']['payments']['strategy']:
+    # calculate pay off values
+
+    calcs_dict = {}
+
+    double_flag = (strat == 'double')
+    data_list, month_quant = calc_pay_off_term(src_data, double_flag)
+
+    calcs_dict['Term'] = month_quant
+    calcs_dict['Data'] = data_list
+
+    all_calcs_dict[strat] = calcs_dict
 
 logger.debug("That's all folks")
 pprint("That's all folks")
