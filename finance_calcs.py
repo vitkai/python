@@ -6,6 +6,7 @@ Created: Mon Jul 23 2018 20:34
 import __main__ as main
 import logging
 import codecs
+import matplotlib.pyplot as plt
 import pandas as pd
 import ruamel.yaml as yml
 from os import path  # , listdir, remove, makedirs
@@ -153,7 +154,13 @@ for strat in src_data['parameters']['payments']['strategy']:
     calcs_dict['Term'] = month_quant
     calcs_dict['Data'] = data_list
 
+    logger.debug(f"Pay off values for {strat}: {debt_columns}\n{data_list[:3]}\n...\n{data_list[-3:]}")
+
     all_calcs_dict[strat] = calcs_dict
+
+# TODO create pandas DF combining values to plot
+# df_combined.plot()
+# plt.show()
 
 logger.debug("That's all folks")
 pprint("That's all folks")
