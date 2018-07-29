@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import ruamel.yaml as yml
 from os import path  # , listdir, remove, makedirs
-from pprint import pprint  # ,pformat
+#from pprint import pprint  # ,pformat
 
 
 def logging_setup():
@@ -101,12 +101,8 @@ def calc_pay_off_term(inp_data, double):
         debt_pay_off_sum = month_payment
     # cycle by periods (months)
     while (months_passed < debt_length) and (debt_remainder > debt_pay_off_sum):
-        print("{0}month = {1}{0}".format('-' * 5, months_passed))
-        print("month_annuity = {0}".format(month_annuity))
         month_interest = debt_remainder * ir_month
-        print("month_interest = {0}".format(month_interest))
         payment_to_debt = month_annuity - month_interest
-        print("payment_to_debt = {0}".format(payment_to_debt))
         debt_remainder = debt_remainder - payment_to_debt
         # if paying double always just use annuity value *2
         if double:
@@ -115,13 +111,15 @@ def calc_pay_off_term(inp_data, double):
         months_passed += 1
         if month_payment_extra > 0:
             debt_remainder = debt_remainder - month_payment_extra
-        print("debt_remainder = {0}".format(debt_remainder))
+        """print(f"{'-' * 5}month = {months_passed}{'-' * 5}")
+        print(f"month_annuity = {month_annuity}")
+        print(f"month_interest = {month_interest}")
+        print(f"payment_to_debt = {payment_to_debt}")
+        print(f"debt_remainder = {debt_remainder}")"""
         # add row into the list of values
         calcs_data_list.append([month_annuity, month_interest, payment_to_debt, debt_remainder])
         # calculate new annuity
         month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
-
-    print("\n{0}Time total: {1}years {2} months{0}\n".format('-=-' * 2, months_passed // 12, months_passed % 12))
 
     return calcs_data_list, months_passed
 
@@ -143,6 +141,7 @@ debt_columns = ('Annuity', 'Interest', 'Payed to debt', 'Debt Remainder')
 
 all_calcs_dict = {}
 
+concat_df = pd.DataFrame()
 for strat in src_data['parameters']['payments']['strategy']:
     # calculate pay off values
 
@@ -150,6 +149,9 @@ for strat in src_data['parameters']['payments']['strategy']:
 
     double_flag = (strat == 'double')
     data_list, month_quant = calc_pay_off_term(src_data, double_flag)
+    print(f"\n{'-=-' * 2}For {strat} strategy:{'-=-' * 2}")
+    print(f"{'-=-' * 2}Time total: {month_quant // 12}years {month_quant % 12} months{'-=-' * 2}")
+
 
     calcs_dict['Term'] = month_quant
     calcs_dict['Data'] = data_list
@@ -158,9 +160,20 @@ for strat in src_data['parameters']['payments']['strategy']:
 
     all_calcs_dict[strat] = calcs_dict
 
+    # df2 = data_list to be converted
+    df_combined = pd.concat([concat_df, df2], axis=1)
+    concat_df = df_combined  # for next concat
+
+    # show test graphs
+    """df_calcs = pd.DataFrame(data=data_list, columns=debt_columns)
+    df_calcs.plot()
+    plt.show()"""
+
 # TODO create pandas DF combining values to plot
+# new_columns = src_data['parameters']['payments']['strategy']
+# df_combined = pd.concat([df1, df2], axis=1)
 # df_combined.plot()
 # plt.show()
 
 logger.debug("That's all folks")
-pprint("That's all folks")
+print("\nThat's all folks")
