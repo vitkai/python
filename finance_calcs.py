@@ -38,7 +38,8 @@ def load_cfg():
     """Loads configuration file and initializes variables"""
     # importing configuration
     yaml_name = path.splitext(filename)[0] + ".yaml"
-    with codecs.open(full_path + "/" + yaml_name, 'r', encoding='utf-8') as yaml_file:
+    #with codecs.open(full_path + "/" + yaml_name, 'r', encoding='utf-8') as yaml_file:
+    with codecs.open(full_path + yaml_name, 'r', encoding='utf-8') as yaml_file:
         # with open(full_path + "/time_rec_proc.yaml", 'r') as yaml_file:
         cfg = yml.safe_load(yaml_file)
 
@@ -161,8 +162,8 @@ for strat in src_data['parameters']['payments']['strategy']:
     all_calcs_dict[strat] = calcs_dict
 
     # df2 = data_list to be converted
-    df_combined = pd.concat([concat_df, df2], axis=1)
-    concat_df = df_combined  # for next concat
+#    df_combined = pd.concat([concat_df, df2], axis=1)
+#    concat_df = df_combined  # for next concat
 
     # show test graphs
     """df_calcs = pd.DataFrame(data=data_list, columns=debt_columns)

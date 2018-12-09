@@ -24,10 +24,10 @@ parameters:
       - 35
 
   debt:
-    pv: 1228484.63
+    pv: 1168484.63
     term:
       periods_total: 350
-      periods_passed: 47
+      periods_passed: 51
 
 
   money_avail: 40000
