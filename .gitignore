@@ -5,3 +5,5 @@ __pycache__/
 scratch.py
 *xls[x]
 *.csv
+secrets
+
