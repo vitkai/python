@@ -11,6 +11,7 @@ import logging
 import __main__ as main
 import telegram
 import ruamel.yaml as yml
+import sys
 from telegram.error import NetworkError, Unauthorized
 from time import sleep
 from os import path  # , listdir, remove, makedirs
@@ -68,10 +69,29 @@ def echo(bot):
         update_id = update.update_id + 1
 
         if update.message:  # your bot can receive updates without messages
+            # add support for utf-8 symbols
+            msg = update.message.text
+            try:
+                msg = repr([msg.encode(sys.stdout.encoding)]).decode('string-escape')
+                print(msg)
+                logger.debug(msg)
+            except Exception as err:
+                err_msg = "Message processing error: {0}".format(err)
+                print(err_msg)
+                logger.debug(err_msg)
+				
+            try:
+                msg = str(msg.encode('utf-8'))
+                print(msg)
+                logger.debug(msg)
+            except Exception as err:
+                err_msg = "Message processing error: {0}".format(err)
+                print(err_msg)
+                logger.debug(err_msg)
+
             # Reply to the message
             update.message.reply_text(update.message.text)
-            print(update.message.text)
-            logger.debug(update.message.text)
+            
 
 def load_secrets():
     """Loads configuration file and initializes variables"""
