@@ -29,15 +29,20 @@ def main():
     if not full_path == '':
         full_path = full_path + '/'
 
-    logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
+    #logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 
     params = load_secrets()
 
     """Run the bot."""
     global update_id
     # Telegram Bot Authorization Token
-    bot = telegram.Bot('TOKEN')
+    #bot = telegram.Bot('TOKEN')
+    bot = telegram.Bot(params['token'])
 
+    msg = 'Bot run successful'
+    logger.info(msg)
+    print(msg)
+	
     # get the first pending update_id, this is so we can skip over it in case
     # we get an "Unauthorized" exception.
     try:
@@ -65,6 +70,8 @@ def echo(bot):
         if update.message:  # your bot can receive updates without messages
             # Reply to the message
             update.message.reply_text(update.message.text)
+            print(update.message.text)
+            logger.debug(update.message.text)
 
 def load_secrets():
     """Loads configuration file and initializes variables"""
