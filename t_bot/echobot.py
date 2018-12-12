@@ -61,6 +61,34 @@ def main():
             update_id += 1
 
 
+def proc_msg(inp_msg):
+	try:
+		print(inp_msg)
+		logger.debug(inp_msg)
+	except Exception as err:
+		err_msg = "Message processing error: {0}".format(err)
+		print(err_msg)
+		logger.debug(err_msg)
+		
+		try:
+			inp_msg = repr([inp_msg.encode(sys.stdout.encoding)]).decode('string-escape')
+			print(inp_msg)
+			logger.debug(inp_msg)
+		except Exception as err:
+			err_msg = "Message processing error: {0}".format(err)
+			print(err_msg)
+			logger.debug(err_msg)
+		
+			try:
+				inp_msg = str(inp_msg.encode('utf-8'))
+				print(inp_msg)
+				logger.debug(inp_msg)
+			except Exception as err:
+				err_msg = "Message processing error: {0}".format(err)
+				print(err_msg)
+				logger.debug(err_msg)
+
+			
 def echo(bot):
     """Echo the message the user sent."""
     global update_id
@@ -71,23 +99,7 @@ def echo(bot):
         if update.message:  # your bot can receive updates without messages
             # add support for utf-8 symbols
             msg = update.message.text
-            try:
-                msg = repr([msg.encode(sys.stdout.encoding)]).decode('string-escape')
-                print(msg)
-                logger.debug(msg)
-            except Exception as err:
-                err_msg = "Message processing error: {0}".format(err)
-                print(err_msg)
-                logger.debug(err_msg)
-				
-            try:
-                msg = str(msg.encode('utf-8'))
-                print(msg)
-                logger.debug(msg)
-            except Exception as err:
-                err_msg = "Message processing error: {0}".format(err)
-                print(err_msg)
-                logger.debug(err_msg)
+            proc_msg(msg)
 
             # Reply to the message
             update.message.reply_text(update.message.text)
