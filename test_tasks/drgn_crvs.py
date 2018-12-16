@@ -16,6 +16,7 @@ n=4 : L L R L L R R L L L R R L R R
 """
 
 import sys
+import turtle
 
 def calc_curve(num):
 	if num == 0:
@@ -33,6 +34,23 @@ def calc_curve(num):
 	
 	return result
 	
+# plot graph using turtle
+def plot_trtle(crv, sect_num):	
+	step = 50 / (sect_num)
+	angle = 75
+	
+	crv = crv.replace(' ', '')
+	
+	silly = turtle.Turtle()
+	for cmd in crv:
+		if cmd == 'F':
+			silly.forward(step)
+		elif cmd == 'L':
+			silly.left(angle)
+		elif cmd == 'R':
+			silly.right(angle)
+	
+	turtle.done()
 	
 def main():
 	msg = "Script requires integer number >= 0 for curves count"
@@ -55,6 +73,8 @@ def main():
 	print("Building dragon curve for N={0}".format(N))
 	crv = calc_curve(N)
 	print("Resulting curve: {0}".format(crv))
+	
+	plot_trtle(crv, N+1)
 
 if __name__ == '__main__':
 	main()
