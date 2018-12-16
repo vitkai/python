@@ -9,7 +9,10 @@ n=1 : F L F
 n=2 : FLF L FRF
 n=3 : FLF L FRF L FLF R FRF
 n=3 : L L R L L R R
-	  FLF L FRF L FRF R FLF
+	  FLF L FRF L FLF R FRF
+n=4 : L L R L L R R L L L R R L R R
+	  FLF L FRF L FLF R FRF L FLF L FRF R FLF R FRF
+	  
 """
 
 import sys
@@ -24,8 +27,9 @@ def calc_curve(num):
 	i = 1
 	while i < num: 
 		i += 1
-		result = result + ' L ' + result.replace('L', 't').replace('R', 'L').replace('t', 'R')
+		result = result + ' L ' + result[::-1].replace('L', 't').replace('R', 'L').replace('t', 'R')
 		print("i={0} : {1}".format(i, result))
+	print('-'*15)
 	
 	return result
 	
