@@ -8,7 +8,7 @@ import random
 import turtle
 
 #n = int(sys.argv[1])
-n = 5
+n = 25
 
 def prnt_arr(ar):
     for i in range(len(ar)):
@@ -19,7 +19,7 @@ def prnt_arr(ar):
 
 
 def draw_path(path):
-    step = 100 // len(path)
+    step = 800 // (n-1)
     angles = {'U':90, 'D':270, 'L':180, 'R':0}
 
     silly = turtle.Turtle()
@@ -33,7 +33,7 @@ def draw_path(path):
         silly.left(turn_angl)
         silly.forward(step)
 
-        print(cur_angl)
+        #print(cur_angl)
 
     turtle.done()
 
@@ -55,17 +55,20 @@ trail = ''
 array[x][y] = True
 prnt_arr(array)"""
 
+step = 0
 # while we are inside the town
 while (x > 0) and (x < n-1) and (y > 0) and (y < n-1):
     array[x][y] = True
+    step += 1
 
     # to check if we're in the dead end
     if array[x-1][y] and array[x+1][y] and array[x][y-1] and array[x][y+1]:
+        print('Dead end on step {0}'.format(step))
         break
 
     r = random.randrange(1, 5)
 
-    print('{0} => ({1}, {2})'.format(r, x, y))
+    # print('{0} => ({1}, {2})'.format(r, x, y))
 
     if (r == 1) and (not array[x+1][y]):
         x += 1
