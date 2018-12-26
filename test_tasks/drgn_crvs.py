@@ -36,7 +36,7 @@ def calc_curve(num):
 	
 # plot graph using turtle
 def plot_trtle(crv, sect_num):	
-	step = 50 / (sect_num)
+	step = 50 // (sect_num)
 	angle = 75
 	
 	crv = crv.replace(' ', '')
