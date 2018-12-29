@@ -7,14 +7,34 @@ to find out if info reaches all of the possible guests
 import random
 N = 10
 
+
 def pass_goss(src):
-    r = random.random(1, N)
+    r = random.randint(2, N-1)
     print (r)
+    if not guests[r]:
+        dst = r
+    else :
+        dst = N
+    
+    print(dst)
     return dst
     
 
 # init arr of N
 guests = [0] * N
-guests[0:1] = [1, 1] # host and 1st invitee know
+guests[0] = 1 # host and 1st invitee know
+
+cnt = 0 # number of notified people
+curr = 1 # current person
     
-print(guests)
+while cnt <= N:
+    guests[curr] = 1 
+    cnt += 1
+    print(guests)
+    new_curr = pass_goss(curr)
+    if new_curr == N:
+        break
+    elif (new_curr != curr):
+          curr = new_curr
+
+print("Total notified guests: {0}".format(cnt))
