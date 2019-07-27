@@ -11,6 +11,12 @@ boundaries:
     - 'total rent'
     - 'Rent without bail'
 
+replacements:
+  ' of ' : '/'
+  ',\n' : ''
+  '\n\n' : '\n'
+  
+  
 to_remove:
   - 'Monthly rent,'
   - 'Type,'
@@ -23,23 +29,3 @@ to_remove:
   - 'oom,'
   - 'total rent,'
   - 'Deposit o. Cooperative shares,'
-
-  
-#directories
-dirs:
-  inp_dir:  'files_to_proc'
-  outp_dir:  'out'
-
-parameters:
-  years:
-    step: 5
-    steps_count: 10
-    yr_list:
-      - 0
-      - 5
-      - 10
-      - 15
-      - 20
-      - 25
-      - 30
-      - 35

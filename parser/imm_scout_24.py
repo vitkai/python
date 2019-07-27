@@ -49,11 +49,13 @@ def process_fl(inp_data):
     
     #replace new lines with ', '
     parse_result = parse_result.replace('\n', ', ')
+    # subst samples with empty string
     for subs in inp_data['to_remove']:
         parse_result = parse_result.replace(subs, '')
         
-    parse_result = parse_result.replace('\n\n', '\n')
-    
+    for subs, repl in inp_data['replacements'].items():
+        parse_result = parse_result.replace(subs, repl)
+        
     print(parse_result)
 
 def load_cfg():
@@ -67,64 +69,7 @@ def load_cfg():
 
     #logger.debug("config in {0}:\n{1}".format(yaml_name, cfg))
 
-    # process directories
-    global inp_dir, outp_dir
-    inp_dir = cfg['dirs']['inp_dir']
-    outp_dir = cfg['dirs']['outp_dir']
-
-    logger.debug("Dirs: Input: {0} || Output: {1}".format(inp_dir, outp_dir))
     return cfg
-
-
-def plain_counts(inp_data):
-    for yr in inp_data['parameters']['years']['yr_list']:
-
-        debt_remain = inp_data['parameters']['debt_pv']
-        pprint(yr)
-
-
-def calc_pay_off_term(inp_data, double):
-    calcs_data_list = []
-
-    ir_month = inp_data['parameters']['interest_rates']['debt_year_ir'] / (100 * 12)  # 0.1445 / 12
-    debt_remainder = inp_data['parameters']['debt']['pv']  # 1228484.63
-    debt_length = inp_data['parameters']['debt']['term']['periods_total'] - inp_data['parameters']['debt']['term']\
-        ['periods_passed']  # 350 - 47
-    months_passed: int = 0
-    month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
-    if double:
-        month_payment = 0
-        debt_pay_off_sum = month_annuity
-    else:
-        month_payment = inp_data['parameters']['payments']['month_periodic']  # 30000
-        if month_payment < month_annuity:
-            msg = "Warning: month payment is smaller than annuity!"
-            print(msg)
-            logger.warning(msg)
-        debt_pay_off_sum = month_payment
-    # cycle by periods (months)
-    while (months_passed < debt_length) and (debt_remainder > debt_pay_off_sum):
-        month_interest = debt_remainder * ir_month
-        payment_to_debt = month_annuity - month_interest
-        debt_remainder = debt_remainder - payment_to_debt
-        # if paying double always just use annuity value *2
-        if double:
-            month_payment = month_annuity * 2
-        month_payment_extra = month_payment - month_annuity
-        months_passed += 1
-        if month_payment_extra > 0:
-            debt_remainder = debt_remainder - month_payment_extra
-        """print(f"{'-' * 5}month = {months_passed}{'-' * 5}")
-        print(f"month_annuity = {month_annuity}")
-        print(f"month_interest = {month_interest}")
-        print(f"payment_to_debt = {payment_to_debt}")
-        print(f"debt_remainder = {debt_remainder}")"""
-        # add row into the list of values
-        calcs_data_list.append([month_annuity, month_interest, payment_to_debt, debt_remainder])
-        # calculate new annuity
-        month_annuity = period_annuity_calc(debt_remainder, debt_length, months_passed, ir_month)
-
-    return calcs_data_list, months_passed
 
 
 # main starts here
