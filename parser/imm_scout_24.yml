@@ -1,0 +1,45 @@
+#Descr: yaml configuration file for time management records processing for QTimeRec software
+#@author: vitkai
+#Created: Sat Jul 27 2017 16:04
+
+# start 
+boundaries:
+  list1:
+    - 'Scout ID'
+    - 'Internet Availability'
+  list2:
+    - 'total rent'
+    - 'Rent without bail'
+
+to_remove:
+  - 'Monthly rent,'
+  - 'Type,'
+  - 'apartment,'
+  - 'floor,'
+  - 'Living space.,'
+  - 'Vacant from,'
+  - 'Bonitätsauskunft,'
+  - 'Request a SCHUFA credit check,'
+  - 'oom,'
+  - 'total rent,'
+  - 'Deposit o. Cooperative shares,'
+
+  
+#directories
+dirs:
+  inp_dir:  'files_to_proc'
+  outp_dir:  'out'
+
+parameters:
+  years:
+    step: 5
+    steps_count: 10
+    yr_list:
+      - 0
+      - 5
+      - 10
+      - 15
+      - 20
+      - 25
+      - 30
+      - 35
