@@ -6,12 +6,13 @@
 boundaries:
   list1:
     - 'Scout ID'
-    - 'Internet Availability'
+    - 'premium-badge'
   list2:
     - 'total rent'
-    - 'Rent without bail'
+    - 'Start calculation'
 
 replacements:
+  ' out of ' : '/'
   ' of ' : '/'
   ',\n' : ''
   '\n\n' : '\n'
