@@ -9,7 +9,7 @@ from pygame.locals import *
 FPS = 30
 SCREENWIDTH  = 288
 SCREENHEIGHT = 512
-PIPEGAPSIZE  = 100 # gap between upper and lower part of pipe
+PIPEGAPSIZE  = 150 # gap between upper and lower part of pipe
 BASEY        = SCREENHEIGHT * 0.79
 # image, sound and hitmask  dicts
 IMAGES, SOUNDS, HITMASKS = {}, {}, {}
@@ -214,14 +214,14 @@ def mainGame(movementInfo):
     pipeVelX = -4
 
     # player velocity, max velocity, downward accleration, accleration on flap
-    playerVelY    =  -9   # player's velocity along Y, default same as playerFlapped
-    playerMaxVelY =  10   # max vel along Y, max descend speed
-    playerMinVelY =  -8   # min vel along Y, max ascend speed
-    playerAccY    =   1   # players downward accleration
+    playerVelY    =  -5   # player's velocity along Y, default same as playerFlapped
+    playerMaxVelY =  5   # max vel along Y, max descend speed
+    playerMinVelY =  -5   # min vel along Y, max ascend speed
+    playerAccY    =   0.5   # players downward accleration
     playerRot     =  45   # player's rotation
     playerVelRot  =   3   # angular speed
     playerRotThr  =  20   # rotation threshold
-    playerFlapAcc =  -9   # players speed on flapping
+    playerFlapAcc =  -4   # players speed on flapping
     playerFlapped = False # True when player flaps
 
 
@@ -485,3 +485,4 @@ def getHitmask(image):
 
 if __name__ == '__main__':
     main()
+

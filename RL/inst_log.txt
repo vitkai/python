@@ -1,0 +1,18 @@
+----
+$ pip install tcod
+Collecting tcod
+  Downloading https://files.pythonhosted.org/packages/44/9a/d9b45d96f6146ba994fa8c1515493705b013b621fc6a6010bf26e3be73a3/tcod-11.2.2-cp37-cp37m-win32.whl (983kB)
+Collecting cffi<2,>=1.12.0 (from tcod)
+  Downloading https://files.pythonhosted.org/packages/37/09/545b1a8346ec631cdf96b79d2c070c5b1cbf95ef2b75d79b4765f01db9cd/cffi-1.12.3-cp37-cp37m-win32.whl (159kB)
+Requirement already satisfied: numpy<2,>=1.10 in c:\users\corvit\appdata\local\programs\python\python37-32\lib\site-packages (from tcod) (1.17.1)
+Collecting pycparser (from cffi<2,>=1.12.0->tcod)
+  Downloading https://files.pythonhosted.org/packages/68/9e/49196946aee219aead1290e00d1e7fdeab8567783e83e1b9ab5585e6206a/pycparser-2.19.tar.gz (158kB)
+Building wheels for collected packages: pycparser
+  Building wheel for pycparser (setup.py): started
+  Building wheel for pycparser (setup.py): finished with status 'done'
+  Created wheel for pycparser: filename=pycparser-2.19-py2.py3-none-any.whl size=111066 sha256=1b1f219c916e5cabb991eb060fd75b2623779c0485398b9210f20185b4035356
+  Stored in directory: C:\Users\corvit\AppData\Local\pip\Cache\wheels\f2\9a\90\de94f8556265ddc9d9c8b271b0f63e57b26fb1d67a45564511
+Successfully built pycparser
+Installing collected packages: pycparser, cffi, tcod
+Successfully installed cffi-1.12.3 pycparser-2.19 tcod-11.2.2
+----
