@@ -144,6 +144,24 @@ def db_init_data(conn):
         db_create_task(conn, task_1)
         db_create_task(conn, task_2)
     
+
+def db_update_task(conn, task):
+    """
+    update priority, begin_date, and end date of a task
+    :param conn:
+    :param task:
+    :return: project id
+    """
+    sql = ''' UPDATE tasks
+              SET priority = ? ,
+                  begin_date = ? ,
+                  end_date = ?
+              WHERE id = ?'''
+    cur = conn.cursor()
+    cur.execute(sql, task)
+    conn.commit()
+
+
 # main starts here
 def main():
     global logger
@@ -156,10 +174,13 @@ def main():
     # create a database connection
     conn = db_create_connection(full_path + '\\' + 'hbp.db')
 
-    db_init_tables(conn)
-    db_init_data(conn)
+    #db_init_tables(conn)
+    #db_init_data(conn)
     
+    with conn:
+        db_update_task(conn, (2, '2015-01-04', '2015-01-06', 2))
 
+    
     logger.debug("That's all folks")
     print("\nThat's all folks")
 

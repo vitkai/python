@@ -2,3 +2,6 @@
 - data insertion
 - Format:
 Date|Sum|CCY|Category|Content
+-- info:
+	sqlite> .header on
+	sqlite> .mode column
