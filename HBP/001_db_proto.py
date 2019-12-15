@@ -29,7 +29,7 @@ def logging_setup():
 
     return logger
 
-def create_connection(db_file):
+def db_create_connection(db_file):
     """ create a database connection to a SQLite database """
     conn = None
     try:
@@ -44,28 +44,64 @@ def create_connection(db_file):
     return conn
 
 
-def create_table(conn, create_table_sql):
-    """ create a table from the create_table_sql statement
+def db_create_table(conn, db_create_table_sql):
+    """ create a table from the db_create_table_sql statement
     :param conn: Connection object
-    :param create_table_sql: a CREATE TABLE statement
+    :param db_create_table_sql: a CREATE TABLE statement
     :return:
     """
     try:
         c = conn.cursor()
-        c.execute(create_table_sql)
+        c.execute(db_create_table_sql)
     except Error as e:
         print(e)
         logger.error(e)
+        
+        
+def db_create_project(conn, project):
+    """
+    Create a new project into the projects table
+    :param conn:
+    :param project:
+    :return: project id
+    """
+    sql = ''' INSERT INTO projects(name,begin_date,end_date)
+              VALUES(?,?,?) '''
+    cur = conn.cursor()
+    cur.execute(sql, project)
+    return cur.lastrowid
 
-# main starts here
-def main():
-    global logger
-    logger = logging_setup()
 
-    # get script path
-    full_path, filename = path.split(path.realpath(__file__))
-    logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
+def create_project(conn, project):
+    """
+    Create a new project into the projects table
+    :param conn:
+    :param project:
+    :return: project id
+    """
+    sql = ''' INSERT INTO projects(name,begin_date,end_date)
+              VALUES(?,?,?) '''
+    cur = conn.cursor()
+    cur.execute(sql, project)
+    return cur.lastrowid
     
+
+def db_create_task(conn, task):
+    """
+    Create a new task
+    :param conn:
+    :param task:
+    :return:
+    """
+ 
+    sql = ''' INSERT INTO tasks(name,priority,status_id,project_id,begin_date,end_date)
+              VALUES(?,?,?,?,?,?) '''
+    cur = conn.cursor()
+    cur.execute(sql, task)
+    return cur.lastrowid
+
+
+def db_init_tables(conn):
     # db statements
     sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS projects (
                                         id integer PRIMARY KEY,
@@ -84,17 +120,45 @@ def main():
                                     end_date text NOT NULL,
                                     FOREIGN KEY (project_id) REFERENCES projects (id)
                                 );"""
-
-    # create a database connection
-    conn = create_connection(full_path + '\\' + 'hbp.db')
-
+                                
     # create tables
     if conn is not None:
         # create projects table
-        create_table(conn, sql_create_projects_table)
+        db_create_table(conn, sql_create_projects_table)
  
         # create tasks table
-        create_table(conn, sql_create_tasks_table)
+        db_create_table(conn, sql_create_tasks_table)
+
+
+def db_init_data(conn):
+    with conn:
+        # create a new project
+        project = ('Cool App with SQLite & Python', '2015-01-01', '2015-01-30');
+        project_id = create_project(conn, project)
+ 
+        # tasks
+        task_1 = ('Analyze the requirements of the app', 1, 1, project_id, '2015-01-01', '2015-01-02')
+        task_2 = ('Confirm with user about the top requirements', 1, 1, project_id, '2015-01-03', '2015-01-05')
+ 
+        # create tasks
+        db_create_task(conn, task_1)
+        db_create_task(conn, task_2)
+    
+# main starts here
+def main():
+    global logger
+    logger = logging_setup()
+
+    # get script path
+    full_path, filename = path.split(path.realpath(__file__))
+    logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
+    
+    # create a database connection
+    conn = db_create_connection(full_path + '\\' + 'hbp.db')
+
+    db_init_tables(conn)
+    db_init_data(conn)
+    
 
     logger.debug("That's all folks")
     print("\nThat's all folks")
