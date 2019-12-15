@@ -1,0 +1,4 @@
+- db w/ categories
+- data insertion
+- Format:
+Date|Sum|CCY|Category|Content
