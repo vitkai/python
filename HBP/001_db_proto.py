@@ -6,7 +6,8 @@ Created: Sun Dec 15 2019 13:05 MSK
 import __main__ as main
 import logging
 from os import path
-
+import sqlite3
+from sqlite3 import Error
 
 def logging_setup():
     logger = logging.getLogger(__name__)
@@ -28,15 +29,33 @@ def logging_setup():
 
     return logger
 
-
+def create_connection(db_file):
+    """ create a database connection to a SQLite database """
+    conn = None
+    try:
+        conn = sqlite3.connect(db_file)
+        msg = "sqlite3.version = {0}".format(sqlite3.version)
+        print(msg)
+        logger.debug(msg)
+    except Error as e:
+        print(e)
+        logger.error(e)
+    finally:
+        if conn:
+            conn.close()
 
 # main starts here
 if __name__ == "__main__":
     logger = logging_setup()
 
     # get script path
-    full_path, filename = path.split(__file__)
+    full_path, filename = path.split(path.realpath(__file__))
     logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
+    
+    # print('Real path: {0}'.format(path.realpath(__file__)))
+
+    # db access
+    create_connection(full_path + '\\' + 'hbp.db')
 
 
     logger.debug("That's all folks")
