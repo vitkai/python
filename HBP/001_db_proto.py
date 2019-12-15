@@ -162,6 +162,31 @@ def db_update_task(conn, task):
     conn.commit()
 
 
+def db_delete_task(conn, id):
+    """
+    Delete a task by task id
+    :param conn:  Connection to the SQLite database
+    :param id: id of the task
+    :return:
+    """
+    sql = 'DELETE FROM tasks WHERE id=?'
+    cur = conn.cursor()
+    cur.execute(sql, (id,))
+    conn.commit()
+    
+    
+def db_delete_all_tasks(conn):
+    """
+    Delete all rows in the tasks table
+    :param conn: Connection to the SQLite database
+    :return:
+    """
+    sql = 'DELETE FROM tasks'
+    cur = conn.cursor()
+    cur.execute(sql)
+    conn.commit()
+    
+
 # main starts here
 def main():
     global logger
@@ -174,15 +199,21 @@ def main():
     # create a database connection
     conn = db_create_connection(full_path + '\\' + 'hbp.db')
 
-    #db_init_tables(conn)
-    #db_init_data(conn)
+    # db_init_tables(conn)
+    # db_init_data(conn)
     
     with conn:
-        db_update_task(conn, (2, '2015-01-04', '2015-01-06', 2))
-
-    
+        # db_update_task(conn, (2, '2015-01-04', '2015-01-06', 2))
+        db_delete_task(conn, 2);
+        # db_delete_all_tasks(conn);
+ 
+ 
     logger.debug("That's all folks")
     print("\nThat's all folks")
 
 if __name__ == "__main__":
     main()
+    
+# TODO: 
+# 1. replace individual db_ functions with general SQL processing one
+# 2. + add SQL statement generation in a separate function
