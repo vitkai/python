@@ -3,5 +3,6 @@
 - Format:
 Date|Sum|CCY|Category|Content
 -- info:
+	https://www.sqlitetutorial.net/sqlite-python/
 	sqlite> .header on
 	sqlite> .mode column

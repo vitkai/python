@@ -185,7 +185,38 @@ def db_delete_all_tasks(conn):
     cur = conn.cursor()
     cur.execute(sql)
     conn.commit()
-    
+
+
+def db_select_all_tasks(conn):
+    """
+    Query all rows in the tasks table
+    :param conn: the Connection object
+    :return:
+    """
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM tasks")
+ 
+    rows = cur.fetchall()
+ 
+    for row in rows:
+        print(row)
+ 
+ 
+def db_select_task_by_priority(conn, priority):
+    """
+    Query tasks by priority
+    :param conn: the Connection object
+    :param priority:
+    :return:
+    """
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM tasks WHERE priority=?", (priority,))
+ 
+    rows = cur.fetchall()
+ 
+    for row in rows:
+        print(row)
+        
 
 # main starts here
 def main():
@@ -200,12 +231,18 @@ def main():
     conn = db_create_connection(full_path + '\\' + 'hbp.db')
 
     # db_init_tables(conn)
-    # db_init_data(conn)
+    db_init_data(conn)
     
     with conn:
         # db_update_task(conn, (2, '2015-01-04', '2015-01-06', 2))
-        db_delete_task(conn, 2);
+        # db_delete_task(conn, 2);
         # db_delete_all_tasks(conn);
+        
+        print("1. Query task by priority:")
+        db_select_task_by_priority(conn, 1)
+ 
+        print("2. Query all tasks")
+        db_select_all_tasks(conn)
  
  
     logger.debug("That's all folks")
