@@ -254,3 +254,4 @@ if __name__ == "__main__":
 # TODO: 
 # 1. replace individual db_ functions with general SQL processing one
 # 2. + add SQL statement generation in a separate function
+# After quick research I doubt it is necessary to do 1 and 2
