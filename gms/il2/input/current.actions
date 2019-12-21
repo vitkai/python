@@ -1,0 +1,379 @@
+// Input map preset.
+// It is not recommended to change anything here,
+// but it is still possible on your own risk.
+ 
+&actions=action,command,invert|
+screenshot,                                       key_sysrq,                                        0| // Сделать скриншот в игре
+timepause,                                        key_p,                                            0| // Вкл/выкл паузу в игре
+timefaster,                                       key_rbracket,                                     0| // Ускорение времени в игре
+timeslower,                                       key_lbracket,                                     0| // Замедление времени в игре
+record,                                           key_lcontrol+key_r,                               0| // Вкл/выкл запись полета
+fps_counter,                                      key_back,                                         0| // Вкл/выкл счетчик FPS
+escape,                                           key_escape,                                       0| // Показать/убрать главное меню
+lobby,                                            key_tab,                                          0| // Показать/убрать лобби
+missionbriefing,                                  key_o,                                            0| // Описание миссии
+switchmap,                                        key_m,                                            0| // Изменить режим карты
+switchmap,                                        joy0_b5,                                          0|
+switchgauges,                                     key_i,                                            0| // Показать/убрать панель приборов и навигационные маркеры
+aiminghelp,                                       key_rcontrol+key_i,                               0| // Помощь в прицеливании
+chattoall,                                        key_return,                                       0| // Отсылать сообщения для всех
+chattofriendly,                                   key_rcontrol+key_return,                          0| // Отсылать сообщения для своей стороны
+hidehud,                                          key_h,                                            0| // Показать/убрать HUD
+commandmenu,                                      key_grave,                                        0| // Меню команд
+commandmenu,                                      key_lmenu+key_grave,                              0|
+ipdinc,                                           key_lshift+key_add,                               0| // +Коррекция для ВР шлемов без регулятора межзрачкового расстояния
+ipddec,                                           key_lshift+key_numpadenter,                       0| // -Коррекция для ВР шлемов без регулятора межзрачкового расстояния
+cam_reset,                                        key_numpad5,                                      0| // Сброс вида камеры
+cam_ext_free_reset,                               key_c,                                            0| // Сброс вида внешней свободной камеры
+cam_free_slow_mode,                               key_numpad0,                                      0| // Свободная камера - замедленное передвижение
+cam_zoom,                                         ,                                                 0| // Зуммирование вида камеры
+cam_zoom,                                         key_add/key_subtract,                             0|
+cam_rotate_pitch,                                 key_numpad2/key_numpad8,                          0| // Вращение камеры вокруг вверх/вниз
+cam_rotate_pitch,                                 mouse_axis_y,                                     0|
+cam_rotate_pitch,                                 joy0_pov0_180/joy0_pov0_0,                        0|
+cam_rotate_yaw,                                   key_numpad6/key_numpad4,                          0| // Вращение камеры вокруг влево/вправо
+cam_rotate_yaw,                                   mouse_axis_x,                                     0|
+cam_rotate_yaw,                                   joy0_pov0_90/joy0_pov0_270,                       0|
+cam_rotate_ext_pitch,                             key_lshift+mouse_axis_y,                          0| // Вращение вида камеры на месте вверх/вниз
+cam_rotate_ext_yaw,                               key_lshift+mouse_axis_x,                          0| // Вращение вида камеры на месте влево/вправо
+cam_trans_fb,                                     key_w/key_s,                                      0| // Перемещение свободной камеры вперед/назад
+cam_trans_fb,                                     mouse_b1+mouse_axis_y,                            0|
+cam_trans_lr,                                     key_d/key_a,                                      0| // Перемещение свободной камеры вправо/влево
+cam_trans_lr,                                     mouse_b1+mouse_axis_x,                            0|
+cam_trans_ud,                                     key_r/key_f,                                      0| // Перемещение свободной камеры вверх/вниз
+cam_switch_cockpitview_self,                      key_f1,                                           0| // Камера: вид из кабины игрока
+cam_switch_default_opposite,                      key_lcontrol+key_f12,                             0| // Камера: вид на врага
+cam_switch_default_order,                         key_f12,                                          0| // Камера: вид на союзника
+cam_switch_ext_chase_allied_air,                  key_rshift+key_f8,                                0| // Камера слежения: дружественные воздушн. объекты
+cam_switch_ext_chase_enemy_air,                   key_f8,                                           0| // Камера слежения: вражеские воздушн. объекты
+cam_switch_ext_chase_enemy_air_danger,            key_rcontrol+key_f8,                              0| // Камера слежения: ближайшие вражеские воздушн. объекты
+cam_switch_ext_chase_allied_land,                 key_rshift+key_f7,                                0| // Камера слежения: дружественные наземные объекты
+cam_switch_ext_chase_enemy_land,                  key_rcontrol+key_f7,                              0| // Камера слежения: вражеские наземные объекты
+cam_switch_sight_target,                          key_lcontrol+key_f4,                              0| // Камера: боевая камера
+cam_switch_sight_target,                          key_f4,                                           0|
+cam_switch_ext_free_self,                         key_f2,                                           0| // Внешняя свободная камера слежения за самолетом игрока
+cam_switch_ext_free_allied,                       key_lshift+key_f2,                                0| // Внешняя свободная камера слежения за дружественными воздушн. объектами
+cam_switch_ext_free_enemy,                        key_lcontrol+key_f2,                              0| // Внешняя свободная камера слежения за вражескими воздушн. объектами
+cam_switch_ext_free_land_all,                     key_f5,                                           0| // Внешняя свободная камера слежения за наземными объектами
+cam_switch_ext_free_land_allied,                  key_lshift+key_f5,                                0| // Внешняя свободная камера слежения за дружественными наземными объектами
+cam_switch_ext_free_land_enemy,                   key_lcontrol+key_f5,                              0| // Внешняя свободная камера слежения за вражескими наземными объектами
+cam_switch_ext_free_bomb_all,                     key_f6,                                           0| // Внешняя свободная камера слежения за бомбами
+cam_switch_ext_free_bomb_allied,                  key_lshift+key_f6,                                0| // Внешняя свободная камера слежения за дружественными бомбами
+cam_switch_ext_free_bomb_enemy,                   key_lcontrol+key_f6,                              0| // Внешняя свободная камера слежения за вражескими бомбами
+cam_switch_flyby_target,                          key_f3,                                           0| // Камера: внешний вид на пролете
+cam_switch_free,                                  key_f11,                                          0| // Камера: свободная камера обзора пространства
+cam_switch_gopro,                                 key_lmenu+key_f2,                                 0| // Переключение между прикреплёнными камерами
+cam_switch_track,                                 key_lcontrol+key_f1,                              0| // Камера: трек
+cam_switch_head_free,                             key_lmenu+key_f1,                                 0| // Камера: из кабины не связанная с головой
+freelook,                                         ,                                                 0| // FreeLook
+bc_head_zoom,                                     ,                                                 0| // Увеличить/уменьшить
+bc_head_zoom,                                     key_lcontrol+mouse_axis_z,                        0|
+bc_head_zoom,                                     mouse_axis_z,                                     0|
+bc_head_cfovi,                                    key_add,                                          0| // Приближение взлядом
+bc_head_cfovi,                                    joy0_pov0_0,                                      0|
+bc_head_cfovo,                                    key_subtract,                                     0| // Удаление взглядом
+bc_head_cfovo,                                    joy0_pov0_180,                                    0|
+bc_head_cfovr,                                    key_multiply,                                     0| // Восстановить нормальный обзор
+rb_zoom,                                          key_lshift+mouse_axis_z,                          0| // Смена угла обзора в турели
+rb_zoom,                                          key_add/key_subtract,                             0|
+rb_zoom,                                          mouse_axis_z,                                     0|
+mc_zoom,                                          key_lshift+mouse_axis_z,                          0| // Смена угла обзора
+mc_zoom,                                          key_add/key_subtract,                             0|
+vrzoomin,                                         key_add,                                          0| // Увеличение масштаба вида VR
+bc_head_pitch,                                    mouse_axis_y,                                     0| // Наклон головы пилота по вертикали
+bc_head_pitch,                                    mouse_axis_y+mouse_b1,                            0|
+bc_head_yaw,                                      mouse_axis_x,                                     0| // Поворот головы пилота по горизонтали
+bc_head_yaw,                                      mouse_axis_x+mouse_b1,                            0|
+bc_head_yaw_wrapped,                              mouse_axis_x,                                     0| // Поворот головы стрелка по горизонтали
+resethmd,                                         ,                                                 0| // Установка положения VR по умолчанию
+bc_head_cvmodes,                                  key_f9,                                           0| // Изменение метода управления взглядом: возвратный - фиксированный - пошаговый - плавный
+bc_head_cvss,                                     key_f10,                                          0| // Сохранение настроек взгляда
+bc_head_cvc,                                      key_numpad5,                                      0| // Возвращение взгляда в центр
+bc_head_cvc,                                      joy0_b1,                                          0|
+bc_head_cvc,                                      joy0_b0,                                          0|
+bc_head_cvu,                                      key_numpad0,                                      0| // Направление взгляда: вверх
+bc_head_cvu,                                      joy0_b6,                                          0|
+bc_head_cvd,                                      key_numpadenter,                                  0| // Направление взгляда: вниз
+bc_head_cvd,                                      joy0_b7,                                          0|
+bc_head_cva,                                      key_decimal,                                      0| // Направление взгляда: дополнительный/пользовательский вид
+bc_head_cva,                                      joy0_b10,                                         0|
+bc_head_cv0,                                      key_numpad8,                                      0| // Направление взгляда: вперед
+bc_head_cv45,                                     key_numpad9,                                      0| // Направление взгляда: вправо-вперед
+bc_head_cv45,                                     joy0_pov0_45,                                     0|
+bc_head_cv90,                                     key_numpad6,                                      0| // Направление взгляда: вправо
+bc_head_cv90,                                     joy0_pov0_90,                                     0|
+bc_head_cv135,                                    key_numpad3,                                      0| // Направление взгляда: вправо-назад
+bc_head_cv135,                                    joy0_pov0_135,                                    0|
+bc_head_cv180,                                    key_numpad2,                                      0| // Направление взгляда: назад
+bc_head_cv225,                                    key_numpad1,                                      0| // Направление взгляда: влево-назад
+bc_head_cv225,                                    joy0_pov0_225,                                    0|
+bc_head_cv270,                                    key_numpad4,                                      0| // Направление взгляда: влево
+bc_head_cv270,                                    joy0_pov0_270,                                    0|
+bc_head_cv315,                                    key_numpad7,                                      0| // Направление взгляда: влево-вперед
+bc_head_cv315,                                    joy0_pov0_315,                                    0|
+bc_head_pos,                                      key_lcontrol+mouse_axis_z,                        0| // Смена положения у прицела турели
+bc_head_cvmf,                                     key_insert,                                       0| // Перемещение головы пилота вперед
+bc_head_cvmf,                                     key_rshift+joy0_pov0_0,                           0|
+bc_head_cvmb,                                     key_home,                                         0| // Перемещение головы пилота назад
+bc_head_cvmb,                                     key_rshift+joy0_pov0_180,                         0|
+bc_head_cvml,                                     key_delete,                                       0| // Перемещение головы пилота влево
+bc_head_cvml,                                     key_rshift+joy0_pov0_270,                         0|
+bc_head_cvmr,                                     key_end,                                          0| // Перемещение головы пилота вправо
+bc_head_cvmr,                                     key_rshift+joy0_pov0_90,                          0|
+bc_head_cvmu,                                     key_prior,                                        0| // Приподняться на сиденье
+bc_head_cvmd,                                     key_next,                                         0| // Опуститься на сиденье
+cam_turret_pitch_center,                          key_numpad5,                                      0| // Турель, вид через прицел: сброс взгляда к прицелу по вертикали
+cam_turret_pitch,                                 ,                                                 0| // Турель, вид через прицел: взгляд по вертикали
+cam_turret_yaw_center,                            key_numpad5,                                      0| // Турель, вид через прицел: сброс взгляда к прицелу по горизонтали
+cam_turret_yaw,                                   ,                                                 0| // Турель, вид через прицел: взгляд по горизонтали
+cam_rotate_hf_yaw,                                mouse_axis_x,                                     0| // Независимо от головы влево/вправо
+cam_rotate_hf_pitch,                              mouse_axis_y,                                     0| // Независимо от головы вверх/вниз
+cam_rotate_hf_yaw_center,                         key_numpad5,                                      0| // Центрировать независимый от головы вид по горизонтали
+cam_rotate_hf_pitch_center,                       key_numpad5,                                      0| // Центрировать независимый от головы вид по вертикали
+autopilot,                                        key_a,                                            0| // Игровой автопилот: вкл/выкл
+autolevelflight,                                  key_lshift+key_a,                                 0| // Игровой автопилот выдерживания горизонтального полета: вкл/выкл
+autolevelflight_to_left,                          key_lshift+key_z,                                 0| // Игровой автопилот выдерживания горизонтального полета: доворот влево
+autolevelflight_to_right,                         key_lshift+key_x,                                 0| // Игровой автопилот выдерживания горизонтального полета: доворот вправо
+rpc_pitch,                                        key_down/key_up,                                  0| // Управление самолетом по высоте
+rpc_pitch,                                        key_rshift+mouse_axis_y,                          0|
+rpc_pitch,                                        joy0_axis_y,                                      0|
+rpc_roll,                                         key_right/key_left,                               0| // Управление самолетом по крену
+rpc_roll,                                         key_rshift+mouse_axis_x,                          0|
+rpc_roll,                                         joy0_axis_x,                                      0|
+rpc_yaw,                                          key_x/key_z,                                      0| // Управление самолетом по направлению
+rpc_yaw,                                          joy0_axis_t,                                      0|
+yaw_reset,                                        key_d,                                            0| // Управление самолётом: руль направления в нейтраль
+rpc_yaw_trim,                                     key_lcontrol+key_x/key_lcontrol+key_z,            0| // Ось триммера руля направления
+yaw_trim_switch_left,                             key_lcontrol+key_z,                               0| // Переключатель триммера руля направления: руль направления влево
+yaw_trim_switch_right,                            key_lcontrol+key_x,                               0| // Переключатель триммера руля направления: руль направления вправо
+rpc_pitch_trim,                                   key_rcontrol+key_down/key_rcontrol+key_up,        0| // Ось триммера руля высоты
+rpc_pitch_trim,                                   joy0_axis_z,                                      0|
+pitch_trim_switch_up,                             key_rcontrol+key_down,                            0| // Переключатель триммера руля высоты: на кабрирование
+pitch_trim_switch_dn,                             key_rcontrol+key_up,                              0| // Переключатель триммера руля высоты: на пикирование
+rpc_roll_trim,                                    key_rcontrol+key_right/key_rcontrol+key_left,     0| // Ось триммера элеронов
+roll_trim_switch_left,                            key_rcontrol+key_left,                            0| // Переключатель триммера элеронов: крен влево
+roll_trim_switch_right,                           key_rcontrol+key_right,                           0| // Переключатель триммера элеронов: крен вправо
+trims_reset,                                      key_lcontrol+key_t,                               0| // Сброс триммеров в нейтраль
+rpc_adjustable_stabilizer,                        key_rcontrol+key_down/key_rcontrol+key_up,        0| // Ось переставного стабилизатора
+adjustable_stabilizer_up,                         key_rcontrol+key_down,                            0| // Переключатель переставного стабилизаторa: на кабрирование
+adjustable_stabilizer_dn,                         key_rcontrol+key_up,                              0| // Переключатель переставного стабилизаторa: на пикирование
+flaps_up,                                         key_lshift+key_f,                                 0| // Закрылки/посадочные щитки: убрать
+flaps_up,                                         key_lcontrol+joy0_pov0_180,                       0|
+flaps_dn,                                         key_f,                                            0| // Закрылки/посадочные щитки: выпустить
+flaps_dn,                                         key_lcontrol+joy0_pov0_0,                         0|
+airbrakes,                                        key_rmenu+key_b,                                  0| // Воздушные тормоза: выпустить/убрать
+attacksiren,                                      key_lmenu+key_s,                                  0| // Сирена: включить/выключить
+divesystem,                                       key_lcontrol+key_d,                               0| // Автомат пикирования: включить/выключить
+gear,                                             key_g,                                            0| // Шасси: убрать/выпустить
+gear_up,                                          key_lmenu+key_g,                                  0| // Шасси: убрать
+gear_dn,                                          key_lcontrol+key_g,                               0| // Шасси: выпустить
+tailwheel_lock,                                   key_lshift+key_g,                                 0| // Фиксатор хвостового колеса: зафиксировано/свободно
+rpc_wheel_brakes,                                 key_slash,                                        0| // Тормоза колёс шасси
+rpc_wheel_brakes,                                 key_b,                                            0|
+rpc_wheel_brakes_left,                            key_comma,                                        0| // Левый тормоз колёс шасси
+rpc_wheel_brakes_right,                           key_period,                                       0| // Правый тормоз колёс шасси
+rpc_wheel_brakes_central,                         key_rwin+key_slash,                               0| // Тормоз носового/хвостового колёса шасси
+parking_brakes,                                   key_lshift+key_slash,                             0| // Стояночный тормоз колёс шасси: вкл/выкл
+canopy_open_close,                                key_rmenu+key_c,                                  0| // Фонарь кабины экипажа: открыть/закрыть
+window_open_close,                                key_lwin+key_c,                                   0| // Окно: открыть/закрыть
+landing_lights,                                   key_rshift+key_l,                                 0| // Фара: вкл/выкл
+navigation_lights,                                key_rcontrol+key_l,                               0| // Бортовые аэронавигационные огни: вкл/выкл
+cockpit_lights,                                   key_l,                                            0| // Внутреннее освещение: вкл/выкл
+formation_lights,                                 key_rmenu+key_l,                                  0| // Строевые огни: вкл/выкл
+set_altimeter_reference_pressure,                 key_lmenu+key_a,                                  0| // Высотомер: установка давления
+contact_altimeter_target_altitude_increase,       key_rshift+key_k,                                 0| // Контактный высотомер: заданную высоту увеличить
+contact_altimeter_target_altitude_decrease,       key_rcontrol+key_k,                               0| // Контактный высотомер: заданную высоту уменьшить
+radio_volume_decrease,                            key_lmenu+key_subtract,                           0| // Громкость радиоприёмника: уменьшить
+radio_volume_increase,                            key_lmenu+key_add,                                0| // Громкость радиоприёмника: увеличить
+switch_radio_channel,                             key_lmenu+key_c,                                  0| // Переключить радиоканал (свои/противник)
+bc_eject,                                         key_lcontrol+key_e,                               0| // Покинуть самолет
+autoaltitudinalcorrection,                        key_lshift+key_m,                                 0| // Автоматическое управление составом топливовоздушной смеси и переключением режима нагнетателей
+autoradiators,                                    key_lshift+key_r,                                 0| // Автоматическое управление охлаждением двигателей
+autorpmlimiter,                                   key_lshift+key_n,                                 0| // Автоматический ограничитель оборотов двигателя
+all_engines_switch,                               key_e,                                            0| // Запуск/выключение двигателей
+all_engines_ignition,                             key_rshift+key_e,                                 0| // Включение зажигания двигателй (Me 262)
+engine_blip_switch,                               key_lshift+key_e,                                 0| // Прерывание зажигания двигателя
+rpc_all_engines_throttles,                        key_equals/key_minus,                             0| // Рычаги управления двигателями
+rpc_all_engines_throttles,                        mouse_axis_z,                                     0|
+rpc_all_engines_mixtures,                         key_rmenu+key_equals/key_rmenu+key_minus,         0| // Общее управление топливовоздушной смесью двигателей
+all_engines_superchargers,                        key_lshift+key_s,                                 0| // Переключение режима нагнетателей
+rpc_all_engines_turbosuperchargers,               key_lshift+key_equals/key_lshift+key_minus,       0| // Ось общего управления турбокомпрессорами
+all_engines_boost,                                key_lshift+key_b,                                 0| // Форсаж двигателей: вкл/выкл
+rpc_all_engines_props_pitch,                      key_rshift+key_equals/key_rshift+key_minus,       0| // Общее управление оборотами винтов
+rpc_all_engines_props_pitch,                      mouse_axis_z,                                     0|
+all_engines_props_pitch_control_mode,             key_rshift+key_p,                                 0| // Переключение общего управления шагом винтов: ручное/автоматическое
+all_engines_props_pitch_increase,                 key_rshift+key_equals,                            0| // Ручное общее управление шагом винтов: дозировано затяжелить винты
+all_engines_props_pitch_decrease,                 key_rshift+key_minus,                             0| // Ручное общее управление шагом винтов: дозировано облегчить винты
+all_engines_props_feathering,                     key_lcontrol+key_f,                               0| // Флюгирование винтов: вкл/выкл
+rpc_all_engines_oil_radiators_shutters,           key_rwin+key_equals/key_rwin+key_minus,           0| // Ось общего управления створками маслорадиаторов
+all_engines_oil_radiators_control_mode,           key_rwin+key_r,                                   0| // Переключение общего управления маслорадиаторами: ручное/автоматическое
+all_engines_oil_radiators_open,                   key_rwin+key_equals,                              0| // Маслорадиаторы He-111, Bf-110: открыть на одну позицию
+all_engines_oil_radiators_close,                  key_rwin+key_minus,                               0| // Маслорадиаторы He-111, Bf-110: закрыть на одну позицию
+rpc_all_engines_water_radiators_shutters,         key_rcontrol+key_equals/key_rcontrol+key_minus,   0| // Ось общего управления створками водорадиаторов
+all_engines_water_radiators_control_mode,         key_rcontrol+key_r,                               0| // Переключение общего управления водорадиаторами: ручное/автоматическое
+all_engines_water_radiators_open,                 key_rcontrol+key_equals,                          0| // Водорадиатор Bf-109/110, Spitfire: открытие
+all_engines_water_radiators_close,                key_rcontrol+key_minus,                           0| // Водорадиатор Bf-109/110, Spitfire: закрытие
+rpc_all_engines_in_cowls_shutters,                key_lcontrol+key_equals/key_lcontrol+key_minus,   0| // Общее управление входными створками капота двигателя (И-16, Ла-5, Ju 52, верхние створки A-20, створки интеркулера P-47)
+rpc_all_engines_cowls_shutters,                   key_lmenu+key_equals/key_lmenu+key_minus,         0| // Общее управление выходными створками капота двигателя (A-20, Fw 190 A-5 и А-8, Ла-5, Ju 88, P-40, P-47)
+select_all_engines,                               key_0,                                            0| // Режим общего управления двигателями: вкл/выкл
+select_engine_1,                                  key_1,                                            0| // Управление 1-ым двигателем: вкл/выкл
+select_engine_2,                                  key_2,                                            0| // Управление 2-ым двигателем: вкл/выкл
+select_engine_3,                                  key_3,                                            0| // Управление 3-им двигателем: вкл/выкл
+engine_1_switch,                                  key_rcontrol+key_1,                               0| // Запуск/выключение 1-го двигателя
+engine_1_ignition,                                key_rshift+key_numpad1,                           0| // Включение зажигания 1-го двигателя (Me 262)
+rpc_engine_1_throttle,                            ,                                                 0| // Рычаг управления 1-ым двигателем
+rpc_engine_1_altitude_throttle,                   key_lshift+key_equals/key_lshift+key_minus,       0| // Fokker D.VIIF: рычаг управления высотным дросселем двигателя
+rpc_engine_1_mixture,                             ,                                                 0| // Управление топливовоздушной смесью 1-го двигателя
+engine_1_supercharger,                            ,                                                 0| // Переключение режима нагнетателя 1-го двигателя
+rpc_engine_1_turbosupercharger,                   ,                                                 0| // Управление турбокомпрессором 1-го двигателя
+engine_1_boost,                                   ,                                                 0| // Форсаж 1-го двигателя: вкл/выкл
+rpc_engine_1_prop_pitch,                          ,                                                 0| // Управление оборотами винта 1-го двигателя
+engine_1_prop_pitch_control_mode,                 ,                                                 0| // Переключение управления шагом винта 1-го двигателя: ручное/автоматическое
+engine_1_prop_pitch_increase,                     ,                                                 0| // Ручное управление шагом винта 1-го двигателя: дозировано затяжелить винт
+engine_1_prop_pitch_decrease,                     ,                                                 0| // Ручное управление шагом винта 1-го двигателя: дозировано облегчить винт
+rpc_engine_1_oil_radiator_shutter,                ,                                                 0| // Управление створками маслорадиатора 1-го двигателя
+rpc_engine_1_water_radiator_shutter,              ,                                                 0| // Управление створками водорадиатора 1-го двигателя
+rpc_engine_1_in_cowl_shutter,                     ,                                                 0| // Управление входными створками капота 1-го двигателя
+rpc_engine_1_cowl_shutter,                        ,                                                 0| // Управление выходными створками капота 1-го двигателя
+engine_2_switch,                                  key_rcontrol+key_2,                               0| // Запуск/выключение 2-го двигателя
+engine_2_ignition,                                key_rshift+key_numpad2,                           0| // Включение зажигания 2-го двигателя (Me 262)
+rpc_engine_2_throttle,                            ,                                                 0| // Рычаг управления 2-ым двигателем
+rpc_engine_2_mixture,                             ,                                                 0| // Управление топливовоздушной смесью 2-го двигателя
+engine_2_supercharger,                            ,                                                 0| // Переключение режима нагнетателя 2-го двигателя
+rpc_engine_2_turbosupercharger,                   ,                                                 0| // Управление турбокомпрессором 2-го двигателя
+engine_2_boost,                                   ,                                                 0| // Форсаж 2-го двигателя: вкл/выкл
+rpc_engine_2_prop_pitch,                          ,                                                 0| // Управление оборотами винта 2-го двигателя
+engine_2_prop_pitch_control_mode,                 ,                                                 0| // Переключение управления шагом винта 2-го двигателя: ручное/автоматическое
+engine_2_prop_pitch_increase,                     ,                                                 0| // Ручное управление шагом винта 2-го двигателя: дозировано затяжелить винт
+engine_2_prop_pitch_decrease,                     ,                                                 0| // Ручное управление шагом винта 2-го двигателя: дозировано облегчить винт
+rpc_engine_2_oil_radiator_shutter,                ,                                                 0| // Управление створками маслорадиатора 2-го двигателя
+rpc_engine_2_water_radiator_shutter,              ,                                                 0| // Управление створками водорадиатора 2-го двигателя
+rpc_engine_2_in_cowl_shutter,                     ,                                                 0| // Управление входными створками капота 2-го двигателя
+rpc_engine_2_cowl_shutter,                        ,                                                 0| // Управление выходными створками капота 2-го двигателя
+engine_3_switch,                                  key_rcontrol+key_3,                               0| // Запуск/выключение 3-го двигателя
+rpc_engine_3_throttle,                            ,                                                 0| // Рычаг управления 3-им двигателем
+rpc_engine_3_mixture,                             ,                                                 0| // Управление топливовоздушной смесью 3-го двигателя
+rpc_engine_3_oil_radiator_shutter,                ,                                                 0| // Управление створками маслорадиатора 3-го двигателя
+rpc_engine_3_in_cowl_shutter,                     ,                                                 0| // Управление входными створками капота 3-го двигателя
+engine_interconnect_prop,                         key_lshift+key_i,                                 0| // Соединение рычага управления газом и винтом вкл/выкл
+engine_interconnect_turbo,                        key_lmenu+key_i,                                  0| // Соединение рычага управления газом и турбонагнетателем вкл/выкл
+toggle_refuel,                                    key_rcontrol+key_f,                               0| // Начать/остановить заправку топливом (внутри зоны сервисного обслуживания)
+all_guns_fire,                                    key_space,                                        0| // Огонь из всех орудий
+machineguns_fire,                                 key_rmenu+key_space,                              0| // Огонь первой группы вооружения
+machineguns_fire,                                 mouse_b0,                                         0|
+cannons_fire,                                     key_lmenu+key_space,                              0| // Огонь второй группы вооружения
+cannons_fire,                                     mouse_b1,                                         0|
+weapon_group3_fire,                               key_rcontrol+key_space,                           0| // Огонь третьей группы вооружения
+cam_switch_bombaim,                               key_v,                                            0| // Бомбовый прицел
+throw_bombs_mode,                                 key_lwin+key_b,                                   0| // Переключение режимов бомбометания
+throw_bombs_delay,                                key_lcontrol+key_b,                               0| // Переключение интервала в серии бомб
+throw_bombs_command,                              key_b,                                            0| // Сброс бомб, контейнеров, парашютистов или включение дымогенераторов
+throw_bombs_command,                              key_lcontrol+joy0_b1,                             0|
+launch_rockets_mode,                              key_lwin+key_r,                                   0| // Переключение режимов пуска ракет
+launch_rockets_command,                           key_r,                                            0| // Пуск ракет
+launch_rockets_command,                           joy0_b1,                                          0|
+launch_rockets_command,                           key_lcontrol+mouse_b1,                            0|
+jettison_stores_command,                          key_lshift+key_d,                                 0| // Аварийный сброс подвесок
+bombdoors_toggle,                                 key_n,                                            0| // Открыть/закрыть створки бомболюков
+bombsafety_toggle,                                key_lwin+key_s,                                   0| // Взрыватели вкл/выкл
+all_guns_reload,                                  key_lmenu+key_r,                                  0| // Перезарядка всех орудий
+all_guns_reload,                                  key_lcontrol+joy0_b0,                             0|
+bc_gun0,                                          key_lcontrol+key_grave,                           0| // Достать/убрать личное оружие
+bc_gun1,                                          key_lcontrol+key_1,                               0| // Красная сигнальная ракета
+bc_gun2,                                          key_lcontrol+key_2,                               0| // Зеленая сигнальная ракета
+bc_gun3,                                          key_lcontrol+key_3,                               0| // Белая сигнальная ракета
+bc_gun4,                                          key_lcontrol+key_4,                               0| // Личное оружие
+bc_gunfire,                                       key_lcontrol+key_space,                           0| // Выстрел из личного оружия
+bc_gunfire,                                       mouse_b0,                                         0|
+switchpilot,                                      key_lcontrol+key_c,                               0| // Переключиться на управление следующим свободным боевым постом
+tc_guard,                                         key_lshift+key_c,                                 0| // Сменить огневую позицию
+switchgunpos0,                                    key_rshift+key_0,                                 0| // Переключиться на основной боевой пост
+switchgunpos1,                                    key_rshift+key_1,                                 0| // Переключиться на 1-ю огневую точку
+switchgunpos2,                                    key_rshift+key_2,                                 0| // Переключиться на 2-ю огневую точку
+switchgunpos3,                                    key_rshift+key_3,                                 0| // Переключиться на 3-ю огневую точку
+switchgunpos4,                                    key_rshift+key_4,                                 0| // Переключиться на 4-ю огневую точку
+switchgunpos5,                                    key_rshift+key_5,                                 0| // Переключиться на 5-ю огневую точку
+switchgunpos6,                                    key_rshift+key_6,                                 0| // Переключиться на 6-ю огневую точку
+switchgunpos7,                                    key_rshift+key_7,                                 0| // Переключиться на 7-ю огневую точку
+switchgunpos8,                                    key_rshift+key_8,                                 0| // Переключиться на 8-ю огневую точку
+switchgunpos9,                                    key_rshift+key_9,                                 0| // Переключиться на 9-ю огневую точку
+tc_aiming,                                        key_t,                                            0| // Взять/отпустить управление турелью
+cam_switch_turret,                                key_lshift+key_t,                                 0| // Прильнуть к прицелу турели
+tc_fire,                                          mouse_b0,                                         0| // Огонь из главных орудий турели
+tc_fire_secondary,                                mouse_b1,                                         0| // Огонь из вспомогательных орудий турели
+tc_reload,                                        key_lmenu+key_r,                                  0| // Перезарядка орудий турели
+tc_reload,                                        mouse_b2,                                         0|
+gunsight_filter,                                  key_lmenu+key_f,                                  0| // Светофильтр прицела
+gunsight_adjustment,                              key_rmenu+key_f,                                  0| // Положение прицела
+gunsight_mode,                                    key_lmenu+key_m,                                  0| // Режим работы прицела
+gs_distance,                                      key_rmenu+key_period/key_rmenu+key_semicolon,     0| // Регулировка прицела по дальности
+gs_yaw,                                           key_rmenu+key_slash/key_rmenu+key_comma,          0| // Регулировка прицела по горизонтали
+gs_reset,                                         key_rmenu+key_apostrophe,                         0| // Сброс регулировки прицела
+tc_visor_pitch,                                   key_rshift+key_period/key_rshift+key_semicolon,   0| // Регулировка обзорного прибора по вертикали
+tc_visor_yaw,                                     key_rshift+key_slash/key_rshift+key_comma,        0| // Регулировка обзорного прибора по горизонтали
+tc_visor_reset,                                   key_rshift+key_apostrophe,                        0| // Сброс регулировки обзорного прибора
+tc_switchgun,                                     key_rmenu+key_g,                                  0| // Смена боеприпасов
+ai_turret_act_by_yourself,                        key_rmenu+key_1,                                  0| // Команда стрелкам: действовать по своему усмотрению
+ai_turret_back_fire,                              key_rmenu+key_2,                                  0| // Команда стрелкам: атаковать только при угрозе
+ai_turret_cease_fire,                             key_rmenu+key_3,                                  0| // Команда стрелкам: прекратить огонь
+ai_turret_cease_heavy_fire,                       key_rmenu+key_4,                                  0| // Команда стрелкам: прекратить огонь из тяжелого вооружения
+ai_turret_attack_balloons,                        key_rmenu+key_5,                                  0| // Команда стрелкам: атаковать аэростаты
+ai_turret_attack_ground,                          key_rmenu+key_6,                                  0| // Команда стрелкам: атаковать наземные цели
+ai_turret_short_distance,                         key_rmenu+key_7,                                  0| // Команда стрелкам: атаковать с малой дистанции
+ai_turret_normal_distance,                        key_rmenu+key_8,                                  0| // Команда стрелкам: атаковать со средней дистанции
+ai_turret_medium_distance,                        key_rmenu+key_9,                                  0| // Команда стрелкам: атаковать с большой дистанции
+toggle_rearm,                                     key_rcontrol+key_a,                               0| // Начать/остановить перевооружение самолёта (внутри зоны сервисного обслуживания)
+bc_signal_stay_here,                              key_lcontrol+key_0,                               0| // Оставаться на месте и ожидать приказов
+bc_signal_attack_nearest_air_target,              key_lmenu+key_1,                                  0| // Атаковать ближайшую воздушную цель
+bc_signal_attack_nearest_ground_target,           key_lmenu+key_2,                                  0| // Атаковать ближайшую наземную цель
+bc_signal_back_to_mission,                        key_lmenu+key_3,                                  0| // Прекратить атаки и вернуться к выполнению основной задачи
+bc_signal_do_like_me,                             key_lmenu+key_4,                                  0| // Делай как я (повторяй за мной)
+bc_signal_formation_column,                       key_lcontrol+key_6,                               0| // Построение в боевой порядок колонна
+bc_signal_formation_left_arrow,                   key_lcontrol+key_7,                               0| // Построение в боевой порядок левый пеленг
+bc_signal_formation_right_arrow,                  key_lcontrol+key_8,                               0| // Построение в боевой порядок правый пеленг
+bc_signal_formation_v,                            key_lcontrol+key_9,                               0| // Построение в боевой порядок клин
+bc_signal_hold_formation,                         key_lmenu+key_5,                                  0| // Оставаться в боевом порядке и прикрывать ведущего
+bc_signal_patrol,                                 key_lmenu+key_6,                                  0| // Атаковать воздушные и наземные цели
+bc_signal_patrol_air,                             key_lmenu+key_7,                                  0| // Атаковать воздушные цели
+bc_signal_patrol_ground,                          key_lmenu+key_8,                                  0| // Атаковать наземные цели
+bc_signal_return_to_base,                         key_lmenu+key_0,                                  0| // Возвращаемся на базу
+bc_signal_attack,                                 key_lshift+key_1,                                 0| // Жест пилота: Смотри вперед!
+bc_signal_denote_enemy,                           key_lshift+key_2,                                 0| // Жест пилота: Отлично!
+bc_signal_flap_to_head,                           key_lshift+key_3,                                 0| // Жест пилота: Уничтожим!
+vc_gas,                                           key_up/key_down,                                  0| // Газ/тормоз (танк)
+vc_turn,                                          key_right/key_left,                               0| // Поворот (танк)
+vc_gearup,                                        key_x,                                            0| // Ограничитель передачи - больше
+vc_geardown,                                      key_z,                                            0| // Ограничитель передачи - меньше
+rb_pitch,                                         mouse_axis_y,                                     0| // inprb_pitch
+rb_yaw,                                           mouse_axis_x,                                     0| // inprb_yaw
+mc_pitch,                                         mouse_axis_y,                                     0| // inpmc_pitch
+mc_yaw,                                           mouse_axis_x,                                     0| // inpmc_yaw
+mc_pitch_free,                                    mouse_axis_y+mouse_b1,                            0| // inpmc_pitch_free
+mc_yaw_free,                                      mouse_axis_x+mouse_b1,                            0| // inpmc_yaw_free
+vc_engine_switch,                                 key_e,                                            0| // Запуск/выключение двигателей
+vc_brake,                                         key_space,                                        0| // inpvc_brake
+ext_action1,                                      key_lwin+key_1,                                   0| // inpext_action1
+ext_action1,                                      key_rwin+key_1,                                   0|
+ext_action2,                                      key_lwin+key_2,                                   0| // inpext_action2
+ext_action2,                                      key_rwin+key_2,                                   0|
+ext_action3,                                      key_lwin+key_3,                                   0| // inpext_action3
+ext_action3,                                      key_rwin+key_3,                                   0|
+ext_action4,                                      key_lwin+key_4,                                   0| // inpext_action4
+ext_action4,                                      key_rwin+key_4,                                   0|
+ext_action5,                                      key_lwin+key_5,                                   0| // inpext_action5
+ext_action5,                                      key_rwin+key_5,                                   0|
+ext_action6,                                      key_lwin+key_6,                                   0| // inpext_action6
+ext_action6,                                      key_rwin+key_6,                                   0|
+ext_action7,                                      key_lwin+key_7,                                   0| // inpext_action7
+ext_action7,                                      key_rwin+key_7,                                   0|
+ext_action8,                                      key_lwin+key_8,                                   0| // inpext_action8
+ext_action8,                                      key_rwin+key_8,                                   0|
+ext_action9,                                      key_lwin+key_9,                                   0| // inpext_action9
+ext_action9,                                      key_rwin+key_9,                                   0|
+ext_action0,                                      key_lwin+key_0,                                   0| // inpext_action0
+ext_action0,                                      key_rwin+key_0,                                   0|
+cam_rotate_gopro_yaw,                             mouse_axis_x,                                     0| // inpcam_rotate_gopro_yaw
+cam_rotate_gopro_yaw_center,                      key_numpad5,                                      0| // inpcam_rotate_gopro_yaw_center
+gui_mouse_x,                                      mouse_axis_x,                                     0| // Активация мыши по оси X
+gui_mouse_y,                                      mouse_axis_y,                                     0| // Активация мыши по оси Y
+gui_mouse_z,                                      mouse_axis_z,                                     0| // Активация колесика мыши (скролл)

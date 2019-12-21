@@ -1,0 +1,2 @@
+configId,guid,model|
+0,%22cfa42ac0-8442-11e7-0000545345440180%22,PC%20Game%20Controller
