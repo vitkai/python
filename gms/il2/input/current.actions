@@ -68,7 +68,6 @@ cam_switch_head_free,                             key_lmenu+key_f1,             
 freelook,                                         ,                                                 0| // FreeLook
 bc_head_zoom,                                     ,                                                 0| // Увеличить/уменьшить
 bc_head_zoom,                                     key_lcontrol+mouse_axis_z,                        0|
-bc_head_zoom,                                     mouse_axis_z,                                     0|
 bc_head_cfovi,                                    key_add,                                          0| // Приближение взлядом
 bc_head_cfovi,                                    joy0_pov0_0,                                      0|
 bc_head_cfovo,                                    key_subtract,                                     0| // Удаление взглядом
@@ -76,7 +75,6 @@ bc_head_cfovo,                                    joy0_pov0_180,                
 bc_head_cfovr,                                    key_multiply,                                     0| // Восстановить нормальный обзор
 rb_zoom,                                          key_lshift+mouse_axis_z,                          0| // Смена угла обзора в турели
 rb_zoom,                                          key_add/key_subtract,                             0|
-rb_zoom,                                          mouse_axis_z,                                     0|
 mc_zoom,                                          key_lshift+mouse_axis_z,                          0| // Смена угла обзора
 mc_zoom,                                          key_add/key_subtract,                             0|
 vrzoomin,                                         key_add,                                          0| // Увеличение масштаба вида VR
