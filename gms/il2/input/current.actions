@@ -128,7 +128,7 @@ cam_rotate_hf_yaw,                                mouse_axis_x,                 
 cam_rotate_hf_pitch,                              mouse_axis_y,                                     0| // Независимо от головы вверх/вниз
 cam_rotate_hf_yaw_center,                         key_numpad5,                                      0| // Центрировать независимый от головы вид по горизонтали
 cam_rotate_hf_pitch_center,                       key_numpad5,                                      0| // Центрировать независимый от головы вид по вертикали
-autopilot,                                        key_a,                                            0| // Игровой автопилот: вкл/выкл
+autopilot,                                        key_lcontrol+key_a,                               0| // Игровой автопилот: вкл/выкл
 autolevelflight,                                  key_lshift+key_a,                                 0| // Игровой автопилот выдерживания горизонтального полета: вкл/выкл
 autolevelflight_to_left,                          key_lshift+key_z,                                 0| // Игровой автопилот выдерживания горизонтального полета: доворот влево
 autolevelflight_to_right,                         key_lshift+key_x,                                 0| // Игровой автопилот выдерживания горизонтального полета: доворот вправо
@@ -173,6 +173,7 @@ rpc_wheel_brakes_right,                           key_period,                   
 rpc_wheel_brakes_central,                         key_rwin+key_slash,                               0| // Тормоз носового/хвостового колёса шасси
 parking_brakes,                                   key_lshift+key_slash,                             0| // Стояночный тормоз колёс шасси: вкл/выкл
 canopy_open_close,                                key_rmenu+key_c,                                  0| // Фонарь кабины экипажа: открыть/закрыть
+canopy_open_close,                                mouse_b2,                                         0|
 window_open_close,                                key_lwin+key_c,                                   0| // Окно: открыть/закрыть
 landing_lights,                                   key_rshift+key_l,                                 0| // Фара: вкл/выкл
 navigation_lights,                                key_rcontrol+key_l,                               0| // Бортовые аэронавигационные огни: вкл/выкл
@@ -194,7 +195,9 @@ engine_blip_switch,                               key_lshift+key_e,             
 rpc_all_engines_throttles,                        key_equals/key_minus,                             0| // Рычаги управления двигателями
 rpc_all_engines_throttles,                        mouse_axis_z,                                     0|
 rpc_all_engines_mixtures,                         key_rmenu+key_equals/key_rmenu+key_minus,         0| // Общее управление топливовоздушной смесью двигателей
+rpc_all_engines_mixtures,                         key_lcontrol+key_add/key_lcontrol+key_subtract,   0|
 all_engines_superchargers,                        key_lshift+key_s,                                 0| // Переключение режима нагнетателей
+all_engines_superchargers,                        key_lcontrol+joy0_b3,                             0|
 rpc_all_engines_turbosuperchargers,               key_lshift+key_equals/key_lshift+key_minus,       0| // Ось общего управления турбокомпрессорами
 all_engines_boost,                                key_lshift+key_b,                                 0| // Форсаж двигателей: вкл/выкл
 rpc_all_engines_props_pitch,                      key_rshift+key_equals/key_rshift+key_minus,       0| // Общее управление оборотами винтов
@@ -204,10 +207,12 @@ all_engines_props_pitch_increase,                 key_rshift+key_equals,        
 all_engines_props_pitch_decrease,                 key_rshift+key_minus,                             0| // Ручное общее управление шагом винтов: дозировано облегчить винты
 all_engines_props_feathering,                     key_lcontrol+key_f,                               0| // Флюгирование винтов: вкл/выкл
 rpc_all_engines_oil_radiators_shutters,           key_rwin+key_equals/key_rwin+key_minus,           0| // Ось общего управления створками маслорадиаторов
+rpc_all_engines_oil_radiators_shutters,           key_lcontrol+joy0_b4/key_lcontrol+joy0_b2,        0|
 all_engines_oil_radiators_control_mode,           key_rwin+key_r,                                   0| // Переключение общего управления маслорадиаторами: ручное/автоматическое
 all_engines_oil_radiators_open,                   key_rwin+key_equals,                              0| // Маслорадиаторы He-111, Bf-110: открыть на одну позицию
 all_engines_oil_radiators_close,                  key_rwin+key_minus,                               0| // Маслорадиаторы He-111, Bf-110: закрыть на одну позицию
 rpc_all_engines_water_radiators_shutters,         key_rcontrol+key_equals/key_rcontrol+key_minus,   0| // Ось общего управления створками водорадиаторов
+rpc_all_engines_water_radiators_shutters,         key_lcontrol+joy0_b4/key_lcontrol+joy0_b2,        0|
 all_engines_water_radiators_control_mode,         key_rcontrol+key_r,                               0| // Переключение общего управления водорадиаторами: ручное/автоматическое
 all_engines_water_radiators_open,                 key_rcontrol+key_equals,                          0| // Водорадиатор Bf-109/110, Spitfire: открытие
 all_engines_water_radiators_close,                key_rcontrol+key_minus,                           0| // Водорадиатор Bf-109/110, Spitfire: закрытие
@@ -284,14 +289,21 @@ bc_gun4,                                          key_lcontrol+key_4,           
 bc_gunfire,                                       key_lcontrol+key_space,                           0| // Выстрел из личного оружия
 bc_gunfire,                                       mouse_b0,                                         0|
 switchpilot,                                      key_lcontrol+key_c,                               0| // Переключиться на управление следующим свободным боевым постом
+switchpilot,                                      key_c,                                            0|
 tc_guard,                                         key_lshift+key_c,                                 0| // Сменить огневую позицию
 switchgunpos0,                                    key_rshift+key_0,                                 0| // Переключиться на основной боевой пост
 switchgunpos1,                                    key_rshift+key_1,                                 0| // Переключиться на 1-ю огневую точку
+switchgunpos1,                                    key_lshift+key_1,                                 0|
 switchgunpos2,                                    key_rshift+key_2,                                 0| // Переключиться на 2-ю огневую точку
+switchgunpos2,                                    key_lshift+key_2,                                 0|
 switchgunpos3,                                    key_rshift+key_3,                                 0| // Переключиться на 3-ю огневую точку
+switchgunpos3,                                    key_lshift+key_3,                                 0|
 switchgunpos4,                                    key_rshift+key_4,                                 0| // Переключиться на 4-ю огневую точку
+switchgunpos4,                                    key_lshift+key_4,                                 0|
 switchgunpos5,                                    key_rshift+key_5,                                 0| // Переключиться на 5-ю огневую точку
+switchgunpos5,                                    key_lshift+key_5,                                 0|
 switchgunpos6,                                    key_rshift+key_6,                                 0| // Переключиться на 6-ю огневую точку
+switchgunpos6,                                    key_lshift+key_6,                                 0|
 switchgunpos7,                                    key_rshift+key_7,                                 0| // Переключиться на 7-ю огневую точку
 switchgunpos8,                                    key_rshift+key_8,                                 0| // Переключиться на 8-ю огневую точку
 switchgunpos9,                                    key_rshift+key_9,                                 0| // Переключиться на 9-ю огневую точку
@@ -300,7 +312,6 @@ cam_switch_turret,                                key_lshift+key_t,             
 tc_fire,                                          mouse_b0,                                         0| // Огонь из главных орудий турели
 tc_fire_secondary,                                mouse_b1,                                         0| // Огонь из вспомогательных орудий турели
 tc_reload,                                        key_lmenu+key_r,                                  0| // Перезарядка орудий турели
-tc_reload,                                        mouse_b2,                                         0|
 gunsight_filter,                                  key_lmenu+key_f,                                  0| // Светофильтр прицела
 gunsight_adjustment,                              key_rmenu+key_f,                                  0| // Положение прицела
 gunsight_mode,                                    key_lmenu+key_m,                                  0| // Режим работы прицела
@@ -311,6 +322,7 @@ tc_visor_pitch,                                   key_rshift+key_period/key_rshi
 tc_visor_yaw,                                     key_rshift+key_slash/key_rshift+key_comma,        0| // Регулировка обзорного прибора по горизонтали
 tc_visor_reset,                                   key_rshift+key_apostrophe,                        0| // Сброс регулировки обзорного прибора
 tc_switchgun,                                     key_rmenu+key_g,                                  0| // Смена боеприпасов
+tc_switchgun,                                     key_space,                                        0|
 ai_turret_act_by_yourself,                        key_rmenu+key_1,                                  0| // Команда стрелкам: действовать по своему усмотрению
 ai_turret_back_fire,                              key_rmenu+key_2,                                  0| // Команда стрелкам: атаковать только при угрозе
 ai_turret_cease_fire,                             key_rmenu+key_3,                                  0| // Команда стрелкам: прекратить огонь
@@ -339,7 +351,9 @@ bc_signal_attack,                                 key_lshift+key_1,             
 bc_signal_denote_enemy,                           key_lshift+key_2,                                 0| // Жест пилота: Отлично!
 bc_signal_flap_to_head,                           key_lshift+key_3,                                 0| // Жест пилота: Уничтожим!
 vc_gas,                                           key_up/key_down,                                  0| // Газ/тормоз (танк)
+vc_gas,                                           key_w/key_s,                                      0|
 vc_turn,                                          key_right/key_left,                               0| // Поворот (танк)
+vc_turn,                                          key_d/key_a,                                      0|
 vc_gearup,                                        key_x,                                            0| // Ограничитель передачи - больше
 vc_geardown,                                      key_z,                                            0| // Ограничитель передачи - меньше
 rb_pitch,                                         mouse_axis_y,                                     0| // inprb_pitch
@@ -350,6 +364,8 @@ mc_pitch_free,                                    mouse_axis_y+mouse_b1,        
 mc_yaw_free,                                      mouse_axis_x+mouse_b1,                            0| // inpmc_yaw_free
 vc_engine_switch,                                 key_e,                                            0| // Запуск/выключение двигателей
 vc_brake,                                         key_space,                                        0| // inpvc_brake
+cam_switch_mc_far,                                key_f4,                                           0| // inpcam_switch_mc_far
+cam_switch_mc_close,                              key_f1,                                           0| // inpcam_switch_mc_close
 ext_action1,                                      key_lwin+key_1,                                   0| // inpext_action1
 ext_action1,                                      key_rwin+key_1,                                   0|
 ext_action2,                                      key_lwin+key_2,                                   0| // inpext_action2
