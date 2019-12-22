@@ -181,6 +181,7 @@ canopy_open_close,                                key_lshift+mouse_b1,          
 window_open_close,                                key_lwin+key_c,                                   0| // Окно: открыть/закрыть
 landing_lights,                                   key_rshift+key_l,                                 0| // Фара: вкл/выкл
 navigation_lights,                                key_rcontrol+key_l,                               0| // Бортовые аэронавигационные огни: вкл/выкл
+navigation_lights,                                key_g,                                            0|
 cockpit_lights,                                   key_l,                                            0| // Внутреннее освещение: вкл/выкл
 formation_lights,                                 key_rmenu+key_l,                                  0| // Строевые огни: вкл/выкл
 set_altimeter_reference_pressure,                 key_lmenu+key_a,                                  0| // Высотомер: установка давления
@@ -295,6 +296,7 @@ bc_gunfire,                                       key_lcontrol+key_space,       
 bc_gunfire,                                       mouse_b0,                                         0|
 switchpilot,                                      key_lcontrol+key_c,                               0| // Переключиться на управление следующим свободным боевым постом
 switchpilot,                                      key_c,                                            0|
+switchpilot,                                      key_lcontrol+joy0_b0,                             0|
 tc_guard,                                         key_lshift+key_c,                                 0| // Сменить огневую позицию
 switchgunpos0,                                    key_rshift+key_0,                                 0| // Переключиться на основной боевой пост
 switchgunpos1,                                    key_rshift+key_1,                                 0| // Переключиться на 1-ю огневую точку
