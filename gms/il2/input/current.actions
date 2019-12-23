@@ -31,10 +31,10 @@ cam_free_slow_mode,                               key_numpad0,                  
 cam_zoom,                                         ,                                                 0| // Зуммирование вида камеры
 cam_zoom,                                         key_add/key_subtract,                             0|
 cam_rotate_pitch,                                 key_numpad2/key_numpad8,                          0| // Вращение камеры вокруг вверх/вниз
-cam_rotate_pitch,                                 mouse_axis_y,                                     0|
+cam_rotate_pitch,                                 mouse_axis_y,                                     1|
 cam_rotate_pitch,                                 joy0_pov0_180/joy0_pov0_0,                        0|
 cam_rotate_yaw,                                   key_numpad6/key_numpad4,                          0| // Вращение камеры вокруг влево/вправо
-cam_rotate_yaw,                                   mouse_axis_x,                                     0|
+cam_rotate_yaw,                                   mouse_axis_x,                                     1|
 cam_rotate_yaw,                                   joy0_pov0_90/joy0_pov0_270,                       0|
 cam_rotate_ext_pitch,                             key_lshift+mouse_axis_y,                          0| // Вращение вида камеры на месте вверх/вниз
 cam_rotate_ext_yaw,                               key_lshift+mouse_axis_x,                          0| // Вращение вида камеры на месте влево/вправо
@@ -176,13 +176,14 @@ rpc_wheel_brakes_right,                           key_period,                   
 rpc_wheel_brakes_central,                         key_rwin+key_slash,                               0| // Тормоз носового/хвостового колёса шасси
 parking_brakes,                                   key_lshift+key_slash,                             0| // Стояночный тормоз колёс шасси: вкл/выкл
 canopy_open_close,                                key_rmenu+key_c,                                  0| // Фонарь кабины экипажа: открыть/закрыть
-canopy_open_close,                                key_lcontrol+mouse_b2,                            0|
 canopy_open_close,                                key_lshift+mouse_b1,                              0|
 window_open_close,                                key_lwin+key_c,                                   0| // Окно: открыть/закрыть
 landing_lights,                                   key_rshift+key_l,                                 0| // Фара: вкл/выкл
-navigation_lights,                                key_rcontrol+key_l,                               0| // Бортовые аэронавигационные огни: вкл/выкл
+landing_lights,                                   key_rmenu+key_l,                                  0|
+navigation_lights,                                key_l,                                            0| // Бортовые аэронавигационные огни: вкл/выкл
 navigation_lights,                                key_g,                                            0|
-cockpit_lights,                                   key_l,                                            0| // Внутреннее освещение: вкл/выкл
+cockpit_lights,                                   ,                                                 0| // Внутреннее освещение: вкл/выкл
+cockpit_lights,                                   key_rcontrol+key_l,                               0|
 formation_lights,                                 key_rmenu+key_l,                                  0| // Строевые огни: вкл/выкл
 set_altimeter_reference_pressure,                 key_lmenu+key_a,                                  0| // Высотомер: установка давления
 contact_altimeter_target_altitude_increase,       key_rshift+key_k,                                 0| // Контактный высотомер: заданную высоту увеличить
