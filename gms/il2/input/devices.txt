@@ -1,2 +1,2 @@
 configId,guid,model|
-0,%22cfa42ac0-8442-11e7-0000545345440180%22,PC%20Game%20Controller
+0,%222f42afd0-26bf-11ea-0000545345440180%22,Logitech%20Extreme%203D
