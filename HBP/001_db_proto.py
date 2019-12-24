@@ -130,11 +130,13 @@ def db_init_tables(conn):
                                         id integer PRIMARY KEY,
                                         tr_date text NOT NULL,
                                         tr_sum integer NOT NULL,
-                                        FOREIGN KEY (ccy_id) REFERENCES Currency (id),
-                                        FOREIGN KEY (category_id) REFERENCES Category (id)
+                                        ccy_id integer NOT NULL,
+                                        category_id integer NOT NULL,
                                         content text NOT NULL,
                                         add_date text NOT NULL,
-                                        upd_date text NOT NULL
+                                        upd_date text NOT NULL,
+                                        FOREIGN KEY (ccy_id) REFERENCES Currency (id),
+                                        FOREIGN KEY (category_id) REFERENCES Category (id)
                                     ); """
 
     
