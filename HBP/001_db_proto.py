@@ -72,20 +72,6 @@ def db_create_project(conn, project):
     return cur.lastrowid
 
 
-def create_project(conn, project):
-    """
-    Create a new project into the projects table
-    :param conn:
-    :param project:
-    :return: project id
-    """
-    sql = ''' INSERT INTO projects(name,begin_date,end_date)
-              VALUES(?,?,?) '''
-    cur = conn.cursor()
-    cur.execute(sql, project)
-    return cur.lastrowid
-    
-
 def db_create_task(conn, task):
     """
     Create a new task
@@ -121,6 +107,37 @@ def db_init_tables(conn):
                                     FOREIGN KEY (project_id) REFERENCES projects (id)
                                 );"""
                                 
+    """
+    -- Transaction_Records:
+		ID|Date|Sum|CCY|Category|Content|Addition date|Upd date
+	--Categories:
+		ID|Category
+	--Currencies:
+		ID|CCY
+    """
+
+    sql_create_category_table = """ CREATE TABLE IF NOT EXISTS Category (
+                                        id integer PRIMARY KEY,
+                                        name text NOT NULL
+                                    ); """
+
+    sql_create_ccy_table = """ CREATE TABLE IF NOT EXISTS Currency (
+                                        id integer PRIMARY KEY,
+                                        name text NOT NULL
+                                    ); """
+
+    sql_create_tr_records_table = """ CREATE TABLE IF NOT EXISTS Tr_Records (
+                                        id integer PRIMARY KEY,
+                                        tr_date text NOT NULL,
+                                        tr_sum integer NOT NULL,
+                                        FOREIGN KEY (ccy_id) REFERENCES Currency (id),
+                                        FOREIGN KEY (category_id) REFERENCES Category (id)
+                                        content text NOT NULL,
+                                        add_date text NOT NULL,
+                                        upd_date text NOT NULL
+                                    ); """
+
+    
     # create tables
     if conn is not None:
         # create projects table
@@ -128,13 +145,18 @@ def db_init_tables(conn):
  
         # create tasks table
         db_create_table(conn, sql_create_tasks_table)
+        
+        # create transaction related tables
+        db_create_table(conn, sql_create_category_table)
+        db_create_table(conn, sql_create_ccy_table)
+        db_create_table(conn, sql_create_tr_records_table)
 
 
 def db_init_data(conn):
     with conn:
         # create a new project
         project = ('Cool App with SQLite & Python', '2015-01-01', '2015-01-30');
-        project_id = create_project(conn, project)
+        project_id = db_create_project(conn, project)
  
         # tasks
         task_1 = ('Analyze the requirements of the app', 1, 1, project_id, '2015-01-01', '2015-01-02')
@@ -230,7 +252,7 @@ def main():
     # create a database connection
     conn = db_create_connection(full_path + '\\' + 'hbp.db')
 
-    # db_init_tables(conn)
+    db_init_tables(conn)
     db_init_data(conn)
     
     with conn:

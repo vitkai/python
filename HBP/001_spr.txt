@@ -1,8 +1,15 @@
 - db w/ categories
 - data insertion
 - Format:
-Date|Sum|CCY|Category|Content
--- info:
+    -- Transaction_Records:
+		ID|Date|Sum|CCY|Category|Content|Addition date|Upd date
+	--Categories:
+		ID|Category
+	--Currencies:
+		ID|CCY
+
+- info:
 	https://www.sqlitetutorial.net/sqlite-python/
+	https://docs.python.org/3/library/sqlite3.html
 	sqlite> .header on
 	sqlite> .mode column
