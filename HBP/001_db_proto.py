@@ -8,6 +8,7 @@ import logging
 from os import path
 import sqlite3
 from sqlite3 import Error
+from time import gmtime, strftime
 
 def logging_setup():
     logger = logging.getLogger(__name__)
@@ -88,12 +89,24 @@ def db_add_categories(conn, cats):
     """
     Add new currencies into the Currency table
     :param conn:
-    :param currencies:
+    :param categories list:
     """
     cur = conn.cursor()
     sql = 'INSERT INTO Category(name) VALUES(?) '
     print(cats)
     cur.executemany(sql, cats)
+
+
+def db_add_tr_rec(conn, recs):
+    """
+    Add new currencies into the Currency table
+    :param conn:
+    :param transaction record:
+    """
+    cur = conn.cursor()
+    sql = 'INSERT INTO Tr_Records(tr_date, tr_sum, ccy_id, category_id, content, add_date, upd_date) VALUES(?, ?, ?, ?, ?, ?, ?) '
+    print(recs)
+    cur.execute(sql, recs)
 
 
 def db_create_task(conn, task):
@@ -153,7 +166,7 @@ def db_init_tables(conn):
     sql_create_tr_records_table = """ CREATE TABLE IF NOT EXISTS Tr_Records (
                                         id integer PRIMARY KEY,
                                         tr_date text NOT NULL,
-                                        tr_sum integer NOT NULL,
+                                        tr_sum float NOT NULL,
                                         ccy_id integer NOT NULL,
                                         category_id integer NOT NULL,
                                         content text NOT NULL,
@@ -200,8 +213,15 @@ def db_init_data(conn):
         # init Categories
         categories = [('Entertainment',), ('Food',),  ('Rent',), ('Other',)]
         db_add_categories(conn, categories)
+                       
+        # create a new project
+        today = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        sum = 0.0
+        tr_recs = (today, sum, 0, 4, 'Dummy', today, today);
+        db_add_tr_rec(conn, tr_recs)
         """
         pass
+        
 
 def db_update_task(conn, task):
     """
@@ -275,6 +295,21 @@ def db_select_all_categories(conn):
         print(row)
  
  
+def db_select_all_transactions(conn):
+    """
+    Query all rows in the tasks table
+    :param conn: the Connection object
+    :return:
+    """
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Tr_Records")
+ 
+    rows = cur.fetchall()
+ 
+    for row in rows:
+        print(row)
+
+
 def db_select_task_by_priority(conn, priority):
     """
     Query tasks by priority
@@ -316,6 +351,9 @@ def main():
  
         print("2. Query all Currencies")
         db_select_all_categories(conn)
+        
+        print("3. Query all Currencies")
+        db_select_all_transactions(conn)
  
     logger.debug("That's all folks")
     print("\nThat's all folks")
@@ -327,6 +365,6 @@ if __name__ == "__main__":
 # 1. replace individual db_ functions with general SQL processing one
 # 2. + add SQL statement generation in a separate function
 # After quick research I doubt it is necessary to do 1 and 2
-# 3. need to decide whther 
+# 3. need to decide whether 
 #  a) to keep db schema in conf file
 #  b) to keep dictionary data (Currencies and Categories) in conf file or to add an interface to edit them
