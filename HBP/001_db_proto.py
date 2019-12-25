@@ -72,6 +72,30 @@ def db_create_project(conn, project):
     return cur.lastrowid
 
 
+def db_add_ccy(conn, currencies):
+    """
+    Add new currencies into the Currency table
+    :param conn:
+    :param currencies:
+    """
+    cur = conn.cursor()
+    sql = 'INSERT INTO Currency(name) VALUES(?) '
+    print(currencies)
+    cur.executemany(sql, currencies)
+
+
+def db_add_categories(conn, cats):
+    """
+    Add new currencies into the Currency table
+    :param conn:
+    :param currencies:
+    """
+    cur = conn.cursor()
+    sql = 'INSERT INTO Category(name) VALUES(?) '
+    print(cats)
+    cur.executemany(sql, cats)
+
+
 def db_create_task(conn, task):
     """
     Create a new task
@@ -156,6 +180,7 @@ def db_init_tables(conn):
 
 def db_init_data(conn):
     with conn:
+        """
         # create a new project
         project = ('Cool App with SQLite & Python', '2015-01-01', '2015-01-30');
         project_id = db_create_project(conn, project)
@@ -167,7 +192,16 @@ def db_init_data(conn):
         # create tasks
         db_create_task(conn, task_1)
         db_create_task(conn, task_2)
-    
+        
+        # init currencies
+        ccys = [('BGN',), ('EUR',),  ('RUB',), ('USD',)]
+        db_add_ccy(conn, ccys)
+        
+        # init Categories
+        categories = [('Entertainment',), ('Food',),  ('Rent',), ('Other',)]
+        db_add_categories(conn, categories)
+        """
+        pass
 
 def db_update_task(conn, task):
     """
@@ -211,14 +245,29 @@ def db_delete_all_tasks(conn):
     conn.commit()
 
 
-def db_select_all_tasks(conn):
+def db_select_all_ccys(conn):
     """
     Query all rows in the tasks table
     :param conn: the Connection object
     :return:
     """
     cur = conn.cursor()
-    cur.execute("SELECT * FROM tasks")
+    cur.execute("SELECT * FROM Currency")
+ 
+    rows = cur.fetchall()
+ 
+    for row in rows:
+        print(row)
+ 
+
+def db_select_all_categories(conn):
+    """
+    Query all rows in the tasks table
+    :param conn: the Connection object
+    :return:
+    """
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM Category")
  
     rows = cur.fetchall()
  
@@ -262,12 +311,11 @@ def main():
         # db_delete_task(conn, 2);
         # db_delete_all_tasks(conn);
         
-        print("1. Query task by priority:")
-        db_select_task_by_priority(conn, 1)
+        print("1. Query all Currencies")
+        db_select_all_ccys(conn)
  
-        print("2. Query all tasks")
-        db_select_all_tasks(conn)
- 
+        print("2. Query all Currencies")
+        db_select_all_categories(conn)
  
     logger.debug("That's all folks")
     print("\nThat's all folks")
@@ -279,3 +327,6 @@ if __name__ == "__main__":
 # 1. replace individual db_ functions with general SQL processing one
 # 2. + add SQL statement generation in a separate function
 # After quick research I doubt it is necessary to do 1 and 2
+# 3. need to decide whther 
+#  a) to keep db schema in conf file
+#  b) to keep dictionary data (Currencies and Categories) in conf file or to add an interface to edit them
