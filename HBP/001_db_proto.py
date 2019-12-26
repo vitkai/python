@@ -249,16 +249,17 @@ def db_update_transaction(conn, transac):
     :param transaction:
     """
     sql = ''' UPDATE Tr_Records
-              SET tr_date = ? ,
-                  tr_sum = ? ,
-                  ccy_id = ?,
-                  category_id = ?,
-                  content = ?,
-                  add_date = ?,
-                  upd_date =?
+              SET 
+                tr_date = ?,
+                tr_time = ?,
+                tr_sum = ?,
+                ccy_id = ?,
+                category_id = ?,
+                content = ?,
+                upd_date =?
               WHERE id = ?'''
     cur = conn.cursor()
-    cur.execute(sql, task)
+    cur.execute(sql, transac)
     conn.commit()
 
 
@@ -367,7 +368,10 @@ def main():
         # db_update_task(conn, (2, '2015-01-04', '2015-01-06', 2))
         # db_delete_task(conn, 2);
         # db_delete_all_tasks(conn);
-        
+
+        now = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        db_update_transaction(conn, ('2018-01-04', '10:00:35', 1.57, 0, 1, 'Test dummy', now, 1))
+
         print("1. Query all Currencies")
         db_select_all_ccys(conn)
  
