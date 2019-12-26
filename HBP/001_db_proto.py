@@ -104,7 +104,7 @@ def db_add_tr_rec(conn, recs):
     :param transaction record:
     """
     cur = conn.cursor()
-    sql = 'INSERT INTO Tr_Records(tr_date, tr_sum, ccy_id, category_id, content, add_date, upd_date) VALUES(?, ?, ?, ?, ?, ?, ?) '
+    sql = 'INSERT INTO Tr_Records(tr_date, tr_time, tr_sum, ccy_id, category_id, content, add_date, upd_date) VALUES(?, ?, ?, ?, ?, ?, ?, ?) '
     print(recs)
     cur.execute(sql, recs)
 
@@ -166,6 +166,7 @@ def db_init_tables(conn):
     sql_create_tr_records_table = """ CREATE TABLE IF NOT EXISTS Tr_Records (
                                         id integer PRIMARY KEY,
                                         tr_date text NOT NULL,
+                                        tr_time text,
                                         tr_sum float NOT NULL,
                                         ccy_id integer NOT NULL,
                                         category_id integer NOT NULL,
@@ -213,13 +214,15 @@ def db_init_data(conn):
         # init Categories
         categories = [('Entertainment',), ('Food',),  ('Rent',), ('Other',)]
         db_add_categories(conn, categories)
-                       
-        # create a new project
-        today = strftime("%Y-%m-%d %H:%M:%S", gmtime())
-        sum = 0.0
-        tr_recs = (today, sum, 0, 4, 'Dummy', today, today);
-        db_add_tr_rec(conn, tr_recs)
         """
+                       
+        # create a dummy transaction record
+        today = strftime("%Y-%m-%d %H:%M:%S", gmtime())
+        tr_date, tr_time = today.split(' ')
+        sum = 0.0
+        tr_recs = (tr_date, tr_time, sum, 0, 4, 'Dummy', today, today);
+        db_add_tr_rec(conn, tr_recs)
+
         pass
         
 
@@ -228,12 +231,31 @@ def db_update_task(conn, task):
     update priority, begin_date, and end date of a task
     :param conn:
     :param task:
-    :return: project id
     """
     sql = ''' UPDATE tasks
               SET priority = ? ,
                   begin_date = ? ,
                   end_date = ?
+              WHERE id = ?'''
+    cur = conn.cursor()
+    cur.execute(sql, task)
+    conn.commit()
+
+
+def db_update_transaction(conn, transac):
+    """
+    update priority, begin_date, and end date of a task
+    :param conn:
+    :param transaction:
+    """
+    sql = ''' UPDATE Tr_Records
+              SET tr_date = ? ,
+                  tr_sum = ? ,
+                  ccy_id = ?,
+                  category_id = ?,
+                  content = ?,
+                  add_date = ?,
+                  upd_date =?
               WHERE id = ?'''
     cur = conn.cursor()
     cur.execute(sql, task)

@@ -2,7 +2,7 @@
 - data insertion
 - Format:
     -- Transaction_Records:
-		ID|Date|Sum|CCY|Category|Content|Addition date|Upd date
+		ID|Date|Time|Sum|CCY|Category|Content|Addition date|Upd date
 	--Categories:
 		ID|Category
 	--Currencies:
