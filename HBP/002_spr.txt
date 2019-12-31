@@ -1,0 +1,6 @@
+- work with data + interface
+	-- interface to add/input data -> use django
+	-- or
+	-- file parser (.csv or similar)
+
+- add test modules for TDD
