@@ -148,6 +148,7 @@ yaw_trim_switch_left,                             key_lcontrol+key_z,           
 yaw_trim_switch_right,                            key_lcontrol+key_x,                               0| // Переключатель триммера руля направления: руль направления вправо
 rpc_pitch_trim,                                   key_rcontrol+key_down/key_rcontrol+key_up,        0| // Ось триммера руля высоты
 rpc_pitch_trim,                                   joy0_axis_z,                                      0|
+rpc_pitch_trim,                                   joy0_axis_p,                                      0|
 pitch_trim_switch_up,                             key_rcontrol+key_down,                            0| // Переключатель триммера руля высоты: на кабрирование
 pitch_trim_switch_dn,                             key_rcontrol+key_up,                              0| // Переключатель триммера руля высоты: на пикирование
 rpc_roll_trim,                                    key_rcontrol+key_right/key_rcontrol+key_left,     0| // Ось триммера элеронов
@@ -207,11 +208,14 @@ all_engines_superchargers,                        key_lshift+key_s,             
 all_engines_superchargers,                        key_lcontrol+joy0_b3,                             0|
 rpc_all_engines_turbosuperchargers,               key_lshift+key_equals/key_lshift+key_minus,       0| // Ось общего управления турбокомпрессорами
 all_engines_boost,                                key_lshift+key_b,                                 0| // Форсаж двигателей: вкл/выкл
+all_engines_boost,                                joy0_b3,                                          0|
 rpc_all_engines_props_pitch,                      key_rshift+key_equals/key_rshift+key_minus,       0| // Общее управление оборотами винтов
 rpc_all_engines_props_pitch,                      mouse_axis_z,                                     0|
 all_engines_props_pitch_control_mode,             key_rshift+key_p,                                 0| // Переключение общего управления шагом винтов: ручное/автоматическое
 all_engines_props_pitch_increase,                 key_rshift+key_equals,                            0| // Ручное общее управление шагом винтов: дозировано затяжелить винты
+all_engines_props_pitch_increase,                 key_lshift+joy0_pov0_180,                         0|
 all_engines_props_pitch_decrease,                 key_rshift+key_minus,                             0| // Ручное общее управление шагом винтов: дозировано облегчить винты
+all_engines_props_pitch_decrease,                 key_lshift+joy0_pov0_0,                           0|
 all_engines_props_feathering,                     key_lcontrol+key_f,                               0| // Флюгирование винтов: вкл/выкл
 rpc_all_engines_oil_radiators_shutters,           key_rwin+key_equals/key_rwin+key_minus,           0| // Ось общего управления створками маслорадиаторов
 rpc_all_engines_oil_radiators_shutters,           key_lcontrol+joy0_b4/key_lcontrol+joy0_b2,        0|
