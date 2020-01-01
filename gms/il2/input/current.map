@@ -331,7 +331,7 @@ action("jettison_stores_command","State","key_lshift+key_d");
 action("bombdoors_toggle","State","key_n");
 action("bombsafety_toggle","State","key_lwin+key_s");
 action("all_guns_reload","State","key_lmenu+key_r");
-action("all_guns_reload","State","key_lcontrol+joy0_b0");
+action("all_guns_reload","State","key_lshift+joy0_b3");
 action("bc_gun0","State","key_lcontrol+key_grave");
 action("bc_gun1","State","key_lcontrol+key_1");
 action("bc_gun2","State","key_lcontrol+key_2");
