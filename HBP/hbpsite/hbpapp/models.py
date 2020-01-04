@@ -29,11 +29,11 @@ class Transactions(models.Model):
     """Model representing a transaction record."""
     tr_date = models.DateField(null=False, blank=False)
     tr_time = models.DateField(null=True, blank=True)
-    Sum = models.DecimalField(max_digits=19, decimal_places=10, help_text='Enter a transaction sum (e.g. 500.0, or -50.5 for receiving)')
+    Sum = models.DecimalField(max_digits=19, decimal_places=2, help_text='Enter a transaction sum')
      
     TR_DIRS = (
-        ('+', 'Spending'),
-        ('-', 'Obtaining'),
+        ('-', 'Spending'),
+        ('+', 'Obtaining'),
     )
     
     tr_direction = models.CharField(
@@ -41,10 +41,21 @@ class Transactions(models.Model):
         choices=TR_DIRS,
         blank=True,
         default='+',
-        help_text="Whether you're spending (+) or receiving (-)")
+        help_text="Whether you're spending (-) or receiving (+)")
 
     CCY = models.ForeignKey('CCY', on_delete=models.SET_NULL, null=True)
     Category = models.ManyToManyField(Category, help_text="Select a Category for this transaction")
+    
+    def display_sum(self):
+        """Shows sum with a +/- sign"""
+        return '{}{}'.format(self.tr_direction, self.Sum)
+    
+    def display_category(self):
+        """Creates a string for the Category. This is required to display genre in Admin."""
+        return ', '.join([Category.name for cat in self.Category.all()])
+
+    display_category.short_description = 'Categories'
+    
     Content = models.CharField(max_length=200, help_text='Enter a transaction category (e.g. Food)')
   
     
@@ -54,4 +65,4 @@ class Transactions(models.Model):
     
     def __str__(self):
         """String for representing the Model object."""
-        return self.name
+        return '{0} ({1}) {2}{3} {4}'.format(self.tr_date, self.tr_direction, self.Sum, self.CCY, self.Content)
