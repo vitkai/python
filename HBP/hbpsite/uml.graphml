@@ -102,7 +102,7 @@
 		</node>
 		<node id="n2">
 			<data key="d4">
-				<y:RectD X="-106.07922191796237" Y="66.75" Width="205.45422191796237" Height="225.875"/>
+				<y:RectD X="-106.1099356209089" Y="66.75" Width="205.51564932385543" Height="220"/>
 			</data>
 			<data key="d6">
 				<uml:UMLNodeStyle fill="{y:GraphMLReference 1}" highlightFill="{y:GraphMLReference 2}">
@@ -111,12 +111,12 @@
 							<uml:UMLClassModel.attributes>
 								<x:Array Type="sys:Object">
 									<sys:String>tr_date:DateField</sys:String>
-									<sys:String>tr_time:String</sys:String>
-									<sys:String>Sum:Float</sys:String>
+									<sys:String>tr_time:TimeField</sys:String>
+									<sys:String>Sum:DecimalField</sys:String>
+									<sys:String>tr_direction:TR_DIRS(+,-)</sys:String>
 									<sys:String>CCY:Currency[1]</sys:String>
 									<sys:String>Category:Category[0..*]</sys:String>
 									<sys:String>Content:String</sys:String>
-									<sys:String><![CDATA[?Audit records (added/updated)?]]></sys:String>
 								</x:Array>
 							</uml:UMLClassModel.attributes>
 							<uml:UMLClassModel.operations>
