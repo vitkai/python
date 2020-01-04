@@ -4,3 +4,6 @@
 	-- file parser (.csv or similar)
 
 - add test modules for TDD
+
+- info:
+    https://www.yworks.com/yed-live/
