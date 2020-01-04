@@ -24,17 +24,17 @@ parameters:
       - 35
 
   debt:
-    pv: 1168484.63
+    pv: 990000
     term:
       periods_total: 350
-      periods_passed: 51
+      periods_passed: 63
 
 
-  money_avail: 40000
+  money_avail: 20000
 
   payments:
-    month_periodic: 30000
-    month_mandatory_periodic: 15000
+    month_periodic: 20000
+    month_mandatory_periodic: 12150
     strategy:
       # double is used if we want to pay double sum of mandatory annuity
       # no_extra - we pay only annuity
