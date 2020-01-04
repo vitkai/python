@@ -230,6 +230,7 @@ action("gear_dn","State","key_lcontrol+key_g");
 action("tailwheel_lock","State","key_lshift+key_g");
 action("rpc_wheel_brakes_p","State","key_slash");
 action("rpc_wheel_brakes_p","State","key_b");
+action("rpc_wheel_brakes_p","State","key_lshift+joy0_b0");
 action("rpc_wheel_brakes_left_p","State","key_comma");
 action("rpc_wheel_brakes_right_p","State","key_period");
 action("rpc_wheel_brakes_central_p","State","key_rwin+key_slash");

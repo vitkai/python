@@ -172,6 +172,7 @@ gear_dn,                                          key_lcontrol+key_g,           
 tailwheel_lock,                                   key_lshift+key_g,                                 0| // Фиксатор хвостового колеса: зафиксировано/свободно
 rpc_wheel_brakes,                                 key_slash,                                        0| // Тормоза колёс шасси
 rpc_wheel_brakes,                                 key_b,                                            0|
+rpc_wheel_brakes,                                 key_lshift+joy0_b0,                               0|
 rpc_wheel_brakes_left,                            key_comma,                                        0| // Левый тормоз колёс шасси
 rpc_wheel_brakes_right,                           key_period,                                       0| // Правый тормоз колёс шасси
 rpc_wheel_brakes_central,                         key_rwin+key_slash,                               0| // Тормоз носового/хвостового колёса шасси
