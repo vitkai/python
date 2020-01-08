@@ -6,7 +6,8 @@
 		ID|Category
 	--Currencies:
 		ID|CCY
-- data insertion
+- data insertion 
+(+) ---===---
 	-- interface to add/input data
 	-- or
 	-- file parser (.csv or similar)

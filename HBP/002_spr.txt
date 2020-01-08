@@ -1,7 +1,10 @@
 - work with data + interface
 	-- interface to add/input data -> use django
-	-- or
-	-- file parser (.csv or similar)
+		-- basic admin interface
+		(+) ---===---
+		-- basic user interface forms
+		
+	-- file parser (.csv or similar) for bulk uploads
 
 - add test modules for TDD
 
