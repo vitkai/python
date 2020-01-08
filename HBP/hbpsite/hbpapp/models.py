@@ -28,7 +28,7 @@ class CCY(models.Model):
 class Transactions(models.Model):
     """Model representing a transaction record."""
     tr_date = models.DateField(null=False, blank=False)
-    tr_time = models.DateField(null=True, blank=True)
+    tr_time = models.TimeField(null=True, blank=True)
     Sum = models.DecimalField(max_digits=19, decimal_places=2, help_text='Enter a transaction sum')
      
     TR_DIRS = (
@@ -52,7 +52,7 @@ class Transactions(models.Model):
     
     def display_category(self):
         """Creates a string for the Category. This is required to display genre in Admin."""
-        return ', '.join([Category.name for cat in self.Category.all()])
+        return ', '.join([cat.name for cat in self.Category.all()])
 
     display_category.short_description = 'Categories'
     
@@ -60,9 +60,9 @@ class Transactions(models.Model):
   
     
     class Meta:
-        ordering = ['tr_date', 'tr_time']
+        ordering = ['tr_date', 'tr_time', 'Sum', 'CCY']
 
     
     def __str__(self):
         """String for representing the Model object."""
-        return '{0} ({1}) {2}{3} {4}'.format(self.tr_date, self.tr_direction, self.Sum, self.CCY, self.Content)
+        return '{0} ({1}) {2}{3} {4} {5}'.format(self.tr_date, self.tr_time, self.tr_direction, self.Sum, self.CCY, self.Content)
