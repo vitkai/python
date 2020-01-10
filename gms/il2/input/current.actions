@@ -101,25 +101,27 @@ bc_head_cv0,                                      key_numpad8,                  
 bc_head_cv45,                                     key_numpad9,                                      0| // Направление взгляда: вправо-вперед
 bc_head_cv45,                                     joy0_pov0_45,                                     0|
 bc_head_cv90,                                     key_numpad6,                                      0| // Направление взгляда: вправо
-bc_head_cv90,                                     joy0_pov0_90,                                     0|
 bc_head_cv135,                                    key_numpad3,                                      0| // Направление взгляда: вправо-назад
 bc_head_cv135,                                    joy0_pov0_135,                                    0|
 bc_head_cv180,                                    key_numpad2,                                      0| // Направление взгляда: назад
 bc_head_cv225,                                    key_numpad1,                                      0| // Направление взгляда: влево-назад
 bc_head_cv225,                                    joy0_pov0_225,                                    0|
 bc_head_cv270,                                    key_numpad4,                                      0| // Направление взгляда: влево
-bc_head_cv270,                                    joy0_pov0_270,                                    0|
 bc_head_cv315,                                    key_numpad7,                                      0| // Направление взгляда: влево-вперед
 bc_head_cv315,                                    joy0_pov0_315,                                    0|
 bc_head_pos,                                      key_lcontrol+mouse_axis_z,                        0| // Смена положения у прицела турели
 bc_head_cvmf,                                     key_insert,                                       0| // Перемещение головы пилота вперед
 bc_head_cvmf,                                     key_rshift+joy0_pov0_0,                           0|
+bc_head_cvmf,                                     key_lshift+joy0_pov0_0,                           0|
 bc_head_cvmb,                                     key_home,                                         0| // Перемещение головы пилота назад
 bc_head_cvmb,                                     key_rshift+joy0_pov0_180,                         0|
+bc_head_cvmb,                                     key_lshift+joy0_pov0_180,                         0|
 bc_head_cvml,                                     key_delete,                                       0| // Перемещение головы пилота влево
 bc_head_cvml,                                     key_rshift+joy0_pov0_270,                         0|
+bc_head_cvml,                                     joy0_pov0_270,                                    0|
 bc_head_cvmr,                                     key_end,                                          0| // Перемещение головы пилота вправо
 bc_head_cvmr,                                     key_rshift+joy0_pov0_90,                          0|
+bc_head_cvmr,                                     joy0_pov0_90,                                     0|
 bc_head_cvmu,                                     key_prior,                                        0| // Приподняться на сиденье
 bc_head_cvmd,                                     key_next,                                         0| // Опуститься на сиденье
 cam_turret_pitch_center,                          key_numpad5,                                      0| // Турель, вид через прицел: сброс взгляда к прицелу по вертикали
