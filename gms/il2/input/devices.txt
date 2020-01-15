@@ -1,2 +1,2 @@
 configId,guid,model|
-0,%222f42afd0-26bf-11ea-0000545345440180%22,Logitech%20Extreme%203D
+0,%22928359d0-3729-11ea-0000545345440880%22,Logitech%20Extreme%203D
