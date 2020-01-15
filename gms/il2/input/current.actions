@@ -30,7 +30,6 @@ cam_ext_free_reset,                               key_c,                        
 cam_free_slow_mode,                               key_numpad0,                                      0| // Свободная камера - замедленное передвижение
 cam_zoom,                                         ,                                                 0| // Зуммирование вида камеры
 cam_zoom,                                         key_add/key_subtract,                             0|
-cam_zoom,                                         mouse_axis_z,                                     0|
 cam_rotate_pitch,                                 key_numpad2/key_numpad8,                          0| // Вращение камеры вокруг вверх/вниз
 cam_rotate_pitch,                                 mouse_axis_y,                                     1|
 cam_rotate_pitch,                                 joy0_pov0_180/joy0_pov0_0,                        0|
@@ -206,6 +205,7 @@ all_engines_switch,                               key_e,                        
 all_engines_ignition,                             key_rshift+key_e,                                 0| // Включение зажигания двигателй (Me 262)
 engine_blip_switch,                               key_lshift+key_e,                                 0| // Прерывание зажигания двигателя
 rpc_all_engines_throttles,                        key_equals/key_minus,                             0| // Рычаги управления двигателями
+rpc_all_engines_throttles,                        mouse_axis_z,                                     0|
 rpc_all_engines_mixtures,                         key_rmenu+key_equals/key_rmenu+key_minus,         0| // Общее управление топливовоздушной смесью двигателей
 rpc_all_engines_mixtures,                         key_lcontrol+key_add/key_lcontrol+key_subtract,   0|
 rpc_all_engines_mixtures,                         key_lshift+joy0_b4/key_lshift+joy0_b2,            0|
@@ -381,6 +381,8 @@ mc_pitch_free,                                    mouse_axis_y+mouse_b1,        
 mc_yaw_free,                                      mouse_axis_x+mouse_b1,                            0| // inpmc_yaw_free
 vc_engine_switch,                                 key_e,                                            0| // Запуск/выключение двигателей
 vc_brake,                                         key_space,                                        0| // inpvc_brake
+cam_switch_mc_far,                                key_f4,                                           0| // inpcam_switch_mc_far
+cam_switch_mc_close,                              key_f1,                                           0| // inpcam_switch_mc_close
 ext_action1,                                      key_lwin+key_1,                                   0| // inpext_action1
 ext_action1,                                      key_rwin+key_1,                                   0|
 ext_action2,                                      key_lwin+key_2,                                   0| // inpext_action2
