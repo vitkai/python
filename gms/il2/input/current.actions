@@ -70,7 +70,6 @@ cam_switch_head_free,                             key_lmenu+key_f1,             
 freelook,                                         ,                                                 0| // FreeLook
 bc_head_zoom,                                     ,                                                 0| // Увеличить/уменьшить
 bc_head_zoom,                                     key_lcontrol+mouse_axis_z,                        0|
-bc_head_zoom,                                     mouse_axis_z,                                     0|
 bc_head_cfovi,                                    key_add,                                          0| // Приближение взлядом
 bc_head_cfovi,                                    joy0_pov0_0,                                      0|
 bc_head_cfovo,                                    key_subtract,                                     0| // Удаление взглядом
@@ -225,6 +224,7 @@ all_engines_props_feathering,                     key_lcontrol+key_f,           
 rpc_all_engines_oil_radiators_shutters,           key_rwin+key_equals/key_rwin+key_minus,           0| // Ось общего управления створками маслорадиаторов
 rpc_all_engines_oil_radiators_shutters,           key_lcontrol+joy0_b4/key_lcontrol+joy0_b2,        0|
 all_engines_oil_radiators_control_mode,           key_rwin+key_r,                                   0| // Переключение общего управления маслорадиаторами: ручное/автоматическое
+all_engines_oil_radiators_control_mode,           key_rmenu+key_r,                                  0|
 all_engines_oil_radiators_open,                   key_rwin+key_equals,                              0| // Маслорадиаторы He-111, Bf-110: открыть на одну позицию
 all_engines_oil_radiators_close,                  key_rwin+key_minus,                               0| // Маслорадиаторы He-111, Bf-110: закрыть на одну позицию
 rpc_all_engines_water_radiators_shutters,         key_rcontrol+key_equals/key_rcontrol+key_minus,   0| // Ось общего управления створками водорадиаторов
