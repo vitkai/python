@@ -2,7 +2,10 @@
 	-- interface to add/input data -> use django
 		-- basic admin interface
 		(+) ---===---
-		-- basic user interface forms
+		-- basic user interface views
+            -- index (main)
+            -- Transactions list w/ filters by time
+        -- basic user interface forms
 		
 	-- file parser (.csv or similar) for bulk uploads
 
