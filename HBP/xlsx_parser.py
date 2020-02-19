@@ -5,7 +5,9 @@ Created: Wed Feb 19 2019 18:10 MSK
 """
 import __main__
 import logging
+import pandas as pd
 from os import path
+from shutil import copy2
 # import sqlite3
 # from sqlite3 import Error
 # from time import gmtime, strftime
@@ -31,15 +33,27 @@ def logging_setup():
     return logger
 
 
+def import_xlsx(src_fl='my_buh.xlsx'):
+    src_fl = full_path + '\\' + src_fl
+    work_fl = full_path + '\\' + 'tmp.csv'
+    copy2(src_fl, work_fl)
+    
+    pd_imp = pd.ExcelFile(work_fl).parse()
+    
+    print(pd_imp.head(5))
+    
+    return pd_imp
+
 # main starts here
 def main():
-    global logger
+    global logger, full_path
     logger = logging_setup()
 
     # get script path
     full_path, filename = path.split(path.realpath(__file__))
     logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
     
+    import_xlsx()
  
     logger.debug("That's all folks")
     print("\nThat's all folks")
