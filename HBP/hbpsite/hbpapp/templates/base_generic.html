@@ -20,8 +20,8 @@
   <div class="col-sm-2">
   {% block sidebar %}
   <ul class="sidebar-nav">
-    <li>Home</li>
-    <li>Transactions</li>
+    <li><a href="{% url 'index' %}">Home</a></li>
+    <li><a href="{% url 'transactions' %}">Transactions</a></li>
   </ul>
 
 {% endblock %}
