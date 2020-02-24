@@ -4,8 +4,11 @@ Descr: module to parse .xlsx file and populate db
 Created: Wed Feb 19 2019 18:10 MSK
 """
 import __main__
+# import codecs
+# import locale
 import logging
 import pandas as pd
+# import sys
 from os import path
 from shutil import copy2
 # import sqlite3
@@ -33,16 +36,45 @@ def logging_setup():
     return logger
 
 
+"""
+def outputUnicode(t):
+    enc = sys.stdout.encoding
+    bytes = t.encode(enc, 'replace')
+    sys.stdout.write(bytes)
+"""
+
 def import_xlsx(src_fl='my_buh.xlsx'):
+    
     src_fl = full_path + '\\' + src_fl
     work_fl = full_path + '\\' + 'tmp.csv'
     copy2(src_fl, work_fl)
     
     pd_imp = pd.ExcelFile(work_fl).parse()
+    # pd_imp = pd.read_excel(work_fl, encoding='utf-8')
     
-    print(pd_imp.head(5))
+    # sys.stdout = codecs.lookup('utf-8')[-1](sys.stdout)
+    # locale.setlocale( locale.LC_ALL, 'en_US.UTF-8')
     
+    tmp = pd_imp.head(5) #.to_html()
+    print(tmp) # .encode('utf-8'))
+
     return pd_imp
+    
+"""    
+    print(locale.getlocale(locale.LC_CTYPE))   
+    #tst = 'проезд'
+    tst = 'тест'
+    print(tst)
+
+    for i in range(5):
+        for j in range(5):
+            tmp = str(pd_imp.iat[i,j])
+
+            msg = '{}:{},{}'.format(i,j,tmp).encode('utf-8')
+            print(msg.decode('utf-8'))
+            # logger.debug(msg)
+
+"""
 
 # main starts here
 def main():
