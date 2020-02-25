@@ -1,7 +1,18 @@
 # Descr: configuration file for .xlsx parser
 # @author: vitkai
 # Created: Wed Feb 25 2019 19:20 MSK
-
+categories:
+    - Care
+    - Clothes
+    - Communications
+    - Food
+    - House
+    - Other
+    - Rent
+    - Study/Stationery
+    - Trip
+            
+# headers by years
 2020:
     # the row where header ends and data begins
     data_row:   2

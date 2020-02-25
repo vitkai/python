@@ -51,6 +51,16 @@ def load_cfg():
     print(msg)
     
     print(cfg)
+    return cfg
+    
+
+def check_cfg(cfg):
+    # configuration check
+    
+    for cat in cfg['categories']:
+        if cat in cfg[2020]['spent']:
+            print('{} | {} '.format(cat, cfg[2020]['spent'][cat]['val']))
+
 
 def import_xlsx(src_fl='my_buh.xlsx'):
     
@@ -69,21 +79,6 @@ def import_xlsx(src_fl='my_buh.xlsx'):
 
     return pd_imp
     
-"""    
-    print(locale.getlocale(locale.LC_CTYPE))   
-    #tst = 'проезд'
-    tst = 'тест'
-    print(tst)
-
-    for i in range(5):
-        for j in range(5):
-            tmp = str(pd_imp.iat[i,j])
-
-            msg = '{}:{},{}'.format(i,j,tmp).encode('utf-8')
-            print(msg.decode('utf-8'))
-            # logger.debug(msg)
-
-"""
 
 # main starts here
 def main():
@@ -95,7 +90,8 @@ def main():
     logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
     
     # import_xlsx()
-    load_cfg()
+    conf = load_cfg()
+    check_cfg(conf)
  
     logger.debug("That's all folks")
     print("\nThat's all folks")
