@@ -50,16 +50,34 @@ def load_cfg():
     logger.debug(msg)
     print(msg)
     
-    print(cfg)
-    return cfg
+    logger.debug(cfg)
     
+    return cfg
 
-def check_cfg(cfg):
+
+def get_transactions(cat, date_col, cat_col, cat_comm_col, df_inp):
+    """
+    receives parameters:
+        cat - category name
+        date_col - date column ID
+        cat_col - category value column ID
+        cat_comm_col - category comment column ID
+        df_inp - dataframe to work on
+    returns set of transactions (date, sum, category, comment)
+    """
+    # need to filter non-empty rows of df_inp for given category
+    # and to store in a new df (date, sum, category, comment)
+    pass
+
+def check_cfg(cfg, df_inp):
     # configuration check
+    
+    date_col = cfg[2020]['date']
     
     for cat in cfg['categories']:
         if cat in cfg[2020]['spent']:
             print('{} | {} '.format(cat, cfg[2020]['spent'][cat]['val']))
+            get_transactions(cat, date_col, cfg[2020]['spent'][cat]['val'], cfg[2020]['spent'][cat]['comment'], df_inp)
 
 
 def import_xlsx(src_fl='my_buh.xlsx'):
@@ -69,13 +87,9 @@ def import_xlsx(src_fl='my_buh.xlsx'):
     copy2(src_fl, work_fl)
     
     pd_imp = pd.ExcelFile(work_fl).parse()
-    # pd_imp = pd.read_excel(work_fl, encoding='utf-8')
-    
-    # sys.stdout = codecs.lookup('utf-8')[-1](sys.stdout)
-    # locale.setlocale( locale.LC_ALL, 'en_US.UTF-8')
     
     tmp = pd_imp.head(5) #.to_html()
-    print(tmp) # .encode('utf-8'))
+    print(tmp)
 
     return pd_imp
     
@@ -89,9 +103,9 @@ def main():
     full_path, filename = path.split(path.realpath(__file__))
     logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
     
-    # import_xlsx()
     conf = load_cfg()
-    check_cfg(conf)
+    df_table = import_xlsx()
+    check_cfg(conf, df_table)
  
     logger.debug("That's all folks")
     print("\nThat's all folks")
