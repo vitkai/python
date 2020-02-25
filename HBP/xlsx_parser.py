@@ -9,6 +9,7 @@ import __main__
 import logging
 import pandas as pd
 # import sys
+import yaml as yml
 from os import path
 from shutil import copy2
 # import sqlite3
@@ -36,12 +37,20 @@ def logging_setup():
     return logger
 
 
-"""
-def outputUnicode(t):
-    enc = sys.stdout.encoding
-    bytes = t.encode(enc, 'replace')
-    sys.stdout.write(bytes)
-"""
+def load_cfg():
+    # read configuration
+    cfg_file = full_path + '\\' + "xlsx_parser.yaml" 
+    msg = 'Loading configuration:\nOpening {}'.format(cfg_file)
+    logger.debug(msg)
+    print(msg)
+    with open(cfg_file, 'r') as yml_fl:
+        cfg = yml.safe_load(yml_fl)
+    
+    msg = 'Config loaded successfully'
+    logger.debug(msg)
+    print(msg)
+    
+    print(cfg)
 
 def import_xlsx(src_fl='my_buh.xlsx'):
     
@@ -85,7 +94,8 @@ def main():
     full_path, filename = path.split(path.realpath(__file__))
     logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
     
-    import_xlsx()
+    # import_xlsx()
+    load_cfg()
  
     logger.debug("That's all folks")
     print("\nThat's all folks")
