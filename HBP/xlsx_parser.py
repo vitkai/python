@@ -55,24 +55,51 @@ def load_cfg():
     return cfg
 
 
-def get_transactions(cat, date_col, cat_col, cat_comm_col, df_inp):
+def get_transactions(cat, date_col, cat_val_col, cat_comm_col, df_inp):
     """
     receives parameters:
         cat - category name
         date_col - date column ID
-        cat_col - category value column ID
+        cat_val_col - category value column ID
         cat_comm_col - category comment column ID
         df_inp - dataframe to work on
     returns set of transactions (date, sum, category, comment)
     """
     # need to filter non-empty rows of df_inp for given category
     # and to store in a new df (date, sum, category, comment)
-    pass
+    
+    # fields(columns) in a temp dataframe
+    fields = ['Date', 'Sum', 'Comments']
+    # mask all empty rows where Value is missing
+    # mask = df_inp.iloc[data_row:,[cat_val_col]].fillna(False)
+    # mask = df_inp.iloc[data_row:,[cat_val_col]].fillna(False)
+    
+    # get new df without empty rows
+    if cat_comm_col != 'N/A':
+        # new_df = pd.DataFrame(df_inp.iloc[data_row:,[date_col, cat_val_col, cat_comm_col]], columns=fields)#.loc(mask)
+        new_df = df_inp.iloc[data_row:,[date_col, cat_val_col, cat_comm_col]].copy()
+    else:
+        new_df = df_inp.iloc[data_row:,[date_col, cat_val_col]].copy()
+        # need to add an empty comments column
+        new_df['Comments'] = ""
+    
+    # rename columns
+    for idx, col in enumerate(fields):
+        new_df.rename(columns={ new_df.columns[idx]: col }, inplace = True)
+    
+    filtered_df = new_df[~new_df[fields[1]].isna()]
+    
+    print(filtered_df)
+    
+    #ToDo: categoty Column to be added with current category
+    
 
 def check_cfg(cfg, df_inp):
     # configuration check
     
     date_col = cfg[2020]['date']
+    global data_row
+    data_row = cfg[2020]['data_row']
     
     for cat in cfg['categories']:
         if cat in cfg[2020]['spent']:
