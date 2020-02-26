@@ -70,9 +70,6 @@ def get_transactions(cat, date_col, cat_val_col, cat_comm_col, df_inp):
     
     # fields(columns) in a temp dataframe
     fields = ['Date', 'Sum', 'Comments']
-    # mask all empty rows where Value is missing
-    # mask = df_inp.iloc[data_row:,[cat_val_col]].fillna(False)
-    # mask = df_inp.iloc[data_row:,[cat_val_col]].fillna(False)
     
     # get new df without empty rows
     if cat_comm_col != 'N/A':
@@ -87,11 +84,15 @@ def get_transactions(cat, date_col, cat_val_col, cat_comm_col, df_inp):
     for idx, col in enumerate(fields):
         new_df.rename(columns={ new_df.columns[idx]: col }, inplace = True)
     
-    filtered_df = new_df[~new_df[fields[1]].isna()]
+    # remove all empty val rows
+    filtered_df = new_df[~new_df[fields[1]].isna()].reset_index(drop=True)
+    
+    #categoty Column to be added with current category
+    cat_list = [cat] * len(filtered_df)
+    filtered_df.insert(2, 'Category', cat_list)
     
     print(filtered_df)
     
-    #ToDo: categoty Column to be added with current category
     
 
 def check_cfg(cfg, df_inp):
