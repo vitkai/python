@@ -93,6 +93,8 @@ def get_transactions(cat, date_col, cat_val_col, cat_comm_col, df_inp):
     
     print(filtered_df)
     
+    return filtered_df
+    
     
 
 def check_cfg(cfg, df_inp):
@@ -102,11 +104,16 @@ def check_cfg(cfg, df_inp):
     global data_row
     data_row = cfg[2020]['data_row']
     
+    trans_df = pd.DataFrame(columns=['Date', 'Sum', 'Category', 'Comments'])
+    
     for cat in cfg['categories']:
         if cat in cfg[2020]['spent']:
             print('{} | {} '.format(cat, cfg[2020]['spent'][cat]['val']))
-            get_transactions(cat, date_col, cfg[2020]['spent'][cat]['val'], cfg[2020]['spent'][cat]['comment'], df_inp)
+            trans_res = get_transactions(cat, date_col, cfg[2020]['spent'][cat]['val'], cfg[2020]['spent'][cat]['comment'], df_inp)
+            # merge transactions vertically
+            trans_df = pd.concat([trans_df, trans_res], axis=0).reset_index(drop=True)
 
+    print(trans_df)
 
 def import_xlsx(src_fl='my_buh.xlsx'):
     
