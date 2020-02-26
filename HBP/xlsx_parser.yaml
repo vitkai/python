@@ -16,6 +16,7 @@ categories:
 2020:
     # the row where header ends and data begins
     data_row:   2
+    data_end_token:   'ИТОГО'
     # columns indexes map for spreadsheet header
     date:   0
     received:

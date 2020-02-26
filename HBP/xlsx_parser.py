@@ -73,10 +73,10 @@ def get_transactions(cat, date_col, cat_val_col, cat_comm_col, df_inp):
     
     # get new df without empty rows
     if cat_comm_col != 'N/A':
-        # new_df = pd.DataFrame(df_inp.iloc[data_row:,[date_col, cat_val_col, cat_comm_col]], columns=fields)#.loc(mask)
-        new_df = df_inp.iloc[data_row:,[date_col, cat_val_col, cat_comm_col]].copy()
+        # new_df = pd.DataFrame(df_inp.iloc[data_start_row:,[date_col, cat_val_col, cat_comm_col]], columns=fields)#.loc(mask)
+        new_df = df_inp.iloc[data_start_row:,[date_col, cat_val_col, cat_comm_col]].copy()
     else:
-        new_df = df_inp.iloc[data_row:,[date_col, cat_val_col]].copy()
+        new_df = df_inp.iloc[data_start_row:,[date_col, cat_val_col]].copy()
         # need to add an empty comments column
         new_df['Comments'] = ""
     
@@ -101,8 +101,15 @@ def check_cfg(cfg, df_inp):
     # configuration check
     
     date_col = cfg[2020]['date']
-    global data_row
-    data_row = cfg[2020]['data_row']
+    
+    global data_start_row, data_end_row
+    data_start_row = cfg[2020]['data_row']
+    
+    # determine column index by end row token
+    data_end_row = df_inp[df_inp.iloc[:,0] == cfg[2020]['data_end_token']].index
+    print(df_inp.iloc[:,0])
+    print(cfg[2020]['data_end_token'])
+    print('data_end_row = {}'.format(data_end_row))
     
     trans_df = pd.DataFrame(columns=['Date', 'Sum', 'Category', 'Comments'])
     
@@ -114,6 +121,7 @@ def check_cfg(cfg, df_inp):
             trans_df = pd.concat([trans_df, trans_res], axis=0).reset_index(drop=True)
 
     print(trans_df)
+    
 
 def import_xlsx(src_fl='my_buh.xlsx'):
     
@@ -123,9 +131,9 @@ def import_xlsx(src_fl='my_buh.xlsx'):
     
     pd_imp = pd.ExcelFile(work_fl).parse()
     
-    tmp = pd_imp.head(5) #.to_html()
-    print(tmp)
-
+    #tmp = pd_imp.head(5)
+    #print(tmp)
+    
     return pd_imp
     
 
