@@ -4,7 +4,7 @@ Descr: module to parse .xlsx file and populate db
 Created: Wed Feb 19 2019 18:10 MSK
 """
 import __main__
-# import codecs
+import codecs
 # import locale
 import logging
 import pandas as pd
@@ -43,7 +43,8 @@ def load_cfg():
     msg = 'Loading configuration:\nOpening {}'.format(cfg_file)
     logger.debug(msg)
     print(msg)
-    with open(cfg_file, 'r') as yml_fl:
+    
+    with codecs.open(cfg_file, mode='rb', encoding='utf-8') as yml_fl:
         cfg = yml.safe_load(yml_fl)
     
     msg = 'Config loaded successfully'
@@ -74,9 +75,9 @@ def get_transactions(cat, date_col, cat_val_col, cat_comm_col, df_inp):
     # get new df without empty rows
     if cat_comm_col != 'N/A':
         # new_df = pd.DataFrame(df_inp.iloc[data_start_row:,[date_col, cat_val_col, cat_comm_col]], columns=fields)#.loc(mask)
-        new_df = df_inp.iloc[data_start_row:,[date_col, cat_val_col, cat_comm_col]].copy()
+        new_df = df_inp.iloc[data_start_row:data_end_row,[date_col, cat_val_col, cat_comm_col]].copy()
     else:
-        new_df = df_inp.iloc[data_start_row:,[date_col, cat_val_col]].copy()
+        new_df = df_inp.iloc[data_start_row:data_end_row,[date_col, cat_val_col]].copy()
         # need to add an empty comments column
         new_df['Comments'] = ""
     
@@ -106,10 +107,13 @@ def check_cfg(cfg, df_inp):
     data_start_row = cfg[2020]['data_row']
     
     # determine column index by end row token
-    data_end_row = df_inp[df_inp.iloc[:,0] == cfg[2020]['data_end_token']].index
+    data_end_row = df_inp[df_inp.iloc[:,0] == cfg[2020]['data_end_token']].index.tolist()[0]
+
+    """
     print(df_inp.iloc[:,0])
     print(cfg[2020]['data_end_token'])
     print('data_end_row = {}'.format(data_end_row))
+    """
     
     trans_df = pd.DataFrame(columns=['Date', 'Sum', 'Category', 'Comments'])
     
