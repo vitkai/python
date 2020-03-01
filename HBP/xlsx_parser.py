@@ -133,12 +133,16 @@ def import_xlsx(src_fl='my_buh.xlsx'):
     work_fl = full_path + '\\' + 'tmp.csv'
     copy2(src_fl, work_fl)
     
-    pd_imp = pd.ExcelFile(work_fl).parse()
+    # pd_imp = pd.ExcelFile(work_fl).parse()
+    pd_imp = pd.read_excel(work_fl, None)
+    stored_tabs = list(pd_imp.keys())
     
-    #tmp = pd_imp.head(5)
-    #print(tmp)
+    print(stored_tabs)
     
-    return pd_imp
+    tmp = pd_imp[stored_tabs[1]].head(5)
+    print(tmp)
+    
+    return pd_imp[stored_tabs[1]]
     
 
 # main starts here
