@@ -56,13 +56,14 @@ def load_cfg():
     return cfg
 
 
-def get_transactions(cat, date_col, cat_val_col, cat_comm_col, df_inp):
+def get_transactions(cat, date_col, cat_val_col, cat_comm_col, ccy, df_inp):
     """
     receives parameters:
         cat - category name
         date_col - date column ID
         cat_val_col - category value column ID
         cat_comm_col - category comment column ID
+        ccy - currency
         df_inp - dataframe to work on
     returns set of transactions (date, sum, category, comment)
     """
@@ -88,9 +89,13 @@ def get_transactions(cat, date_col, cat_val_col, cat_comm_col, df_inp):
     # remove all empty val rows
     filtered_df = new_df[~new_df[fields[1]].isna()].reset_index(drop=True)
     
-    #categoty Column to be added with current category
+    #currency Column to be added
+    cat_list = [ccy] * len(filtered_df)
+    filtered_df.insert(2, 'CCY', cat_list)
+    
+    #category Column to be added with current category
     cat_list = [cat] * len(filtered_df)
-    filtered_df.insert(2, 'Category', cat_list)
+    filtered_df.insert(3, 'Category', cat_list)
     
     print(filtered_df)
     
@@ -115,12 +120,12 @@ def check_cfg(cfg, df_inp):
     print('data_end_row = {}'.format(data_end_row))
     """
     
-    trans_df = pd.DataFrame(columns=['Date', 'Sum', 'Category', 'Comments'])
+    trans_df = pd.DataFrame(columns=['Date', 'Sum', 'CCY', 'Category', 'Comments'])
     
     for cat in cfg['categories']:
         if cat in cfg[2020]['spent']:
             print('{} | {} '.format(cat, cfg[2020]['spent'][cat]['val']))
-            trans_res = get_transactions(cat, date_col, cfg[2020]['spent'][cat]['val'], cfg[2020]['spent'][cat]['comment'], df_inp)
+            trans_res = get_transactions(cat, date_col, cfg[2020]['spent'][cat]['val'], cfg[2020]['spent'][cat]['comment'], cfg[2020]['CCY'], df_inp)
             # merge transactions vertically
             trans_df = pd.concat([trans_df, trans_res], axis=0).reset_index(drop=True)
 
@@ -137,12 +142,14 @@ def import_xlsx(src_fl='my_buh.xlsx'):
     pd_imp = pd.read_excel(work_fl, None)
     stored_tabs = list(pd_imp.keys())
     
+    """
     print(stored_tabs)
     
     tmp = pd_imp[stored_tabs[1]].head(5)
     print(tmp)
+    """
     
-    return pd_imp[stored_tabs[1]]
+    return pd_imp, stored_tabs
     
 
 # main starts here
@@ -155,8 +162,9 @@ def main():
     logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
     
     conf = load_cfg()
-    df_table = import_xlsx()
-    check_cfg(conf, df_table)
+    df_table, df_tabs = import_xlsx()
+    
+    check_cfg(conf, df_table[df_tabs[1]])
  
     logger.debug("That's all folks")
     print("\nThat's all folks")
