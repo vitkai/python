@@ -3,6 +3,10 @@ from django.views import generic
 
 from .models import Transactions, CCY, Category
 
+# own function to handle an uploaded file
+from hbpapp.xlsx_parser import parse
+
+
 class TransactionsListView(generic.ListView):
     """Generic class-based view for a list of books."""
     model = Transactions
@@ -28,3 +32,13 @@ def index(request):
                  'num_categories': num_categories, 'num_visits': num_visits},
     )
 
+
+def upload_file(request):
+    if request.method == 'POST':
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            parse(request.FILES['file'])
+            return HttpResponseRedirect('/success/url/')
+    else:
+        form = UploadFileForm()
+    return render(request, 'upload.html', {'form': form})

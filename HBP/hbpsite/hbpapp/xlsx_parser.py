@@ -153,7 +153,7 @@ def import_xlsx(src_fl='my_buh.xlsx'):
     
 
 # main starts here
-def main():
+def parse():
     global logger, full_path
     logger = logging_setup()
 
@@ -170,6 +170,6 @@ def main():
     print("\nThat's all folks")
 
 if __name__ == "__main__":
-    main()
+    parse()
     
 # TODO: 
