@@ -8,7 +8,8 @@ import logging
 import codecs
 import matplotlib.pyplot as plt
 import pandas as pd
-import ruamel.yaml as yml
+#import ruamel.yaml as yml
+import yaml as yml
 from os import path  # , listdir, remove, makedirs
 #from pprint import pprint  # ,pformat
 
@@ -38,8 +39,8 @@ def load_cfg():
     """Loads configuration file and initializes variables"""
     # importing configuration
     yaml_name = path.splitext(filename)[0] + ".yaml"
-    #with codecs.open(full_path + "/" + yaml_name, 'r', encoding='utf-8') as yaml_file:
-    with codecs.open(full_path + yaml_name, 'r', encoding='utf-8') as yaml_file:
+    with codecs.open(full_path + "/" + yaml_name, 'r', encoding='utf-8') as yaml_file:
+    #with codecs.open(full_path + yaml_name, 'r', encoding='utf-8') as yaml_file:
         # with open(full_path + "/time_rec_proc.yaml", 'r') as yaml_file:
         cfg = yml.safe_load(yaml_file)
 
