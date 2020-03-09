@@ -16,3 +16,4 @@
     https://www.yworks.com/yed-live/
     https://html-online.com/editor/
 	https://github.com/pawelsalawa/sqlitestudio/releases
+	https://docs.djangoproject.com/en/dev/topics/http/file-uploads/
