@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.views import generic
 
-from .models import Transactions, CCY, Category
+from .models import Transactions, CCY, Category, Document
 
 # own function to handle an uploaded file
-from hbpapp.xlsx_parser import parse
+from .xlsx_parser import parse
+from .forms import UploadFileForm
 
 
 class TransactionsListView(generic.ListView):
@@ -37,7 +38,8 @@ def upload_file(request):
     if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            parse(request.FILES['file'])
+            newdoc = Document(docfile = request.FILES['docfile'])
+            parse(newdoc)
             return HttpResponseRedirect('/success/url/')
     else:
         form = UploadFileForm()

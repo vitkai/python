@@ -132,9 +132,8 @@ def check_cfg(cfg, df_inp):
     print(trans_df)
     
 
-def import_xlsx(src_fl='my_buh.xlsx'):
+def import_xlsx(src_fl):
     
-    src_fl = full_path + '\\' + src_fl
     work_fl = full_path + '\\' + 'tmp.csv'
     copy2(src_fl, work_fl)
     
@@ -153,7 +152,7 @@ def import_xlsx(src_fl='my_buh.xlsx'):
     
 
 # main starts here
-def parse():
+def parse(file_to_proc):
     global logger, full_path
     logger = logging_setup()
 
@@ -162,9 +161,17 @@ def parse():
     logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
     
     conf = load_cfg()
-    df_table, df_tabs = import_xlsx()
     
-    check_cfg(conf, df_table[df_tabs[1]])
+    if not file_to_proc:
+        tmp = 'my_buh.xlsx'
+        print('Processing {}'.format(tmp))
+        file_to_proc = full_path + '\\' + tmp
+    
+    print('file_to_proc = {}'.format(file_to_proc))
+    
+    #df_table, df_tabs = import_xlsx(file_to_proc)
+    
+    #check_cfg(conf, df_table[df_tabs[1]])
  
     logger.debug("That's all folks")
     print("\nThat's all folks")

@@ -66,3 +66,7 @@ class Transactions(models.Model):
     def __str__(self):
         """String for representing the Model object."""
         return '{0} ({1}) {2}{3} {4} {5}'.format(self.tr_date, self.tr_time, self.tr_direction, self.Sum, self.CCY, self.Content)
+
+
+class Document(models.Model):
+    docfile = models.FileField(upload_to='documents/%Y/%m/%d')
