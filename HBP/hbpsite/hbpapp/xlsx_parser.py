@@ -118,12 +118,16 @@ def check_cfg(cfg, df_inp):
     
     for cat in cfg['categories']:
         if cat in cfg[2020]['spent']:
-            print('{} | {} '.format(cat, cfg[2020]['spent'][cat]['val']))
+            # print('{} | {} '.format(cat, cfg[2020]['spent'][cat]['val']))
             trans_res = get_transactions(cat, date_col, cfg[2020]['spent'][cat]['val'], cfg[2020]['spent'][cat]['comment'], cfg[2020]['CCY'], df_inp)
             # merge transactions vertically
             trans_df = pd.concat([trans_df, trans_res], axis=0).reset_index(drop=True)
 
-    print(trans_df)
+    msg = 'Transformed dataframe: \n{}'.format(trans_df)
+    print(msg)
+    logger.debug(msg)
+    
+    return trans_df
     
 
 def import_xlsx(src_fl):
