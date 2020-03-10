@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views import generic
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from .models import Transactions, CCY, Category, Document
 
@@ -39,8 +41,14 @@ def upload_file(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             newdoc = Document(docfile = request.FILES['docfile'])
-            parse(newdoc)
-            return HttpResponseRedirect('/success/url/')
+            newdoc.save()
+            parse(newdoc.docfile.name)
+            return HttpResponseRedirect(reverse('upload_file'))
     else:
-        form = UploadFileForm()
-    return render(request, 'upload.html', {'form': form})
+        form = UploadFileForm() # An empty, unbound form
+
+    # Load documents for the list page
+    documents = Document.objects.all()
+
+    return render(request, 'upload.html', {'documents': documents, 'form': form})    
+    

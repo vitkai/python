@@ -162,12 +162,16 @@ def parse(file_to_proc):
     
     conf = load_cfg()
     
+    msg = 'file_to_proc = {}'.format(file_to_proc)
+    print(msg)
+    logger.debug(msg)
+    
     if not file_to_proc:
         tmp = 'my_buh.xlsx'
-        print('Processing {}'.format(tmp))
+        msg = 'Processing {}'.format(tmp)
+        print(msg)
+        logger.debug(msg)
         file_to_proc = full_path + '\\' + tmp
-    
-    print('file_to_proc = {}'.format(file_to_proc))
     
     #df_table, df_tabs = import_xlsx(file_to_proc)
     
