@@ -132,7 +132,7 @@ def check_cfg(cfg, df_inp):
 
 def import_xlsx(src_fl):
     
-    work_fl = full_path + '\\' + 'tmp.csv'
+    work_fl = path.join(full_path, 'tmp.csv')
     copy2(src_fl, work_fl)
     
     logger.debug('Importing: {}'.format(src_fl))
@@ -168,7 +168,7 @@ def parse(file_to_proc):
         file_to_proc = full_path + '\\' + tmp
     else:
         # construct file path
-        file_to_proc = path.realpath(full_path + '\\..' + '\\' + file_to_proc.replace('/', '\\'))
+        file_to_proc = path.join(full_path, '..', file_to_proc)
         
     msg = 'file_to_proc = {}'.format(file_to_proc)
     print(msg)
