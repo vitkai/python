@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>Minimal Django File Upload Example</title>
-    </head>
+{% extends "base_generic.html" %}
 
-    <body>
+{% block content %}
+<h1>Budget Project file upload page</h1>
+
         <!-- List of uploaded documents -->
         {% if documents %}
             <ul>
@@ -31,6 +28,5 @@
 
             <p><input type="submit" value="Upload"/></p>
         </form>
-    </body>
 
-</html>
+{% endblock %}
