@@ -114,12 +114,6 @@ def check_cfg(cfg, df_inp):
     # determine column index by end row token
     data_end_row = df_inp[df_inp.iloc[:,0] == cfg[2020]['data_end_token']].index.tolist()[0]
 
-    """
-    print(df_inp.iloc[:,0])
-    print(cfg[2020]['data_end_token'])
-    print('data_end_row = {}'.format(data_end_row))
-    """
-    
     trans_df = pd.DataFrame(columns=['Date', 'Sum', 'CCY', 'Category', 'Comments'])
     
     for cat in cfg['categories']:
@@ -170,7 +164,6 @@ def parse(file_to_proc):
         file_to_proc = full_path + '\\' + tmp
     else:
         # construct file path
-        # file_to_proc = path.realpath(path.pardir + '\\' + file_to_proc.replace('/', '\\'))
         file_to_proc = path.realpath(full_path + '\\..' + '\\' + file_to_proc.replace('/', '\\'))
         
     msg = 'file_to_proc = {}'.format(file_to_proc)
@@ -179,7 +172,7 @@ def parse(file_to_proc):
     
     df_table, df_tabs = import_xlsx(file_to_proc)
     
-    #check_cfg(conf, df_table[df_tabs[1]])
+    check_cfg(conf, df_table[df_tabs[1]])
  
     logger.debug("That's all folks")
     print("\nThat's all folks")
