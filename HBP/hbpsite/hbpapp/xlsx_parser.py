@@ -19,12 +19,12 @@ from shutil import copy2
 def logging_setup():
     logger = logging.getLogger(__name__)
     filename = path.splitext(__main__.__file__)[0] + '.log'
-    handler = logging.FileHandler(filename)
+    handler = logging.FileHandler(filename, encoding = "UTF-8")
 
     logger.setLevel(logging.DEBUG)
     handler.setLevel(logging.DEBUG)
 
-    formatter = logging.Formatter('%(asctime)s %(levelname)s - %(message)s')
+    formatter = logging.Formatter('%(asctime)s %(module)s.%(funcName)s %(levelname)s - %(message)s')
     handler.setFormatter(formatter)
 
     if logger.hasHandlers():
@@ -137,16 +137,16 @@ def import_xlsx(src_fl):
     work_fl = full_path + '\\' + 'tmp.csv'
     copy2(src_fl, work_fl)
     
-    # pd_imp = pd.ExcelFile(work_fl).parse()
+    logger.debug('Importing: {}'.format(src_fl))
+    
     pd_imp = pd.read_excel(work_fl, None)
     stored_tabs = list(pd_imp.keys())
     
-    """
-    print(stored_tabs)
+    logger.debug('Import success')
     
     tmp = pd_imp[stored_tabs[1]].head(5)
-    print(tmp)
-    """
+    msg = 'xlsx stored tabs head5: \n{}'.format(tmp)
+    logger.debug(msg)
     
     return pd_imp, stored_tabs
     
@@ -162,18 +162,22 @@ def parse(file_to_proc):
     
     conf = load_cfg()
     
-    msg = 'file_to_proc = {}'.format(file_to_proc)
-    print(msg)
-    logger.debug(msg)
-    
     if not file_to_proc:
         tmp = 'my_buh.xlsx'
         msg = 'Processing {}'.format(tmp)
         print(msg)
         logger.debug(msg)
         file_to_proc = full_path + '\\' + tmp
+    else:
+        # construct file path
+        # file_to_proc = path.realpath(path.pardir + '\\' + file_to_proc.replace('/', '\\'))
+        file_to_proc = path.realpath(full_path + '\\..' + '\\' + file_to_proc.replace('/', '\\'))
+        
+    msg = 'file_to_proc = {}'.format(file_to_proc)
+    print(msg)
+    logger.debug(msg)
     
-    #df_table, df_tabs = import_xlsx(file_to_proc)
+    df_table, df_tabs = import_xlsx(file_to_proc)
     
     #check_cfg(conf, df_table[df_tabs[1]])
  
