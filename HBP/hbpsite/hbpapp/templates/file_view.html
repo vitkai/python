@@ -1,0 +1,15 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Budget Project file view page</h1>
+
+        <!-- List of uploaded documents -->
+        {% if item %}
+			<p>{{ item }}</p>
+        {% else %}
+            <p>No file found.</p>
+        {% endif %}
+
+        <!-- Process file form placeholder. Note enctype attribute! -->
+
+{% endblock %}

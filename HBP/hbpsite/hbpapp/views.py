@@ -50,5 +50,11 @@ def upload_file(request):
     # Load documents for the list page
     documents = Document.objects.all()
 
-    return render(request, 'upload.html', {'documents': documents, 'form': form})    
+    return render(request, 'upload.html', {'documents': documents, 'form': form})
     
+
+def file_view(request, pk):
+    item = Document.objects.get(pk=pk)
+    
+    #return render(request, 'file_view.html', {'item': item, 'form': form})
+    return render(request, 'file_view.html', {'item': item})
