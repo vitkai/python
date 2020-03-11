@@ -1,15 +1,42 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<h1>Budget Project file view page</h1>
+<h2>Budget Project file view page</h2>
 
         <!-- List of uploaded documents -->
         {% if item %}
-			<p>{{ item }}</p>
+			<p><strong>{{ item }}</strong></p>
+
+        <!-- Process file form placeholder. Note enctype attribute! -->
+			<form action="" method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				<p>{{ form.non_field_errors }}</p>
+
+				<p>{{ form.item.label_tag }} {{ form.item.help_text }}</p>
+
+				<p>
+					{{ form.item.errors }}
+					{{ form.item }}
+				</p>
+
+				<p><input type="submit" value="Process"/></p>
+			</form>
+
         {% else %}
             <p>No file found.</p>
         {% endif %}
 
-        <!-- Process file form placeholder. Note enctype attribute! -->
+
+<p>Form fields:</p>
+
+{% for field in form %}
+    <div class="fieldWrapper">
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
 
 {% endblock %}

@@ -5,3 +5,7 @@ class UploadFileForm(forms.Form):
         label='Select a file',
         help_text='max. 42 megabytes'
     )
+    
+
+class ProcessFileForm(forms.Form):
+    text = forms.CharField(widget=forms.Textarea)

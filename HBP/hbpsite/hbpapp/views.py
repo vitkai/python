@@ -7,7 +7,7 @@ from .models import Transactions, CCY, Category, Document
 
 # own function to handle an uploaded file
 from .xlsx_parser import parse
-from .forms import UploadFileForm
+from .forms import UploadFileForm, ProcessFileForm
 
 
 class TransactionsListView(generic.ListView):
@@ -42,7 +42,7 @@ def upload_file(request):
         if form.is_valid():
             newdoc = Document(docfile = request.FILES['docfile'])
             newdoc.save()
-            parse(newdoc.docfile.name)
+            # parse(newdoc.docfile.name)
             return HttpResponseRedirect(reverse('upload_file'))
     else:
         form = UploadFileForm() # An empty, unbound form
@@ -55,6 +55,16 @@ def upload_file(request):
 
 def file_view(request, pk):
     item = Document.objects.get(pk=pk)
+    proc_res = ''
     
-    #return render(request, 'file_view.html', {'item': item, 'form': form})
-    return render(request, 'file_view.html', {'item': item})
+    if request.method == 'POST':
+        form = ProcessFileForm(request.POST)
+        if form.is_valid():
+            proc_res = parse(item.docfile.name)
+            # text = form.cleaned_data['message']
+            return HttpResponseRedirect(reverse('file_view'))
+    else:
+        form = ProcessFileForm() # An empty, unbound form
+        
+    return render(request, 'file_view.html', {'item': item, 'form': form, 'proc_res': proc_res})
+    # return render(request, 'file_view.html', {'item': item})
