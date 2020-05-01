@@ -218,8 +218,10 @@ rpc_all_engines_props_pitch,                      mouse_axis_z,                 
 all_engines_props_pitch_control_mode,             key_rshift+key_p,                                 0| // Переключение общего управления шагом винтов: ручное/автоматическое
 all_engines_props_pitch_increase,                 key_rshift+key_equals,                            0| // Ручное общее управление шагом винтов: дозировано затяжелить винты
 all_engines_props_pitch_increase,                 key_lshift+joy0_pov0_180,                         0|
+all_engines_props_pitch_increase,                 key_lshift+joy0_pov0_90,                          0|
 all_engines_props_pitch_decrease,                 key_rshift+key_minus,                             0| // Ручное общее управление шагом винтов: дозировано облегчить винты
 all_engines_props_pitch_decrease,                 key_lshift+joy0_pov0_0,                           0|
+all_engines_props_pitch_decrease,                 key_lshift+joy0_pov0_270,                         0|
 all_engines_props_feathering,                     key_lcontrol+key_f,                               0| // Флюгирование винтов: вкл/выкл
 rpc_all_engines_oil_radiators_shutters,           key_rwin+key_equals/key_rwin+key_minus,           0| // Ось общего управления створками маслорадиаторов
 rpc_all_engines_oil_radiators_shutters,           key_lcontrol+joy0_b4/key_lcontrol+joy0_b2,        0|
@@ -302,6 +304,7 @@ bc_gun1,                                          key_lcontrol+key_1,           
 bc_gun2,                                          key_lcontrol+key_2,                               0| // Зеленая сигнальная ракета
 bc_gun3,                                          key_lcontrol+key_3,                               0| // Белая сигнальная ракета
 bc_gun4,                                          key_lcontrol+key_4,                               0| // Личное оружие
+bc_gun5,                                          key_lcontrol+key_5,                               0| // Бинокль
 bc_gunfire,                                       key_lcontrol+key_space,                           0| // Выстрел из личного оружия
 bc_gunfire,                                       mouse_b0,                                         0|
 switchpilot,                                      key_lcontrol+key_c,                               0| // Переключиться на управление следующим свободным боевым постом
