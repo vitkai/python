@@ -126,6 +126,7 @@ bc_head_cvmr,                                     joy0_pov0_90,                 
 bc_head_cvmu,                                     key_prior,                                        0| // Приподняться на сиденье
 bc_head_cvmd,                                     key_next,                                         0| // Опуститься на сиденье
 cam_turret_pitch_center,                          key_numpad5,                                      0| // Турель, вид через прицел: сброс взгляда к прицелу по вертикали
+cam_turret_pitch_center,                          joy0_b0,                                          0|
 cam_turret_pitch,                                 ,                                                 0| // Турель, вид через прицел: взгляд по вертикали
 cam_turret_yaw_center,                            key_numpad5,                                      0| // Турель, вид через прицел: сброс взгляда к прицелу по горизонтали
 cam_turret_yaw,                                   ,                                                 0| // Турель, вид через прицел: взгляд по горизонтали
@@ -150,10 +151,11 @@ rpc_yaw_trim,                                     key_lcontrol+key_x/key_lcontro
 yaw_trim_switch_left,                             key_lcontrol+key_z,                               0| // Переключатель триммера руля направления: руль направления влево
 yaw_trim_switch_right,                            key_lcontrol+key_x,                               0| // Переключатель триммера руля направления: руль направления вправо
 rpc_pitch_trim,                                   key_rcontrol+key_down/key_rcontrol+key_up,        0| // Ось триммера руля высоты
-rpc_pitch_trim,                                   joy0_axis_z,                                      0|
-rpc_pitch_trim,                                   joy0_axis_p,                                      0|
+rpc_pitch_trim,                                   joy0_b2/joy0_b4,                                  0|
 pitch_trim_switch_up,                             key_rcontrol+key_down,                            0| // Переключатель триммера руля высоты: на кабрирование
+pitch_trim_switch_up,                             joy0_b2,                                          0|
 pitch_trim_switch_dn,                             key_rcontrol+key_up,                              0| // Переключатель триммера руля высоты: на пикирование
+pitch_trim_switch_dn,                             joy0_b4,                                          0|
 rpc_roll_trim,                                    key_rcontrol+key_right/key_rcontrol+key_left,     0| // Ось триммера элеронов
 roll_trim_switch_left,                            key_rcontrol+key_left,                            0| // Переключатель триммера элеронов: крен влево
 roll_trim_switch_right,                           key_rcontrol+key_right,                           0| // Переключатель триммера элеронов: крен вправо
@@ -175,7 +177,7 @@ gear_dn,                                          key_lcontrol+key_g,           
 tailwheel_lock,                                   key_lshift+key_g,                                 0| // Фиксатор хвостового колеса: зафиксировано/свободно
 rpc_wheel_brakes,                                 key_slash,                                        0| // Тормоза колёс шасси
 rpc_wheel_brakes,                                 key_b,                                            0|
-rpc_wheel_brakes,                                 key_lshift+joy0_b0,                               0|
+rpc_wheel_brakes,                                 joy0_b0,                                          0|
 rpc_wheel_brakes_left,                            key_comma,                                        0| // Левый тормоз колёс шасси
 rpc_wheel_brakes_right,                           key_period,                                       0| // Правый тормоз колёс шасси
 rpc_wheel_brakes_central,                         key_rwin+key_slash,                               0| // Тормоз носового/хвостового колёса шасси
@@ -218,10 +220,10 @@ rpc_all_engines_props_pitch,                      mouse_axis_z,                 
 all_engines_props_pitch_control_mode,             key_rshift+key_p,                                 0| // Переключение общего управления шагом винтов: ручное/автоматическое
 all_engines_props_pitch_increase,                 key_rshift+key_equals,                            0| // Ручное общее управление шагом винтов: дозировано затяжелить винты
 all_engines_props_pitch_increase,                 key_lshift+joy0_pov0_180,                         0|
-all_engines_props_pitch_increase,                 key_lshift+joy0_pov0_90,                          0|
+all_engines_props_pitch_increase,                 joy0_axis_p,                                      0|
 all_engines_props_pitch_decrease,                 key_rshift+key_minus,                             0| // Ручное общее управление шагом винтов: дозировано облегчить винты
 all_engines_props_pitch_decrease,                 key_lshift+joy0_pov0_0,                           0|
-all_engines_props_pitch_decrease,                 key_lshift+joy0_pov0_270,                         0|
+all_engines_props_pitch_decrease,                 joy0_axis_p,                                      1|
 all_engines_props_feathering,                     key_lcontrol+key_f,                               0| // Флюгирование винтов: вкл/выкл
 rpc_all_engines_oil_radiators_shutters,           key_rwin+key_equals/key_rwin+key_minus,           0| // Ось общего управления створками маслорадиаторов
 rpc_all_engines_oil_radiators_shutters,           key_lcontrol+joy0_b4/key_lcontrol+joy0_b2,        0|
@@ -236,6 +238,7 @@ all_engines_water_radiators_open,                 key_rcontrol+key_equals,      
 all_engines_water_radiators_close,                key_rcontrol+key_minus,                           0| // Водорадиатор Bf-109/110, Spitfire: закрытие
 rpc_all_engines_in_cowls_shutters,                key_lcontrol+key_equals/key_lcontrol+key_minus,   0| // Общее управление входными створками капота двигателя (И-16, Ла-5, Ju 52, верхние створки A-20, створки интеркулера P-47)
 rpc_all_engines_cowls_shutters,                   key_lmenu+key_equals/key_lmenu+key_minus,         0| // Общее управление выходными створками капота двигателя (A-20, Fw 190 A-5 и А-8, Ла-5, Ju 88, P-40, P-47)
+rpc_all_engines_cowls_shutters,                   key_rcontrol+key_equals/key_rcontrol+key_minus,   0|
 select_all_engines,                               key_0,                                            0| // Режим общего управления двигателями: вкл/выкл
 select_engine_1,                                  key_1,                                            0| // Управление 1-ым двигателем: вкл/выкл
 select_engine_2,                                  key_2,                                            0| // Управление 2-ым двигателем: вкл/выкл
@@ -288,7 +291,7 @@ weapon_group3_fire,                               key_rcontrol+key_space,       
 cam_switch_bombaim,                               key_v,                                            0| // Бомбовый прицел
 throw_bombs_mode,                                 key_lwin+key_b,                                   0| // Переключение режимов бомбометания
 throw_bombs_delay,                                key_lcontrol+key_b,                               0| // Переключение интервала в серии бомб
-throw_bombs_command,                              key_b,                                            0| // Сброс бомб, контейнеров, парашютистов или включение дымогенераторов
+throw_bombs_command,                              ,                                                 0| // Сброс бомб, контейнеров, парашютистов или включение дымогенераторов
 throw_bombs_command,                              key_lcontrol+joy0_b1,                             0|
 launch_rockets_mode,                              key_lwin+key_r,                                   0| // Переключение режимов пуска ракет
 launch_rockets_command,                           key_r,                                            0| // Пуск ракет
@@ -309,7 +312,7 @@ bc_gunfire,                                       key_lcontrol+key_space,       
 bc_gunfire,                                       mouse_b0,                                         0|
 switchpilot,                                      key_lcontrol+key_c,                               0| // Переключиться на управление следующим свободным боевым постом
 switchpilot,                                      key_c,                                            0|
-switchpilot,                                      key_lcontrol+joy0_b0,                             0|
+switchpilot,                                      key_lshift+joy0_b0,                               0|
 tc_guard,                                         key_lshift+key_c,                                 0| // Сменить огневую позицию
 switchgunpos0,                                    key_rshift+key_0,                                 0| // Переключиться на основной боевой пост
 switchgunpos1,                                    key_rshift+key_1,                                 0| // Переключиться на 1-ю огневую точку
