@@ -235,7 +235,9 @@ rpc_all_engines_water_radiators_shutters,         key_rcontrol+key_equals/key_rc
 rpc_all_engines_water_radiators_shutters,         key_lcontrol+joy0_b4/key_lcontrol+joy0_b2,        0|
 all_engines_water_radiators_control_mode,         key_rcontrol+key_r,                               0| // Переключение общего управления водорадиаторами: ручное/автоматическое
 all_engines_water_radiators_open,                 key_rcontrol+key_equals,                          0| // Водорадиатор Bf-109/110, Spitfire: открытие
+all_engines_water_radiators_open,                 key_lcontrol+joy0_b4,                             0|
 all_engines_water_radiators_close,                key_rcontrol+key_minus,                           0| // Водорадиатор Bf-109/110, Spitfire: закрытие
+all_engines_water_radiators_close,                key_lcontrol+joy0_b2,                             0|
 rpc_all_engines_in_cowls_shutters,                key_lcontrol+key_equals/key_lcontrol+key_minus,   0| // Общее управление входными створками капота двигателя (И-16, Ла-5, Ju 52, верхние створки A-20, створки интеркулера P-47)
 rpc_all_engines_cowls_shutters,                   key_lmenu+key_equals/key_lmenu+key_minus,         0| // Общее управление выходными створками капота двигателя (A-20, Fw 190 A-5 и А-8, Ла-5, Ju 88, P-40, P-47)
 rpc_all_engines_cowls_shutters,                   key_rcontrol+key_equals/key_rcontrol+key_minus,   0|
