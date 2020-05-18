@@ -100,16 +100,12 @@ bc_head_cva,                                      key_decimal,                  
 bc_head_cva,                                      joy0_b10,                                         0|
 bc_head_cv0,                                      key_numpad8,                                      0| // Направление взгляда: вперед
 bc_head_cv45,                                     key_numpad9,                                      0| // Направление взгляда: вправо-вперед
-bc_head_cv45,                                     joy0_pov0_45,                                     0|
 bc_head_cv90,                                     key_numpad6,                                      0| // Направление взгляда: вправо
 bc_head_cv135,                                    key_numpad3,                                      0| // Направление взгляда: вправо-назад
-bc_head_cv135,                                    joy0_pov0_135,                                    0|
 bc_head_cv180,                                    key_numpad2,                                      0| // Направление взгляда: назад
 bc_head_cv225,                                    key_numpad1,                                      0| // Направление взгляда: влево-назад
-bc_head_cv225,                                    joy0_pov0_225,                                    0|
 bc_head_cv270,                                    key_numpad4,                                      0| // Направление взгляда: влево
 bc_head_cv315,                                    key_numpad7,                                      0| // Направление взгляда: влево-вперед
-bc_head_cv315,                                    joy0_pov0_315,                                    0|
 bc_head_pos,                                      key_lcontrol+mouse_axis_z,                        0| // Смена положения у прицела турели
 bc_head_cvmf,                                     key_insert,                                       0| // Перемещение головы пилота вперед
 bc_head_cvmf,                                     key_rshift+joy0_pov0_0,                           0|
