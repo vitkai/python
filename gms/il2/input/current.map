@@ -304,6 +304,8 @@ action("all_engines_water_radiators_close","State","key_rcontrol+key_minus");
 action("all_engines_water_radiators_close","State","key_lcontrol+joy0_b2");
 action("rpc_all_engines_in_cowls_shutters_p","State","key_lcontrol+key_equals");
 action("rpc_all_engines_in_cowls_shutters_n","State","key_lcontrol+key_minus");
+action("rpc_all_engines_in_cowls_shutters_p","State","key_lcontrol+joy0_b4");
+action("rpc_all_engines_in_cowls_shutters_n","State","key_lcontrol+joy0_b2");
 action("rpc_all_engines_cowls_shutters_p","State","key_lmenu+key_equals");
 action("rpc_all_engines_cowls_shutters_n","State","key_lmenu+key_minus");
 action("rpc_all_engines_cowls_shutters_p","State","key_rcontrol+key_equals");
