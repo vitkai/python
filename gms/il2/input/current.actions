@@ -71,16 +71,20 @@ freelook,                                         ,                             
 bc_head_zoom,                                     ,                                                 0| // Увеличить/уменьшить
 bc_head_zoom,                                     key_lcontrol+mouse_axis_z,                        0|
 bc_head_cfovi,                                    key_add,                                          0| // Приближение взлядом
-bc_head_cfovi,                                    joy0_pov0_0,                                      0|
 bc_head_cfovo,                                    key_subtract,                                     0| // Удаление взглядом
-bc_head_cfovo,                                    joy0_pov0_180,                                    0|
 bc_head_cfovr,                                    key_multiply,                                     0| // Восстановить нормальный обзор
+bc_head_fov0,                                     key_rcontrol+key_decimal,                         0| // Быстрый zoom: наименьший
+bc_head_fov1,                                     key_rcontrol+key_numpad1,                         0| // Быстрый zoom: промежуточный 1
+bc_head_fov2,                                     key_rcontrol+key_numpad2,                         0| // Быстрый zoom: промежуточный 2
+bc_head_fov2,                                     joy0_pov0_180,                                    0|
+bc_head_fov3,                                     key_rcontrol+key_numpad3,                         0| // Быстрый zoom: промежуточный 3
+bc_head_fov4,                                     key_rcontrol+key_numpad0,                         0| // Быстрый zoom: наибольший
+bc_head_fov4,                                     joy0_pov0_0,                                      0|
 rb_zoom,                                          key_lshift+mouse_axis_z,                          0| // Смена угла обзора в турели
 rb_zoom,                                          key_add/key_subtract,                             0|
 rb_zoom,                                          mouse_axis_z,                                     0|
 mc_zoom,                                          key_lshift+mouse_axis_z,                          0| // Смена угла обзора
 mc_zoom,                                          key_add/key_subtract,                             0|
-vrzoomin,                                         key_add,                                          0| // Увеличение масштаба вида VR
 bc_head_pitch,                                    mouse_axis_y,                                     0| // Наклон головы пилота по вертикали
 bc_head_pitch,                                    mouse_axis_y+mouse_b1,                            0|
 bc_head_yaw,                                      mouse_axis_x,                                     0| // Поворот головы пилота по горизонтали
@@ -194,7 +198,7 @@ contact_altimeter_target_altitude_decrease,       key_rcontrol+key_k,           
 radio_volume_decrease,                            key_lmenu+key_subtract,                           0| // Громкость радиоприёмника: уменьшить
 radio_volume_increase,                            key_lmenu+key_add,                                0| // Громкость радиоприёмника: увеличить
 switch_radio_channel,                             key_lmenu+key_c,                                  0| // Переключить радиоканал (свои/противник)
-bc_eject,                                         key_lcontrol+key_e,                               0| // Покинуть самолет
+bc_eject,                                         key_lcontrol+key_lmenu+key_e,                     0| // Покинуть самолет
 autoaltitudinalcorrection,                        key_lshift+key_m,                                 0| // Автоматическое управление составом топливовоздушной смеси и переключением режима нагнетателей
 autoradiators,                                    key_lshift+key_r,                                 0| // Автоматическое управление охлаждением двигателей
 autorpmlimiter,                                   key_lshift+key_n,                                 0| // Автоматический ограничитель оборотов двигателя
