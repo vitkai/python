@@ -27,19 +27,22 @@ import wget
 print('Beginning file download with wget module')
 out = os.path.abspath('/Users/corvit/Downloads/Slow_Deustsch/')
 
-for i in range(1, 125):
+for i in range(126, 280):
+    """
     msg = f'i={i}'
     print(msg)
-    pdf = 'sg' + str(i) + 'kurz.pdf'
+    pdf = 'sg' + str(i) + 'akurz.pdf'
     url = 'https://slowgerman.com/folgen/' + pdf
     try:
         wget.download(url, out=out)
         # wget.download(url)
     except Exception as e:
         print(e)
-
+    """
+    
     mp3 = 'sg' + str(i) + '.mp3'
-    url = 'https://slowgerman.com/folgen/' + mp3
+    # url = 'https://slowgerman.com/folgen/' + mp3
+    url = 'https://cdn.podseed.org/slowgerman/' + mp3
     try:
         wget.download(url, out=out)
         # wget.download(url)
@@ -50,4 +53,5 @@ for i in range(1, 125):
 """
 https://slowgerman.com/folgen/sg125kurz.pdf
 https://slowgerman.com/folgen/sg125.mp3
+https://cdn.podseed.org/slowgerman/sg214.mp3
 """
