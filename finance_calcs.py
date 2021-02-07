@@ -130,7 +130,7 @@ def calc_pay_off_term(inp_data, double):
 logger = logging_setup()
 
 # get script path
-full_path, filename = path.split(__file__)
+full_path, filename = path.split(path.realpath(__file__))
 logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 
 src_data = load_cfg()
