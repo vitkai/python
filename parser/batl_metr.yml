@@ -1,0 +1,15 @@
+#Descr: yaml configuration file for time management records processing for QTimeRec software
+#@author: vitkai
+#Created: Fri Mar 18 2022 17:46
+
+# start 
+url: 'https://www.battlemetrics.com/servers/scum/2608012'
+
+show_fields:
+  - status
+  - time
+  - players
+
+refresh_delay_sec: 10
+#exit_after_sec: 86400 #86400 - 24 hours
+exit_after_sec: 30 #86400 - 24 hours
