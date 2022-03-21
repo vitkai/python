@@ -56,47 +56,32 @@ def load_cfg():
     return cfg
 
 
-def check_dict(inp_data, fields):
-    #print(f'inp_data:\n {inp_data}')
-    #print(f'fields:\n {fields}')
-
-    for key in inp_data:
-        if type(inp_data[key]) is dict:
-            check_dict(inp_data[key], fields)
-        else:
-            if key in fields:
-                print(f'{key}:\n{inp_data[key]}')
-
-
-def process_html(inp_data):
-    vgm_url = inp_data['url']
-
+def get_page_driver(vgm_url):
+    #vgm_url = inp_data['url']
     #driver = webdriver.Chrome(r'C:\Users\corvit\Downloads\chromedriver_win32\chromedriver.exe')
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     driver.get(vgm_url)
-    #print(driver.find_element_by_id('contador_PDEH').text)
-    #driver.quit()
 
-    html_text = driver.page_source
-    #html_text = requests.get(vgm_url).text
+    return driver
+
+
+def process_html(drvr, inp_data):
+    html_text = drvr.page_source
     #print(f'html_text:\n{html_text}')
     soup = BeautifulSoup(html_text, 'html.parser')
     #print(f'soup:\n{soup}')
 
     curr = soup.findAll('div', attrs={'class': "fmrqyE cmrqyE"})
     price = soup.findAll('div', attrs={'class': "gmrqyE cmrqyE"})
-    outp = '\n' + '---===***'*3 + '\n' \
-            f'{curr[0].text}: {price[0].text} / {price[1].text}\n' + \
-            f'{curr[1].text}: {price[2].text} / {price[3].text}\n' + \
-            f'{curr[2].text}: {price[4].text} / {price[5].text}\n' + \
-           '---===***' * 3
+    outp = '\n' + '---===***'*3 + '===---\n' \
+            f'{curr[0].text}:\t{price[0].text} / {price[1].text}\n' + \
+            f'{curr[1].text}:\t{price[2].text} / {price[3].text}\n' + \
+            f'{curr[2].text}:\t{price[4].text} / {price[5].text}\n' + \
+           '---===***' * 3 + '===---'
         #print(price)
     print(outp)
-
-    #data = json.loads(soup.find('script', type='application/json').text)
-    #check_dict(data, inp_data['show_fields'])
 
 
 def main():
@@ -108,15 +93,19 @@ def main():
     full_path = full_path + '/'
     logger.debug("Full path: {0} | filename: {1}".format(full_path, filename))
 
-    src_data = load_cfg()
+    cfg_data = load_cfg()
+
+    page_driver = get_page_driver(cfg_data['url'])
 
     cnt = 0
-    while cnt < src_data['exit_after_sec']:
+    while cnt < cfg_data['exit_after_sec']:
         #cls()
-        process_html(src_data)
-        time.sleep(src_data['refresh_delay_sec'])
-        cnt += src_data['refresh_delay_sec']
+        process_html(page_driver, cfg_data)
+        time.sleep(cfg_data['refresh_delay_sec'])
+        cnt += cfg_data['refresh_delay_sec']
+        page_driver.refresh()
 
+    page_driver.quit()
     logger.debug("That's all folks")
     print("\nThat's all folks")
 
