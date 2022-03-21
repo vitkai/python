@@ -78,9 +78,9 @@ def process_html(drvr, inp_data):
     curr = soup.findAll('div', attrs={'class': inp_data['tink_div_classes'][0]})
     price = soup.findAll('div', attrs={'class': inp_data['tink_div_classes'][1]})
     outp = '\n' + '---===***'*3 + '===---\n' \
-            f'{curr[0].text}:\t{price[0].text} / {price[1].text}\n' + \
-            f'{curr[1].text}:\t{price[2].text} / {price[3].text}\n' + \
-            f'{curr[2].text}:\t{price[4].text} / {price[5].text}\n' + \
+            f'{curr[0].text}:\n {price[0].text} / {price[1].text}\n' + \
+            f'{curr[1].text}:\n {price[2].text} / {price[3].text}\n' + \
+            f'{curr[2].text}:\n {price[4].text} / {price[5].text}\n' + \
            '---===***' * 3 + '===---'
         #print(price)
     cls()
