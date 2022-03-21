@@ -100,7 +100,7 @@ def process_html(drvr, inp_data):
     cls()
     for phr in inp_data['to_remove']:
         outp = outp.replace(phr, '')
-    outp = re.sub(r'\n+', '\n', outp)
+    outp = '\n'.join(outp.split('\n\n'))
     print(outp)
 
 
