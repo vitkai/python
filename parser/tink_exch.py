@@ -87,7 +87,7 @@ def process_html(inp_data):
 
     curr = soup.findAll('div', attrs={'class': "fmrqyE cmrqyE"})
     price = soup.findAll('div', attrs={'class': "gmrqyE cmrqyE"})
-    outp = '\n' + '---===***'*3 + \
+    outp = '\n' + '---===***'*3 + '\n' \
             f'{curr[0].text}: {price[0].text} / {price[1].text}\n' + \
             f'{curr[1].text}: {price[2].text} / {price[3].text}\n' + \
             f'{curr[2].text}: {price[4].text} / {price[5].text}\n' + \
