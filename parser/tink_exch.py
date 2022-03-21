@@ -7,6 +7,7 @@ Created: Fri Mar 18 2022 17:46
 import json
 import logging
 import codecs
+import re
 import ruamel.yaml as yml
 import requests
 import time
@@ -89,8 +90,6 @@ def process_html(drvr, inp_data):
     #price = soup_2.findAll('div', attrs={'class': inp_data['vtb_div_classes'][1]})
 
     outp += '\n\nVTB:\n' + '---===***'*3 + '===---\n'
-    #outp += f'curr: {curr}\n' + \
-    #        f'price: {price}\n'
     if len(curr) > 1:
         #outp += '\ncurr:\n\n'
         for idx, item in enumerate(curr):
@@ -99,6 +98,9 @@ def process_html(drvr, inp_data):
     outp += '---===***' * 3 + '===---'
 
     cls()
+    for phr in inp_data['to_remove']:
+        outp = outp.replace(phr, '')
+    outp = re.sub(r'\n+', '\n', outp)
     print(outp)
 
 

@@ -23,6 +23,12 @@ vtb_div_class_ids:
   - 8
   - 9
 
+to_remove:
+  - 'Покупаем'
+  - 'Продаем'
+  - 'до 30 000 $'
+  - 'до 30 000 €'
+
 refresh_delay_sec: 30
 #exit_after_sec: 86400 #24 hours
 #exit_after_sec: 30
