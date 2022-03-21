@@ -3,11 +3,25 @@
 #Created: Fri Mar 18 2022 17:46
 
 # start 
-url: 'https://www.tinkoff.ru/about/exchange/'
+url:
+  - 'https://www.tinkoff.ru/about/exchange/'
+  - 'https://www.vtb.ru/personal/platezhi-i-perevody/obmen-valjuty/'
 
 tink_div_classes:
   - "fmrqyE cmrqyE"
   - "gmrqyE cmrqyE"
+
+vtb_div_classes:
+    - "typographystyles__Box-foundation-kit__sc-14qzghz-0 iLoKHL markdown-paragraphstyles__ParagraphTypography-foundation-kit__sc-otngat-0 cMrHfu"
+    - "groupstyles__Box-foundation-kit__sc-1gqk80i-0 bmkETC numbersstyles__GroupStyled-foundation-kit__sc-1xhbrzd-0 koWGQZ"
+
+vtb_div_class_ids:
+  - 1
+  - 2
+  - 3
+  - 7
+  - 8
+  - 9
 
 refresh_delay_sec: 30
 #exit_after_sec: 86400 #24 hours

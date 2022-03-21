@@ -57,32 +57,47 @@ def load_cfg():
 
 
 def get_page_driver(vgm_url):
-    #vgm_url = inp_data['url']
-    #driver = webdriver.Chrome(r'C:\Users\corvit\Downloads\chromedriver_win32\chromedriver.exe')
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
     chrome_service = Service(ChromeDriverManager().install())
     chrome_service.creationflags = CREATE_NO_WINDOW
-    driver = webdriver.Chrome(service=chrome_service, options=options)
-    driver.get(vgm_url)
+    driver_1 = webdriver.Chrome(service=chrome_service, options=options)
+    driver_1.get(vgm_url[0])
+    driver_2 = webdriver.Chrome(service=chrome_service, options=options)
+    driver_2.get(vgm_url[1])
 
-    return driver
+    return driver_1, driver_2
 
 
 def process_html(drvr, inp_data):
-    html_text = drvr.page_source
+    html_text_1 = drvr[0].page_source
+    html_text_2 = drvr[1].page_source
     #print(f'html_text:\n{html_text}')
-    soup = BeautifulSoup(html_text, 'html.parser')
+    soup_1 = BeautifulSoup(html_text_1, 'html.parser')
+    soup_2 = BeautifulSoup(html_text_2, 'html.parser')
     #print(f'soup:\n{soup}')
 
-    curr = soup.findAll('div', attrs={'class': inp_data['tink_div_classes'][0]})
-    price = soup.findAll('div', attrs={'class': inp_data['tink_div_classes'][1]})
-    outp = '\n' + '---===***'*3 + '===---\n' \
-            f'{curr[0].text}:\n {price[0].text} / {price[1].text}\n' + \
-            f'{curr[1].text}:\n {price[2].text} / {price[3].text}\n' + \
-            f'{curr[2].text}:\n {price[4].text} / {price[5].text}\n' + \
-           '---===***' * 3 + '===---'
-        #print(price)
+    curr = soup_1.findAll('div', attrs={'class': inp_data['tink_div_classes'][0]})
+    price = soup_1.findAll('div', attrs={'class': inp_data['tink_div_classes'][1]})
+    outp = 'Tinkoff:\n' + '---===***'*3 + '===---\n'
+    if len(curr) > 1:
+        for idx, item in enumerate(curr):
+            outp += f'{item.text}:\n {price[idx*2].text} / {price[idx*2+1].text}\n'
+    outp += '---===***' * 3 + '===---'
+
+    curr = soup_2.findAll('div', attrs={'class': inp_data['vtb_div_classes'][0]})
+    #price = soup_2.findAll('div', attrs={'class': inp_data['vtb_div_classes'][1]})
+
+    outp += '\n\nVTB:\n' + '---===***'*3 + '===---\n'
+    #outp += f'curr: {curr}\n' + \
+    #        f'price: {price}\n'
+    if len(curr) > 1:
+        #outp += '\ncurr:\n\n'
+        for idx, item in enumerate(curr):
+            if idx in inp_data['vtb_div_class_ids']:
+                outp += f'{item.text}\n'
+    outp += '---===***' * 3 + '===---'
+
     cls()
     print(outp)
 
@@ -98,15 +113,16 @@ def main():
 
     cfg_data = load_cfg()
 
-    page_driver = get_page_driver(cfg_data['url'])
+    page_drivers = get_page_driver(cfg_data['url'])
 
     cnt = 0
     while cnt < cfg_data['exit_after_sec']:
         #cls()
-        process_html(page_driver, cfg_data)
+        process_html(page_drivers, cfg_data)
         time.sleep(cfg_data['refresh_delay_sec'])
         cnt += cfg_data['refresh_delay_sec']
-        page_driver.refresh()
+        page_drivers[0].refresh()
+        page_drivers[1].refresh()
 
     page_driver.quit()
     logger.debug("That's all folks")
