@@ -12,6 +12,9 @@ import requests
 import time
 from bs4 import BeautifulSoup
 from os import name, path, system
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 def logging_setup():
@@ -67,13 +70,33 @@ def check_dict(inp_data, fields):
 
 def process_html(inp_data):
     vgm_url = inp_data['url']
-    html_text = requests.get(vgm_url).text
+
+    #driver = webdriver.Chrome(r'C:\Users\corvit\Downloads\chromedriver_win32\chromedriver.exe')
+    options = webdriver.ChromeOptions()
+    options.add_argument("headless")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver.get(vgm_url)
+    #print(driver.find_element_by_id('contador_PDEH').text)
+    #driver.quit()
+
+    html_text = driver.page_source
+    #html_text = requests.get(vgm_url).text
     #print(f'html_text:\n{html_text}')
     soup = BeautifulSoup(html_text, 'html.parser')
     #print(f'soup:\n{soup}')
 
-    data = json.loads(soup.find('script', type='application/json').text)
-    check_dict(data, inp_data['show_fields'])
+    curr = soup.findAll('div', attrs={'class': "fmrqyE cmrqyE"})
+    price = soup.findAll('div', attrs={'class': "gmrqyE cmrqyE"})
+    outp = '\n' + '---===***'*3 + \
+            f'{curr[0].text}: {price[0].text} / {price[1].text}\n' + \
+            f'{curr[1].text}: {price[2].text} / {price[3].text}\n' + \
+            f'{curr[2].text}: {price[4].text} / {price[5].text}\n' + \
+           '---===***' * 3
+        #print(price)
+    print(outp)
+
+    #data = json.loads(soup.find('script', type='application/json').text)
+    #check_dict(data, inp_data['show_fields'])
 
 
 def main():
@@ -89,7 +112,7 @@ def main():
 
     cnt = 0
     while cnt < src_data['exit_after_sec']:
-        cls()
+        #cls()
         process_html(src_data)
         time.sleep(src_data['refresh_delay_sec'])
         cnt += src_data['refresh_delay_sec']
