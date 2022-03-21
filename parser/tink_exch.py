@@ -14,8 +14,8 @@ from bs4 import BeautifulSoup
 from os import name, path, system
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from subprocess import CREATE_NO_WINDOW
 from webdriver_manager.chrome import ChromeDriverManager
-
 
 def logging_setup():
     global full_path, filename
@@ -61,7 +61,9 @@ def get_page_driver(vgm_url):
     #driver = webdriver.Chrome(r'C:\Users\corvit\Downloads\chromedriver_win32\chromedriver.exe')
     options = webdriver.ChromeOptions()
     options.add_argument("headless")
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    chrome_service = Service(ChromeDriverManager().install())
+    chrome_service.creationflags = CREATE_NO_WINDOW
+    driver = webdriver.Chrome(service=chrome_service, options=options)
     driver.get(vgm_url)
 
     return driver
@@ -73,14 +75,15 @@ def process_html(drvr, inp_data):
     soup = BeautifulSoup(html_text, 'html.parser')
     #print(f'soup:\n{soup}')
 
-    curr = soup.findAll('div', attrs={'class': "fmrqyE cmrqyE"})
-    price = soup.findAll('div', attrs={'class': "gmrqyE cmrqyE"})
+    curr = soup.findAll('div', attrs={'class': inp_data['tink_div_classes'][0]})
+    price = soup.findAll('div', attrs={'class': inp_data['tink_div_classes'][1]})
     outp = '\n' + '---===***'*3 + '===---\n' \
             f'{curr[0].text}:\t{price[0].text} / {price[1].text}\n' + \
             f'{curr[1].text}:\t{price[2].text} / {price[3].text}\n' + \
             f'{curr[2].text}:\t{price[4].text} / {price[5].text}\n' + \
            '---===***' * 3 + '===---'
         #print(price)
+    cls()
     print(outp)
 
 

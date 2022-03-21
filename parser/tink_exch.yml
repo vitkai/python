@@ -5,10 +5,9 @@
 # start 
 url: 'https://www.tinkoff.ru/about/exchange/'
 
-show_fields:
-  - status
-  - time
-  - players
+tink_div_classes:
+  - "fmrqyE cmrqyE"
+  - "gmrqyE cmrqyE"
 
 refresh_delay_sec: 30
 #exit_after_sec: 86400 #24 hours
