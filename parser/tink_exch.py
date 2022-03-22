@@ -71,6 +71,8 @@ def get_page_driver(vgm_url):
 
 
 def process_html(drvr, inp_data):
+    global tink_data, vtb_data
+
     html_text_1 = drvr[0].page_source
     html_text_2 = drvr[1].page_source
     #print(f'html_text:\n{html_text}')
@@ -81,7 +83,16 @@ def process_html(drvr, inp_data):
     curr = soup_1.findAll('div', attrs={'class': inp_data['tink_div_classes'][0]})
     price = soup_1.findAll('div', attrs={'class': inp_data['tink_div_classes'][1]})
     outp = 'Tinkoff:\n' + '---===***'*3 + '===---\n'
+    have_data = False
     if len(curr) > 1:
+        tink_data = [curr, price]
+        have_data = True
+    elif tink_data:
+        curr = tink_data[0]
+        price = tink_data[1]
+        have_data = True
+
+    if have_data:
         for idx, item in enumerate(curr):
             outp += f'{item.text}:\n {price[idx*2].text} / {price[idx*2+1].text}\n'
     outp += '---===***' * 3 + '===---'
@@ -90,8 +101,16 @@ def process_html(drvr, inp_data):
     #price = soup_2.findAll('div', attrs={'class': inp_data['vtb_div_classes'][1]})
 
     outp += '\n\nVTB:\n' + '---===***'*3 + '===---\n'
+    have_data = False
     if len(curr) > 1:
-        #outp += '\ncurr:\n\n'
+        vtb_data = curr
+        have_data = True
+    elif vtb_data:
+        # restoring previous values if no data received on this run
+        curr = vtb_data
+        have_data = True
+
+    if have_data:
         for idx, item in enumerate(curr):
             if idx in inp_data['vtb_div_class_ids']:
                 outp += f'{item.text}\n'
@@ -106,6 +125,11 @@ def process_html(drvr, inp_data):
 
 def main():
     global full_path, filename
+    global tink_data, vtb_data
+
+    tink_data = []
+    vtb_data = []
+
     logger = logging_setup()
 
     # get script path
