@@ -123,10 +123,11 @@ def main():
         process_html(page_drivers, cfg_data)
         time.sleep(cfg_data['refresh_delay_sec'])
         cnt += cfg_data['refresh_delay_sec']
-        page_drivers[0].refresh()
-        page_drivers[1].refresh()
+        for drv in page_drivers:
+            drv.refresh()
 
-    page_driver.quit()
+    for drv in page_drivers:
+        drv.quit()
     logger.debug("That's all folks")
     print("\nThat's all folks")
 
