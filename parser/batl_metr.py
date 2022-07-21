@@ -72,8 +72,12 @@ def process_html(inp_data):
     soup = BeautifulSoup(html_text, 'html.parser')
     #print(f'soup:\n{soup}')
 
-    data = json.loads(soup.find('script', type='application/json').text)
-    check_dict(data, inp_data['show_fields'])
+    data = soup.find('script', type='application/json')
+    if data is None:
+        print(f'Soup returned: {data}')
+    else:
+        data = json.loads(data.text)
+        check_dict(data, inp_data['show_fields'])
 
 
 def main():

@@ -11,6 +11,6 @@ show_fields:
   - players
 
 refresh_delay_sec: 30
-#exit_after_sec: 86400 #24 hours
+exit_after_sec: 86400 #24 hours
 #exit_after_sec: 30
-exit_after_sec: 10800 #24 hours
+#exit_after_sec: 10800 #3 hours

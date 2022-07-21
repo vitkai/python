@@ -3,6 +3,9 @@
 #Created: Fri Mar 18 2022 17:46
 
 # start 
+show_page: True
+#show_page: False
+
 url:
   - 'https://www.tinkoff.ru/about/exchange/'
   - 'https://www.vtb.ru/personal/platezhi-i-perevody/obmen-valjuty/'
@@ -12,8 +15,16 @@ tink_div_classes:
   - "gmrqyE cmrqyE"
 
 vtb_div_classes:
-    - "typographystyles__Box-foundation-kit__sc-14qzghz-0 iLoKHL markdown-paragraphstyles__ParagraphTypography-foundation-kit__sc-otngat-0 cMrHfu"
+# service-packages-tablestyles__Box-currency-exchange__sc-p7ct8d-8 dIRJM
+#service-packages-tablestyles__Row-currency-exchange__sc-p7ct8d-0 service-packages-tablestyles__ContentStyled-currency-exchange__sc-p7ct8d-6 dmRWMT kHYaAR
+#layoutstyles__Box-foundation-kit__sc-jkisi6-0 fLbVlO service-packages-tablestyles__LayoutStyled-currency-exchange__sc-p7ct8d-9 hkntFZ
+#typographystyles__Box-foundation-kit__sc-14qzghz-0 iLoKHL markdown-paragraphstyles__ParagraphTypography-foundation-kit__sc-otngat-0 cMrHfu
+    #- "typographystyles__Box-foundation-kit__sc-14qzghz-0 iLoKHL markdown-paragraphstyles__ParagraphTypography-foundation-kit__sc-otngat-0 cMrHfu"
+    #- "service-packages-tablestyles__Row-currency-exchange__sc-p7ct8d-0 service-packages-tablestyles__ContentStyled-currency-exchange__sc-p7ct8d-6 iqrkiZ QWrwF"
+    - "iqrkiZ QWrwF"
     - "groupstyles__Box-foundation-kit__sc-1gqk80i-0 bmkETC numbersstyles__GroupStyled-foundation-kit__sc-1xhbrzd-0 koWGQZ"
+    #- "layoutstyles__Box-foundation-kit__sc-jkisi6-0 fLbVlO service-packages-tablestyles__LayoutStyled-currency-exchange__sc-p7ct8d-9 hkntFZ"
+    #- 
 
 vtb_div_class_ids:
   - 1
@@ -29,7 +40,8 @@ to_remove:
   - 'до 30 000 $'
   - 'до 30 000 €'
 
-refresh_delay_sec: 30
+refresh_delay_sec: 1
+#refresh_delay_sec: 30
 #exit_after_sec: 86400 #24 hours
 #exit_after_sec: 30
 exit_after_sec: 10800 #24 hours
