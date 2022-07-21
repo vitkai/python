@@ -35,6 +35,7 @@ class GameGrid(Frame):
         self.init_grid()
         self.matrix = funcs.new_game(c.GRID_LEN)
         self.history_matrices = []
+        self.win = False
         self.update_grid_cells()
 
         self.mainloop()
@@ -100,9 +101,11 @@ class GameGrid(Frame):
                 # record last move
                 self.history_matrices.append(self.matrix)
                 self.update_grid_cells()
-                if funcs.game_state(self.matrix) == 'win':
-                    self.grid_cells[1][1].configure(text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
-                    self.grid_cells[1][2].configure(text="Win!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                if not self.win:
+                    if funcs.game_state(self.matrix) == 'win':
+                        self.grid_cells[1][1].configure(text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                        self.grid_cells[1][2].configure(text="Win!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                        self.win = True
                 if funcs.game_state(self.matrix) == 'lose':
                     self.grid_cells[1][1].configure(text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
                     self.grid_cells[1][2].configure(text="Lose!", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
