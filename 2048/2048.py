@@ -3,8 +3,10 @@ import random
 import funcs
 import conf as c
 
+
 def gen():
     return random.randint(0, c.GRID_LEN - 1)
+
 
 class GameGrid(Frame):
     def __init__(self):
@@ -32,13 +34,13 @@ class GameGrid(Frame):
         self.grid_cells = []
         self.init_grid()
         self.matrix = funcs.new_game(c.GRID_LEN)
-        self.history_matrixs = []
+        self.history_matrices = []
         self.update_grid_cells()
 
         self.mainloop()
 
     def init_grid(self):
-        background = Frame(self, bg=c.BACKGROUND_COLOR_GAME,width=c.SIZE, height=c.SIZE)
+        background = Frame(self, bg=c.BACKGROUND_COLOR_GAME, width=c.SIZE, height=c.SIZE)
         background.grid()
 
         for i in range(c.GRID_LEN):
@@ -73,7 +75,7 @@ class GameGrid(Frame):
             for j in range(c.GRID_LEN):
                 new_number = self.matrix[i][j]
                 if new_number == 0:
-                    self.grid_cells[i][j].configure(text="",bg=c.BACKGROUND_COLOR_CELL_EMPTY)
+                    self.grid_cells[i][j].configure(text="", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
                 else:
                     self.grid_cells[i][j].configure(
                         text=str(new_number),
@@ -85,17 +87,18 @@ class GameGrid(Frame):
     def key_down(self, event):
         key = event.keysym
         print(event)
-        if key == c.KEY_QUIT: exit()
-        if key == c.KEY_BACK and len(self.history_matrixs) > 1:
-            self.matrix = self.history_matrixs.pop()
+        if key == c.KEY_QUIT:
+            exit()
+        if key == c.KEY_BACK and len(self.history_matrices) > 1:
+            self.matrix = self.history_matrices.pop()
             self.update_grid_cells()
-            print('back on step total step:', len(self.history_matrixs))
+            print('back on step total step:', len(self.history_matrices))
         elif key in self.commands:
             self.matrix, done = self.commands[key](self.matrix)
             if done:
                 self.matrix = funcs.add_two(self.matrix)
                 # record last move
-                self.history_matrixs.append(self.matrix)
+                self.history_matrices.append(self.matrix)
                 self.update_grid_cells()
                 if funcs.game_state(self.matrix) == 'win':
                     self.grid_cells[1][1].configure(text="You", bg=c.BACKGROUND_COLOR_CELL_EMPTY)
@@ -110,4 +113,7 @@ class GameGrid(Frame):
             index = (gen(), gen())
         self.matrix[index[0]][index[1]] = 2
 
-game_grid = GameGrid()
+
+if __name__ == '__main__':
+    game_grid = GameGrid()
+    
