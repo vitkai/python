@@ -3,7 +3,9 @@
 #Created: Fri Mar 18 2022 17:46
 
 # start 
-url: 'https://www.battlemetrics.com/servers/scum/2608012'
+url: 'https://www.battlemetrics.com/servers/scum/14654704'
+#url: 'https://www.battlemetrics.com/servers/scum/17490475'
+#url: 'https://www.battlemetrics.com/servers/scum/2608012'
 
 show_fields:
   - status
