@@ -1,0 +1,802 @@
+controls{
+  version:i=5
+
+  basePresetPaths{
+    default:t="wt/config/hotkeys/hotkey.keyboard_shooter_ver2.blk"
+  }
+
+  hotkeys{
+    AUTOBIND_TEST_SHORTCUT{
+      keyboardKey:i=18
+    }
+
+    ID_AAM_HELICOPTER{
+      keyboardKey:i=56
+      keyboardKey:i=57
+    }
+
+    ID_AAM_HELICOPTER{
+      keyboardKey:i=29
+      joyButton:i=2
+    }
+
+    ID_AGM{}
+    ID_AGM_LOCK_HELICOPTER{
+      joyButton:i=2
+    }
+
+    ID_AGM_LOCK_HELICOPTER{
+      joyButton:i=3
+    }
+
+    ID_AIR_BRAKE{
+      keyboardKey:i=49
+    }
+
+    ID_AIR_BRAKE{
+      keyboardKey:i=29
+      joyButton:i=2
+    }
+
+    ID_ATGM_HELICOPTER{}
+    ID_ATGM_HELICOPTER{
+      keyboardKey:i=29
+      joyButton:i=1
+    }
+
+    ID_ATGM_HELICOPTER{
+      mouseButton:i=1
+    }
+
+    ID_BAY_DOOR{
+      keyboardKey:i=57
+    }
+
+    ID_BOMBS{
+      keyboardKey:i=29
+      joyButton:i=3
+    }
+
+    ID_BOMBS{
+      keyboardKey:i=29
+      joyButton:i=0
+    }
+
+    ID_BOMBS_HELICOPTER{
+      mouseButton:i=3
+    }
+
+    ID_BOMBS_HELICOPTER{
+      keyboardKey:i=42
+      joyButton:i=17
+    }
+
+    ID_CAMERA_BINOCULARS{
+      keyboardKey:i=29
+    }
+
+    ID_CAMERA_BOMBVIEW{
+      keyboardKey:i=65
+    }
+
+    ID_CAMERA_BOMBVIEW{
+      joyButton:i=18
+    }
+
+    ID_CAMERA_DEFAULT{
+      keyboardKey:i=63
+    }
+
+    ID_CAMERA_DEFAULT{
+      mouseButton:i=2
+    }
+
+    ID_CAMERA_DEFAULT{
+      joyButton:i=3
+    }
+
+    ID_CAMERA_DRIVER{
+      keyboardKey:i=201
+    }
+
+    ID_CAMERA_FPS{
+      keyboardKey:i=60
+    }
+
+    ID_CAMERA_FPS{
+      joyButton:i=16
+    }
+
+    ID_CAMERA_FPS_HELICOPTER{
+      keyboardKey:i=60
+    }
+
+    ID_CAMERA_FPS_HELICOPTER{
+      joyButton:i=16
+    }
+
+    ID_CAMERA_GUNNER{
+      joyButton:i=5
+    }
+
+    ID_CAMERA_GUNNER_HELICOPTER{
+      keyboardKey:i=64
+    }
+
+    ID_CAMERA_GUNNER_HELICOPTER{
+      joyButton:i=20
+    }
+
+    ID_CAMERA_NEUTRAL{
+      keyboardKey:i=83
+    }
+
+    ID_CAMERA_NEUTRAL{
+      mouseButton:i=2
+    }
+
+    ID_CAMERA_NEUTRAL{
+      keyboardKey:i=42
+    }
+
+    ID_CHANGE_ARTILLERY_TARGETING_MODE{}
+    ID_CHANGE_SHOT_FREQ_HELICOPTER{
+      keyboardKey:i=29
+      joyButton:i=3
+    }
+
+    ID_CHANGE_SHOT_FREQ_HELICOPTER{
+      keyboardKey:i=44
+    }
+
+    ID_CONTINUE{
+      keyboardKey:i=57
+    }
+
+    ID_FBW_MODE_HELICOPTER{
+      joyButton:i=0
+    }
+
+    ID_FIRE_ADDITIONAL_GUNS{
+      mouseButton:i=1
+    }
+
+    ID_FIRE_ADDITIONAL_GUNS_HELICOPTER{
+      keyboardKey:i=3
+    }
+
+    ID_FIRE_CANNONS{
+      mouseButton:i=1
+    }
+
+    ID_FIRE_CANNONS_HELICOPTER{
+      keyboardKey:i=3
+    }
+
+    ID_FIRE_GM_SPECIAL_GUN{
+      mouseButton:i=4
+    }
+
+    ID_FIRE_GM_SPECIAL_GUN{
+      keyboardKey:i=42
+    }
+
+    ID_FIRE_MGUNS_HELICOPTER{
+      keyboardKey:i=2
+    }
+
+    ID_FIRE_PRIMARY_HELICOPTER{
+      mouseButton:i=0
+    }
+
+    ID_FIRE_SECONDARY{}
+    ID_FIRE_SECONDARY_HELICOPTER{
+      mouseButton:i=0
+    }
+
+    ID_FLAPS_DOWN{
+      keyboardKey:i=29
+      joyButton:i=12
+    }
+
+    ID_FLAPS_UP{
+      keyboardKey:i=29
+      joyButton:i=14
+    }
+
+    ID_FLARES_HELICOPTER{
+      keyboardKey:i=57
+    }
+
+    ID_HELICOPTER_TRIM{
+      joyButton:i=4
+    }
+
+    ID_HELICOPTER_TRIM_RESET{
+      keyboardKey:i=29
+      joyButton:i=4
+    }
+
+    ID_HELI_GUNNER_NIGHT_VISION{
+      keyboardKey:i=49
+    }
+
+    ID_IRCM_SWITCH_HELICOPTER{
+      keyboardKey:i=29
+      joyButton:i=3
+    }
+
+    ID_IR_PROJECTOR{
+      keyboardKey:i=42
+      mouseButton:i=0
+    }
+
+    ID_KILLSTREAK_WHEEL_MENU{
+      keyboardKey:i=6
+    }
+
+    ID_LOCK_TARGET{}
+    ID_MPSTATSCREEN{
+      keyboardKey:i=15
+    }
+
+    ID_MPSTATSCREEN{
+      keyboardKey:i=201
+    }
+
+    ID_RADIATOR_AUTO{
+      keyboardKey:i=19
+    }
+
+    ID_ROCKETS{
+      keyboardKey:i=42
+      mouseButton:i=0
+    }
+
+    ID_ROCKETS{
+      joyButton:i=0
+    }
+
+    ID_ROCKETS_HELICOPTER{
+      joyButton:i=1
+    }
+
+    ID_ROCKETS_HELICOPTER{
+      mouseButton:i=1
+    }
+
+    ID_SCREENSHOT{
+      keyboardKey:i=42
+      keyboardKey:i=183
+    }
+
+    ID_SENSOR_SWITCH_HELICOPTER{
+      keyboardKey:i=19
+      keyboardKey:i=56
+    }
+
+    ID_SENSOR_SWITCH_HELICOPTER{
+      keyboardKey:i=29
+      joyButton:i=14
+    }
+
+    ID_SHIP_TOGGLE_GUNNERS{
+      keyboardKey:i=18
+    }
+
+    ID_SHIP_TOGGLE_GUNNERS{
+      keyboardKey:i=42
+    }
+
+    ID_SHIP_WEAPON_DEPTH_CHARGE{}
+    ID_SHIP_WEAPON_DEPTH_CHARGE{
+      keyboardKey:i=42
+      keyboardKey:i=57
+    }
+
+    ID_SHIP_WEAPON_DEPTH_CHARGE{
+      keyboardKey:i=29
+      keyboardKey:i=57
+    }
+
+    ID_SHIP_WEAPON_MINE{}
+    ID_SHIP_WEAPON_MINE{
+      keyboardKey:i=42
+      keyboardKey:i=57
+    }
+
+    ID_SHIP_WEAPON_MINE{
+      keyboardKey:i=29
+      keyboardKey:i=57
+    }
+
+    ID_SHIP_WEAPON_ROCKETS{
+      keyboardKey:i=19
+    }
+
+    ID_SHIP_WEAPON_ROCKETS{
+      mouseButton:i=1
+    }
+
+    ID_SHOW_HERO_MODULES{}
+    ID_SWITCH_SHOOTING_CYCLE_PRIMARY_HELICOPTER{
+      keyboardKey:i=29
+      joyButton:i=15
+    }
+
+    ID_SWITCH_SHOOTING_CYCLE_SECONDARY_HELICOPTER{
+      keyboardKey:i=32
+    }
+
+    ID_SWITCH_SHOOTING_CYCLE_SECONDARY_HELICOPTER{
+      keyboardKey:i=29
+      joyButton:i=13
+    }
+
+    ID_TACTICAL_MAP{
+      keyboardKey:i=68
+    }
+
+    ID_TACTICAL_MAP{
+      keyboardKey:i=209
+    }
+
+    ID_TANK_NIGHT_VISION{
+      keyboardKey:i=42
+      mouseButton:i=1
+    }
+
+    ID_TARGETING_HOLD_GM{}
+    ID_TARGET_CAMERA_HELICOPTER{}
+    ID_TOGGLE_COCKPIT_DOOR_HELICOPTER{
+      keyboardKey:i=29
+      keyboardKey:i=46
+    }
+
+    ID_TOGGLE_COCKPIT_LIGHTS{
+      keyboardKey:i=184
+      keyboardKey:i=38
+    }
+
+    ID_TOGGLE_GUNNERS{
+      keyboardKey:i=201
+    }
+
+    ID_TOGGLE_LASER_DESIGNATOR_HELICOPTER{
+      keyboardKey:i=24
+    }
+
+    ID_TOGGLE_LASER_DESIGNATOR_HELICOPTER{
+      keyboardKey:i=29
+      joyButton:i=12
+    }
+
+    ID_TOGGLE_VIEW_GM{
+      mouseButton:i=1
+    }
+
+    ID_TOGGLE_VIEW_HELICOPTER{
+      keyboardKey:i=42
+      joyButton:i=16
+    }
+
+    ID_TOGGLE_VIEW_HELICOPTER{
+      keyboardKey:i=29
+      joyButton:i=0
+    }
+
+    ID_TOGGLE_VIEW_HELICOPTER{
+      keyboardKey:i=47
+    }
+
+    ID_TOGGLE_VIEW_HUMAN{
+      keyboardKey:i=47
+    }
+
+    ID_TOGGLE_VIEW_HUMAN{
+      mouseButton:i=1
+    }
+
+    ID_TOGGLE_VIEW_SHIP{
+      keyboardKey:i=201
+    }
+
+    ID_TRANS_GEAR_DOWN{}
+    ID_TRIM{
+      joyButton:i=4
+    }
+
+    ID_WEAPON_LOCK_HELICOPTER{
+      joyButton:i=4
+    }
+
+    ID_ZOOM_TOGGLE{}
+    ailerons_rangeMax{}
+    ailerons_rangeMin{}
+    brake_left_rangeMax{
+      keyboardKey:i=48
+    }
+
+    brake_left_rangeMax{
+      joyButton:i=0
+    }
+
+    brake_right_rangeMax{
+      keyboardKey:i=49
+    }
+
+    brake_right_rangeMax{
+      joyButton:i=0
+    }
+
+    elevator_rangeMax{}
+    elevator_rangeMin{}
+    gm_zoom_rangeMax{
+      joyButton:i=28
+    }
+
+    gm_zoom_rangeMin{
+      joyButton:i=30
+    }
+
+    helicopter_collective_rangeMax{
+      keyboardKey:i=17
+    }
+
+    helicopter_collective_rangeMax{
+      mouseButton:i=5
+    }
+
+    helicopter_collective_rangeMin{
+      keyboardKey:i=31
+    }
+
+    helicopter_collective_rangeMin{
+      mouseButton:i=6
+    }
+
+    helicopter_cyclic_pitch_rangeMax{}
+    helicopter_cyclic_pitch_rangeMin{}
+    helicopter_cyclic_roll_rangeMax{}
+    helicopter_cyclic_roll_rangeMin{}
+    helicopter_fire_rangeMax{
+      joyButton:i=1
+    }
+
+    helicopter_fire_rangeMax{
+      mouseButton:i=0
+    }
+
+    helicopter_pedals_rangeMax{}
+    helicopter_pedals_rangeMin{}
+    helicopter_zoom_rangeMax{
+      joyButton:i=12
+    }
+
+    helicopter_zoom_rangeMin{
+      joyButton:i=14
+    }
+
+    oil_radiator_rangeMax{
+      keyboardKey:i=200
+    }
+
+    oil_radiator_rangeMin{
+      keyboardKey:i=208
+    }
+
+    radiator_rangeMax{
+      keyboardKey:i=200
+    }
+
+    radiator_rangeMin{
+      keyboardKey:i=208
+    }
+
+    rudder_rangeMax{}
+    rudder_rangeMin{}
+    ship_zoom_rangeMax{
+      joyButton:i=28
+    }
+
+    ship_zoom_rangeMin{
+      joyButton:i=30
+    }
+
+    throttle_rangeMax{
+      mouseButton:i=5
+    }
+
+    throttle_rangeMin{}
+    trim_ailerons_rangeMax{
+      keyboardKey:i=203
+    }
+
+    trim_ailerons_rangeMin{
+      keyboardKey:i=205
+    }
+
+    trim_ailerons_rangeSet{
+      keyboardKey:i=205
+      keyboardKey:i=203
+    }
+
+    trim_rudder_rangeMax{
+      keyboardKey:i=157
+      keyboardKey:i=203
+    }
+
+    trim_rudder_rangeMin{
+      keyboardKey:i=157
+      keyboardKey:i=205
+    }
+
+    zoom_rangeMax{
+      joyButton:i=12
+    }
+
+    zoom_rangeMin{
+      joyButton:i=30
+    }
+
+    zoom_rangeMin{
+      joyButton:i=14
+    }
+  }
+
+  axes{
+    ailerons{
+      axisId:i=1
+      mouseAxisId:i=-1
+      innerDeadzone:r=0.02
+    }
+
+    brake_left{
+      relSens:r=0.81
+    }
+
+    brake_right{
+      relSens:r=0.81
+    }
+
+    camx{
+      mouseAxisId:i=0
+      innerDeadzone:r=0.05
+      relative:b=no
+    }
+
+    camy{
+      mouseAxisId:i=1
+      innerDeadzone:r=0.05
+      relative:b=no
+    }
+
+    elevator{
+      axisId:i=0
+      mouseAxisId:i=-1
+      relSens:r=0.81
+    }
+
+    gm_zoom{
+      innerDeadzone:r=0
+    }
+
+    helicopter_collective{
+      mouseAxisId:i=-1
+    }
+
+    helicopter_cyclic_pitch{
+      axisId:i=0
+      kMul:r=0.93
+      relSens:r=0.81
+    }
+
+    helicopter_cyclic_roll{
+      axisId:i=1
+      kMul:r=0.93
+      relSens:r=0.81
+    }
+
+    helicopter_fire{
+      relSens:r=0.64
+    }
+
+    helicopter_pedals{
+      axisId:i=2
+      kMul:r=0.89
+      relSens:r=0.81
+    }
+
+    helicopter_zoom{
+      relSens:r=0.64
+      relative:b=yes
+    }
+
+    oil_radiator{
+      relative:b=yes
+    }
+
+    radiator{
+      relative:b=yes
+    }
+
+    rudder{
+      axisId:i=2
+      innerDeadzone:r=0.02
+    }
+
+    ship_zoom{
+      innerDeadzone:r=0
+    }
+
+    trim_ailerons{
+      relSens:r=0.36
+      relative:b=yes
+    }
+
+    trim_elevator{
+      axisId:i=3
+      innerDeadzone:r=0.02
+      nonlinearity:i=1
+    }
+
+    trim_rudder{
+      relSens:r=0.36
+      relative:b=yes
+    }
+
+    turret_x{
+      innerDeadzone:r=0.05
+    }
+
+    turret_y{
+      innerDeadzone:r=0.05
+    }
+
+    zoom{
+      relSens:r=0.81
+      relative:b=yes
+    }
+  }
+
+  params{
+    USEROPT_AILERONS_MULTIPLIER:i=19
+    USEROPT_ATGM_AIM_SENS_HELICOPTER:i=100
+    USEROPT_ATGM_AIM_ZOOM_SENS_HELICOPTER:i=100
+    USEROPT_AUTOTRIM:b=no
+    USEROPT_ELEVATOR_MULTIPLIER:i=19
+    USEROPT_FIX_GUN_IN_MOUSE_LOOK:b=no
+    USEROPT_FREE_CAMERA_INERTIA:i=77
+    USEROPT_FREE_CAMERA_ZOOM_SPEED:i=50
+    USEROPT_GUNNER_VIEW_SENSE:i=100
+    USEROPT_GUNNER_VIEW_ZOOM_SENS:i=100
+    USEROPT_HELPERS_MODE:i=3
+    USEROPT_INSTRUCTOR_ENABLED:b=no
+    USEROPT_INVERTCAMERAY:i=0
+    USEROPT_INVERTY_HELICOPTER:b=no
+    USEROPT_INVERTY_HELICOPTER_GUNNER:b=no
+    USEROPT_INVERTY_SHIP:b=no
+    USEROPT_INVERTY_SPECTATOR:b=no
+    USEROPT_INVERTY_SUBMARINE:b=no
+    USEROPT_JOYFX:b=no
+    USEROPT_MOUSE_SMOOTH:b=yes
+    USEROPT_MOUSE_USAGE:i=4
+    USEROPT_MOUSE_USAGE_NO_AIM:i=3
+    USEROPT_REPLAY_CAMERA_WIGGLE:i=77
+    USEROPT_RUDDER_MULTIPLIER:i=10
+    USEROPT_SHIP_COMBINE_PRI_SEC_TRIGGERS:b=yes
+    USEROPT_SINGLE_SHOT_BY_TURRET:b=yes
+    USEROPT_WHEEL_CONTROL_SHIP:b=no
+    trackIrZoom:b=no
+    mouseJoystick:b=no
+  }
+
+  deviceMapping{
+    joystick{
+      connected:b=yes
+      devId:t="044F:0416"
+      axesOffset:i=0
+      name:t="SimTask FarmStick Right"
+      buttonsOffset:i=0
+      buttonsCount:i=33
+      axesCount:i=8
+    }
+
+    joystick{
+      connected:b=no
+      devId:t="046D:C215"
+      axesOffset:i=0
+      name:t="Logitech Extreme 3D"
+      buttonsOffset:i=0
+      buttonsCount:i=16
+      axesCount:i=6
+    }
+
+    joystick{
+      connected:b=no
+      devId:t="11FF:3331"
+      axesOffset:i=6
+      name:t="PC Game Controller"
+      buttonsOffset:i=16
+      buttonsCount:i=16
+      axesCount:i=7
+    }
+  }
+}
+
+settings{
+  aileronsMultiplier:r=0.19
+  elevatorMultiplier:r=0.19
+  rudderMultiplier:r=0.1
+  helicopterCyclicRollMultiplier:r=0.79
+  helicopterCyclicPitchMultiplier:r=0.73
+  helicopterPedalsMultiplier:r=0.7
+  freeCameraInertia:r=0.77
+  replayCameraWiggle:r=0.77
+  zoomSens:r=0
+  mouseSens:r=0.5
+  mouseAimSens:r=0.5
+  gunnerViewSens:r=1
+  gunnerViewZoomSens:r=1
+  atgmAimSensHelicopter:r=1
+  atgmAimZoomSensHelicopter:r=1
+  mouseSmooth:b=yes
+  mouseJoystickDeadZone:r=0.1
+  helicopterMouseJoystickDeadZone:r=0.1
+  mouseJoystickScreenSize:r=0.6
+  helicopterMouseJoystickScreenSize:r=0.6
+  mouseJoystickScreenPlace:r=0
+  helicopterMouseJoystickScreenPlace:r=0
+  mouseJoystickSensitivity:r=2
+  helicopterMouseJoystickSensitivity:r=2
+  mouseAileronAileronFactor:r=1
+  helicopterMouseAileronAileronFactor:r=1
+  mouseAileronRudderFactor:r=0.5
+  helicopterMouseAileronRudderFactor:r=0.5
+  mouseJoystickSquare:b=no
+  helicopterMouseJoystickSquare:b=no
+  mouseJoyMode:i=0
+  helicopterMouseJoyMode:i=0
+  aimTimeNonlinearityAir:r=0
+  aimTimeNonlinearityHelicopter:r=0
+  aimTimeNonlinearityTank:r=0
+  aimTimeNonlinearityWalker:r=0
+  aimTimeNonlinearityShip:r=0
+  aimTimeNonlinearitySubmarine:r=0
+  aimAccelerationDelayAir:r=0.5
+  aimAccelerationDelayHelicopter:r=0.5
+  aimAccelerationDelayTank:r=0.5
+  aimAccelerationDelayWalker:r=0.5
+  aimAccelerationDelayShip:r=0.5
+  aimAccelerationDelaySubmarine:r=0.5
+  mouseZMultAir:r=0.5
+  mouseZMultHelicopter:r=0.5
+  mouseZMultTank:r=0.5
+  mouseZMultShip:r=0.5
+  mouseZMultSubmarine:r=0.5
+  gamepadMinVibration:r=0.05
+  cameraSmooth:r=0
+  cameraSpeed:r=0.95
+  cameraMouseSpeed:r=1.4
+  cameraFpsPhysMult:r=0.5
+  vrCameraFpsPhysMult:r=0
+  invertY:b=no
+  invertX:b=no
+  invertT:b=no
+  invertYTank:b=no
+  invertYShip:b=no
+  invertYHelicopter:b=no
+  invertYHelicopterGunner:b=no
+  invertYWalker:b=no
+  invertYSpectator:b=no
+  invertYSubmarine:b=no
+  cameraInvertY:b=no
+  isXChgSticks:b=no
+  secondaryInvert:b=no
+  secondaryXChgSticks:b=no
+  zoomForTurret:b=no
+  isVibration:b=no
+  forceGain:r=1
+  cameraShakeMultiplier:r=1
+  vrCameraShakeMultiplier:r=1
+}
