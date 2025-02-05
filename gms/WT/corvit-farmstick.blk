@@ -54,12 +54,7 @@ controls{
     }
 
     ID_BOMBS{
-      keyboardKey:i=29
-      joyButton:i=0
-    }
-
-    ID_BOMBS{
-      keyboardKey:i=209
+      keyboardKey:i=207
     }
 
     ID_BOMBS_HELICOPTER{
@@ -72,7 +67,7 @@ controls{
     }
 
     ID_BOMBS_HELICOPTER{
-      joyButton:i=28
+      keyboardKey:i=207
     }
 
     ID_CAMERA_BINOCULARS{
@@ -108,15 +103,11 @@ controls{
     }
 
     ID_CAMERA_FPS_HELICOPTER{
-      keyboardKey:i=60
-    }
-
-    ID_CAMERA_FPS_HELICOPTER{
       joyButton:i=16
     }
 
     ID_CAMERA_FPS_HELICOPTER{
-      joyButton:i=23
+      joyButton:i=22
     }
 
     ID_CAMERA_GUNNER{
@@ -138,11 +129,7 @@ controls{
     }
 
     ID_CAMERA_GUNNER_HELICOPTER{
-      joyButton:i=22
-    }
-
-    ID_CAMERA_NEUTRAL{
-      keyboardKey:i=83
+      joyButton:i=23
     }
 
     ID_CAMERA_NEUTRAL{
@@ -151,6 +138,10 @@ controls{
 
     ID_CAMERA_NEUTRAL{
       keyboardKey:i=42
+    }
+
+    ID_CAMERA_NEUTRAL{
+      keyboardKey:i=58
     }
 
     ID_CAMERA_OPTICS_HELICOPTER{
@@ -204,12 +195,20 @@ controls{
       keyboardKey:i=3
     }
 
+    ID_FIRE_GM_SECONDARY_GUN{
+      keyboardKey:i=199
+    }
+
     ID_FIRE_GM_SPECIAL_GUN{
       mouseButton:i=4
     }
 
     ID_FIRE_GM_SPECIAL_GUN{
       keyboardKey:i=42
+    }
+
+    ID_FIRE_GM_SPECIAL_GUN{
+      keyboardKey:i=207
     }
 
     ID_FIRE_MGUNS_HELICOPTER{
@@ -278,21 +277,17 @@ controls{
       joyButton:i=19
     }
 
+    ID_MPSTATSCREEN{
+      keyboardKey:i=29
+      mouseButton:i=2
+    }
+
     ID_RADIATOR_AUTO{
       keyboardKey:i=19
     }
 
     ID_ROCKETS{
-      keyboardKey:i=42
-      mouseButton:i=0
-    }
-
-    ID_ROCKETS{
-      joyButton:i=0
-    }
-
-    ID_ROCKETS{
-      keyboardKey:i=201
+      keyboardKey:i=199
     }
 
     ID_ROCKETS_HELICOPTER{
@@ -301,10 +296,6 @@ controls{
 
     ID_ROCKETS_HELICOPTER{
       mouseButton:i=1
-    }
-
-    ID_ROCKETS_HELICOPTER{
-      joyButton:i=29
     }
 
     ID_SCREENSHOT{
@@ -388,7 +379,7 @@ controls{
     }
 
     ID_TACTICAL_MAP{
-      mouseButton:i=2
+      keyboardKey:i=209
     }
 
     ID_TANK_NIGHT_VISION{
@@ -397,6 +388,10 @@ controls{
     }
 
     ID_TARGETING_HOLD_GM{}
+    ID_TARGETING_HOLD_GM{
+      mouseButton:i=2
+    }
+
     ID_TARGET_CAMERA_HELICOPTER{}
     ID_TOGGLE_COCKPIT_DOOR{
       keyboardKey:i=29
@@ -428,10 +423,6 @@ controls{
     }
 
     ID_TOGGLE_VIEW{
-      keyboardKey:i=47
-    }
-
-    ID_TOGGLE_VIEW{
       keyboardKey:i=29
       joyButton:i=22
     }
@@ -440,13 +431,12 @@ controls{
       joyButton:i=21
     }
 
-    ID_TOGGLE_VIEW_GM{
-      mouseButton:i=1
+    ID_TOGGLE_VIEW{
+      keyboardKey:i=201
     }
 
-    ID_TOGGLE_VIEW_HELICOPTER{
-      keyboardKey:i=29
-      joyButton:i=0
+    ID_TOGGLE_VIEW_GM{
+      mouseButton:i=1
     }
 
     ID_TOGGLE_VIEW_HELICOPTER{
@@ -456,6 +446,10 @@ controls{
     ID_TOGGLE_VIEW_HELICOPTER{
       keyboardKey:i=29
       joyButton:i=30
+    }
+
+    ID_TOGGLE_VIEW_HELICOPTER{
+      keyboardKey:i=201
     }
 
     ID_TOGGLE_VIEW_HUMAN{
@@ -539,11 +533,11 @@ controls{
     helicopter_pedals_rangeMax{}
     helicopter_pedals_rangeMin{}
     helicopter_zoom_rangeMax{
-      joyButton:i=12
+      joyButton:i=28
     }
 
     helicopter_zoom_rangeMin{
-      joyButton:i=14
+      joyButton:i=29
     }
 
     oil_radiator_rangeMax{
@@ -681,10 +675,6 @@ controls{
     }
 
     helicopter_zoom{
-      axisId:i=6
-      innerDeadzone:r=0
-      inverse:b=yes
-      relSens:r=0.64
       relative:b=yes
     }
 
