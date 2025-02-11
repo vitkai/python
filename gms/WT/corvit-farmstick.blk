@@ -503,19 +503,11 @@ controls{
     }
 
     helicopter_collective_rangeMax{
-      keyboardKey:i=17
-    }
-
-    helicopter_collective_rangeMax{
-      mouseButton:i=5
+      joyButton:i=28
     }
 
     helicopter_collective_rangeMin{
-      keyboardKey:i=31
-    }
-
-    helicopter_collective_rangeMin{
-      mouseButton:i=6
+      joyButton:i=29
     }
 
     helicopter_cyclic_pitch_rangeMax{}
@@ -532,14 +524,6 @@ controls{
 
     helicopter_pedals_rangeMax{}
     helicopter_pedals_rangeMin{}
-    helicopter_zoom_rangeMax{
-      joyButton:i=28
-    }
-
-    helicopter_zoom_rangeMin{
-      joyButton:i=29
-    }
-
     oil_radiator_rangeMax{
       keyboardKey:i=200
     }
@@ -593,15 +577,10 @@ controls{
     }
 
     throttle_rangeMax{
-      mouseButton:i=5
-    }
-
-    throttle_rangeMin{}
-    zoom_rangeMax{
       joyButton:i=28
     }
 
-    zoom_rangeMin{
+    throttle_rangeMin{
       joyButton:i=29
     }
   }
@@ -647,6 +626,9 @@ controls{
 
     helicopter_collective{
       mouseAxisId:i=-1
+      innerDeadzone:r=0
+      kMul:r=0.55
+      relSens:r=0.49
     }
 
     helicopter_cyclic_pitch{
@@ -675,6 +657,7 @@ controls{
     }
 
     helicopter_zoom{
+      mouseAxisId:i=6
       relative:b=yes
     }
 
@@ -702,6 +685,13 @@ controls{
       innerDeadzone:r=0
     }
 
+    throttle{
+      mouseAxisId:i=-1
+      innerDeadzone:r=0
+      kMul:r=0.59
+      relSens:r=0.25
+    }
+
     trim_ailerons{
       innerDeadzone:r=0.05
     }
@@ -723,8 +713,8 @@ controls{
     }
 
     zoom{
+      mouseAxisId:i=2
       innerDeadzone:r=0.05
-      relative:b=yes
     }
   }
 
@@ -838,8 +828,8 @@ settings{
   aimAccelerationDelayWalker:r=0.5
   aimAccelerationDelayShip:r=0.5
   aimAccelerationDelaySubmarine:r=0.5
-  mouseZMultAir:r=0.5
-  mouseZMultHelicopter:r=0.5
+  mouseZMultAir:r=1
+  mouseZMultHelicopter:r=1
   mouseZMultTank:r=0.5
   mouseZMultShip:r=0.5
   mouseZMultSubmarine:r=0.5
