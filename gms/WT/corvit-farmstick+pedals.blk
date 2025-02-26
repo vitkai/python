@@ -611,10 +611,12 @@ controls{
     }
 
     brake_left{
+      axisId:i=9
       relSens:r=0.81
     }
 
     brake_right{
+      axisId:i=8
       relSens:r=0.81
     }
 
@@ -694,9 +696,9 @@ controls{
     }
 
     rudder{
-      axisId:i=0
-      innerDeadzone:r=0.02
+      axisId:i=10
       nonlinearity:r=0.5
+      kMul:r=1.05
     }
 
     ship_zoom{
