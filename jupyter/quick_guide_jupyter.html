@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Guide to Python Jupyter Usage</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; }
+        code { background-color: #f4f4f4; padding: 2px 4px; border-radius: 4px; }
+        pre { background-color: #f4f4f4; padding: 10px; border-radius: 4px; overflow-x: auto; }
+        h2 { color: #2a7ae2; }
+    </style>
+</head>
+<body>
+    <h1>🚀 Quick Guide to Python Jupyter Usage</h1>
+
+    <h2>🧰 1. What is Jupyter Notebook?</h2>
+    <p>Jupyter Notebooks let you write and run Python code in an interactive, cell-based format—great for data science, experimentation, and learning.</p>
+
+    <h2>📦 2. How to Launch</h2>
+    <ul>
+        <li>Install Jupyter via Anaconda (recommended) or <code>pip install notebook</code></li>
+        <li>Run:</li>
+    </ul>
+    <pre><code>jupyter notebook</code></pre>
+    <p>This will open it in your browser.</p>
+
+    <h2>🔹 3. Notebook Interface Basics</h2>
+    <ul>
+        <li><strong>Code Cells</strong>: Write Python code here</li>
+        <li><strong>Markdown Cells</strong>: Write formatted text using Markdown</li>
+        <li><strong>Run Cell</strong>: <code>Shift + Enter</code></li>
+        <li><strong>Add Cell</strong>: <code>+</code> icon or <code>B</code> (below), <code>A</code> (above)</li>
+    </ul>
+
+    <h2>🐍 4. Basic Python in Jupyter</h2>
+    <pre><code># Simple output
+print("Hello, Jupyter!")
+
+# Math
+x = 10
+y = 5
+x + y
+
+# Loop
+for i in range(3):
+    print(i)</code></pre>
+
+    <h2>📊 5. Plotting (example with matplotlib)</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+x = [1, 2, 3]
+y = [2, 4, 1]
+plt.plot(x, y)
+plt.title("Simple Plot")
+plt.show()</code></pre>
+
+    <h2>🧪 6. Data Handling (with pandas)</h2>
+    <pre><code>import pandas as pd
+
+# Create DataFrame
+df = pd.DataFrame({
+    'Name': ['Alice', 'Bob'],
+    'Age': [25, 30]
+})
+print(df)
+
+# Read CSV
+# df = pd.read_csv('your_file.csv')</code></pre>
+
+    <h2>🔍 7. Magic Commands</h2>
+    <pre><code>%timeit x = sum(range(1000))  # Timing code
+%matplotlib inline  # Plots inline</code></pre>
+
+    <h2>💾 8. Save & Export</h2>
+    <ul>
+        <li>Save: <code>Ctrl + S</code> or File &gt; Save</li>
+        <li>Export: File &gt; Download as (HTML, PDF, Python script)</li>
+    </ul>
+</body>
+</html>
