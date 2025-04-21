@@ -1,0 +1,13 @@
+pip install virtualenv
+
+# Create a virtual environment
+python -m venv myenv
+
+# Activate it (Windows)
+myenv\Scripts\activate
+
+# Activate it (macOS/Linux)
+source myenv/bin/activate
+
+# create dependencies
+pip freeze > requirements.txt
