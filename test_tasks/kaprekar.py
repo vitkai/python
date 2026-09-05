@@ -4,7 +4,7 @@ def kaprekar_step(number):
     smaller = int("".join(sorted(digits)))
     bigger = int("".join(sorted(digits, reverse=True)))
 
-    return bigger - smaller
+    return bigger - smaller, bigger, smaller
 
 
 def main(number):
@@ -18,15 +18,13 @@ def main(number):
         raise ValueError("Digits must not be identical.")
 
     previous = number
+    seen = set()
 
     while True:
-        result = kaprekar_step(previous)
+        # Remember this number
+        seen.add(previous)
 
-        print(f"{previous} => ", end="")
-        
-        digits = str(previous)
-        smaller = int("".join(sorted(digits)))
-        bigger = int("".join(sorted(digits, reverse=True)))
+        result, bigger, smaller = kaprekar_step(previous)
 
         print(f"{bigger}-{smaller}={result}")
 
@@ -34,8 +32,9 @@ def main(number):
         if result < 10:
             break
 
-        # Stop if result is equal to the previous number
-        if result == previous:
+        # Stop if result was already encountered
+        if result in seen:
+            print(f"Cycle detected: {result} has already occurred.")
             break
 
         previous = result
