@@ -870,7 +870,6 @@ controls{
 
     throttle{
       innerDeadzone:r=0.05
-      relative:b=no
     }
 
     trim_ailerons{
