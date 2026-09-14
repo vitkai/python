@@ -346,6 +346,14 @@ controls{
     }
 
     ID_LOCK_TARGET{}
+    ID_LOCK_TARGETING_AT_POINT_HELICOPTER{
+      keyboardKey:i=33
+    }
+
+    ID_LOCK_TARGETING_AT_POINT_HELICOPTER{
+      mouseButton:i=4
+    }
+
     ID_MPSTATSCREEN{
       keyboardKey:i=15
     }
@@ -789,7 +797,6 @@ controls{
     }
 
     helicopter_collective{
-      mouseAxisId:i=6
       innerDeadzone:r=0
       kMul:r=0.55
       relSens:r=0.49
@@ -814,7 +821,7 @@ controls{
     }
 
     helicopter_pedals{
-      axisId:i=10
+      axisId:i=0
       innerDeadzone:r=0
       nonlinearity:r=0.2
       kMul:r=1.1
@@ -823,7 +830,6 @@ controls{
 
     helicopter_zoom{
       axisId:i=6
-      innerDeadzone:r=0.05
       inverse:b=yes
       kMul:r=1.53
       relative:b=yes
