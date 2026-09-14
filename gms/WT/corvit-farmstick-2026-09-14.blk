@@ -680,7 +680,6 @@ controls{
     human_uav_pitch_rangeMin{}
     human_uav_roll_rangeMax{}
     human_uav_roll_rangeMin{}
-
     human_uav_yaw_rangeMax{}
     human_uav_yaw_rangeMin{}
     oil_radiator_rangeMax{
@@ -735,6 +734,10 @@ controls{
       joyButton:i=30
     }
 
+    throttle_rangeMax{}
+    throttle_rangeMin{}
+    vtol_rangeMax{}
+    vtol_rangeMin{}
   }
 
   axes{
@@ -865,6 +868,11 @@ controls{
       innerDeadzone:r=0
     }
 
+    throttle{
+      innerDeadzone:r=0.05
+      relative:b=no
+    }
+
     trim_ailerons{
       innerDeadzone:r=0.05
     }
@@ -883,6 +891,10 @@ controls{
 
     turret_y{
       innerDeadzone:r=0.05
+    }
+
+    vtol{
+      relative:b=no
     }
 
     zoom{
