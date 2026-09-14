@@ -789,7 +789,7 @@ controls{
     }
 
     helicopter_collective{
-      mouseAxisId:i=-1
+      mouseAxisId:i=6
       innerDeadzone:r=0
       kMul:r=0.55
       relSens:r=0.49
@@ -822,7 +822,10 @@ controls{
     }
 
     helicopter_zoom{
-      mouseAxisId:i=6
+      axisId:i=6
+      innerDeadzone:r=0.05
+      inverse:b=yes
+      kMul:r=1.53
       relative:b=yes
     }
 
