@@ -96,10 +96,6 @@ controls{
     }
 
     ID_CAMERA_DRIVER{
-      mouseButton:i=4
-    }
-
-    ID_CAMERA_DRIVER{
       keyboardKey:i=46
     }
 
@@ -346,25 +342,17 @@ controls{
     }
 
     ID_LOCK_TARGET{}
-    ID_LOCK_TARGETING_AT_POINT_HELICOPTER{
-      keyboardKey:i=33
+    ID_MPSTATSCREEN{
+      keyboardKey:i=29
+      mouseButton:i=2
     }
 
-    ID_LOCK_TARGETING_AT_POINT_HELICOPTER{
-      mouseButton:i=4
+    ID_MPSTATSCREEN{
+      mouseButton:i=3
     }
 
     ID_MPSTATSCREEN{
       keyboardKey:i=15
-    }
-
-    ID_MPSTATSCREEN{
-      joyButton:i=19
-    }
-
-    ID_MPSTATSCREEN{
-      keyboardKey:i=29
-      mouseButton:i=2
     }
 
     ID_OPEN_VISUAL_WEAPON_SELECTOR{
@@ -382,10 +370,6 @@ controls{
     ID_ROCKETS{
       keyboardKey:i=42
       keyboardKey:i=30
-    }
-
-    ID_ROCKETS{
-      mouseButton:i=4
     }
 
     ID_ROCKETS{
@@ -519,7 +503,7 @@ controls{
     }
 
     ID_TACTICAL_MAP{
-      mouseButton:i=3
+      mouseButton:i=4
     }
 
     ID_TANK_NIGHT_VISION{
@@ -644,7 +628,15 @@ controls{
 
     head_pos_x{}
     head_pos_x_rangeMax{}
+    head_pos_x_rangeMax{
+      keyboardKey:i=200
+    }
+
     head_pos_x_rangeMin{}
+    head_pos_x_rangeMin{
+      keyboardKey:i=208
+    }
+
     head_pos_x_rangeSet{}
     head_pos_y{}
     head_pos_y_rangeMax{}
@@ -794,6 +786,14 @@ controls{
 
     gm_zoom{
       innerDeadzone:r=0
+    }
+
+    head_pos_x{
+      relative:b=yes
+    }
+
+    head_pos_z{
+      axisId:i=7
     }
 
     helicopter_collective{
