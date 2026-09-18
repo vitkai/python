@@ -869,8 +869,9 @@ controls{
     }
 
     rudder{
-      axisId:i=0
+      axisId:i=10
       nonlinearity:r=0.5
+      kMul:r=1.21
     }
 
     ship_zoom{
@@ -959,9 +960,19 @@ controls{
     }
 
     joystick{
+      connected:b=yes
+      devId:t="10F5:7012"
+      axesOffset:i=8
+      name:t="VelocityOne Rudder"
+      buttonsOffset:i=33
+      buttonsCount:i=0
+      axesCount:i=3
+    }
+
+    joystick{
       connected:b=no
       devId:t="06A3:0763"
-      axesOffset:i=8
+      axesOffset:i=11
       name:t="Saitek Pro Flight Rudder Pedals"
       buttonsOffset:i=33
       buttonsCount:i=0
@@ -971,7 +982,7 @@ controls{
     joystick{
       connected:b=no
       devId:t="046D:C215"
-      axesOffset:i=11
+      axesOffset:i=14
       name:t="Logitech Extreme 3D"
       buttonsOffset:i=33
       buttonsCount:i=16
@@ -981,7 +992,7 @@ controls{
     joystick{
       connected:b=no
       devId:t="11FF:3331"
-      axesOffset:i=17
+      axesOffset:i=20
       name:t="PC Game Controller"
       buttonsOffset:i=49
       buttonsCount:i=16
