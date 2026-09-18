@@ -781,6 +781,7 @@ controls{
       axisId:i=1
       mouseAxisId:i=-1
       nonlinearity:r=0.5
+      kMul:r=1.1
       relSens:r=0.81
     }
 
@@ -907,9 +908,8 @@ controls{
 
     zoom{
       axisId:i=6
-      innerDeadzone:r=0.05
       inverse:b=yes
-      kMul:r=1.53
+      kMul:r=2
       relative:b=yes
     }
   }
