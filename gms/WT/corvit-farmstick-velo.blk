@@ -749,13 +749,13 @@ controls{
     }
 
     brake_left{
-      axisId:i=9
+      axisId:i=8
       innerDeadzone:r=0
       relSens:r=0.81
     }
 
     brake_right{
-      axisId:i=8
+      axisId:i=9
       relSens:r=0.81
     }
 
@@ -879,7 +879,8 @@ controls{
     }
 
     throttle{
-      innerDeadzone:r=0.05
+      innerDeadzone:r=0
+      relSens:r=0.64
     }
 
     trim_ailerons{
