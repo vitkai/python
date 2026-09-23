@@ -183,17 +183,16 @@ controls{
     }
 
     ID_DESIGNATE_TARGET{
-      keyboardKey:i=29
-      keyboardKey:i=46
-    }
-
-    ID_DESIGNATE_TARGET{
       keyboardKey:i=42
       keyboardKey:i=46
     }
 
     ID_DESIGNATE_TARGET{
       keyboardKey:i=42
+      mouseButton:i=0
+    }
+
+    ID_DESIGNATE_TARGET{
       mouseButton:i=0
     }
 
@@ -385,11 +384,6 @@ controls{
     }
 
     ID_SCOUT_UAV{
-      keyboardKey:i=46
-      keyboardKey:i=47
-    }
-
-    ID_SCOUT_UAV{
       keyboardKey:i=29
       keyboardKey:i=47
     }
@@ -397,6 +391,10 @@ controls{
     ID_SCOUT_UAV{
       keyboardKey:i=42
       keyboardKey:i=47
+    }
+
+    ID_SCOUT_UAV{
+      mouseButton:i=1
     }
 
     ID_SCREENSHOT{
@@ -746,6 +744,7 @@ controls{
       mouseAxisId:i=-1
       innerDeadzone:r=0.02
       nonlinearity:r=0.5
+      kMul:r=1.2
     }
 
     brake_left{
@@ -781,7 +780,7 @@ controls{
       axisId:i=1
       mouseAxisId:i=-1
       nonlinearity:r=0.5
-      kMul:r=1.1
+      kMul:r=1.15
       relSens:r=0.81
     }
 
@@ -807,13 +806,15 @@ controls{
       axisId:i=1
       innerDeadzone:r=0
       nonlinearity:r=1
+      kMul:r=1.21
       relSens:r=0.81
     }
 
     helicopter_cyclic_roll{
       axisId:i=2
       innerDeadzone:r=0
-      nonlinearity:r=1
+      nonlinearity:r=0.5
+      kMul:r=1.25
       relSens:r=0.81
     }
 
@@ -822,10 +823,10 @@ controls{
     }
 
     helicopter_pedals{
-      axisId:i=0
+      axisId:i=10
       innerDeadzone:r=0
-      nonlinearity:r=0.2
-      kMul:r=1.1
+      nonlinearity:r=0.5
+      kMul:r=1.2
       relSens:r=0.81
     }
 
@@ -910,6 +911,7 @@ controls{
     zoom{
       axisId:i=6
       inverse:b=yes
+      nonlinearity:r=0.2
       kMul:r=2
       relative:b=yes
     }
@@ -923,7 +925,7 @@ controls{
     USEROPT_ELEVATOR_MULTIPLIER:i=100
     USEROPT_FIX_GUN_IN_MOUSE_LOOK:b=no
     USEROPT_FREE_CAMERA_INERTIA:i=77
-    USEROPT_FREE_CAMERA_ZOOM_SPEED:i=50
+    USEROPT_FREE_CAMERA_ZOOM_SPEED:i=200
     USEROPT_GUNNER_VIEW_SENSE:i=100
     USEROPT_GUNNER_VIEW_ZOOM_SENS:i=100
     USEROPT_HELPERS_MODE:i=3
