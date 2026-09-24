@@ -31,6 +31,10 @@ controls{
       joyButton:i=3
     }
 
+    ID_AGM_LOCK_HELICOPTER{
+      joyButton:i=19
+    }
+
     ID_AIR_BRAKE{
       keyboardKey:i=49
     }
@@ -69,6 +73,10 @@ controls{
 
     ID_BOMBS_HELICOPTER{
       keyboardKey:i=207
+    }
+
+    ID_BOMBS_HELICOPTER{
+      joyButton:i=29
     }
 
     ID_CAMERA_BINOCULARS{
@@ -272,7 +280,7 @@ controls{
 
     ID_FIRE_SECONDARY{}
     ID_FIRE_SECONDARY_HELICOPTER{
-      mouseButton:i=0
+      mouseButton:i=1
     }
 
     ID_FLAPS{}
@@ -381,6 +389,10 @@ controls{
 
     ID_ROCKETS_HELICOPTER{
       mouseButton:i=1
+    }
+
+    ID_ROCKETS_HELICOPTER{
+      joyButton:i=28
     }
 
     ID_SCOUT_UAV{
@@ -593,6 +605,10 @@ controls{
 
     ID_WEAPON_LOCK_HELICOPTER{
       joyButton:i=4
+    }
+
+    ID_WEAPON_LOCK_HELICOPTER{
+      joyButton:i=19
     }
 
     ID_ZOOM_TOGGLE{}
@@ -872,7 +888,7 @@ controls{
     rudder{
       axisId:i=10
       nonlinearity:r=0.5
-      kMul:r=1.21
+      kMul:r=1.18
     }
 
     ship_zoom{
