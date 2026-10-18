@@ -698,6 +698,10 @@ controls{
     head_pos_y_rangeMax{}
     head_pos_y_rangeMin{}
     head_pos_y_rangeSet{}
+    head_pos_y_rangeSet{
+      joyButton:i=33
+    }
+
     head_pos_z{}
     head_pos_z_rangeMax{}
     head_pos_z_rangeMin{}
@@ -955,8 +959,10 @@ controls{
     }
 
     throttle{
+      axisId:i=7
       innerDeadzone:r=0
-      relSens:r=0.64
+      nonlinearity:r=0.5
+      relSens:r=0.25
     }
 
     trim_ailerons{
@@ -1005,7 +1011,6 @@ controls{
     USEROPT_FIX_GUN_IN_MOUSE_LOOK:b=no
     USEROPT_FREE_CAMERA_INERTIA:i=77
     USEROPT_FREE_CAMERA_ZOOM_SPEED:i=200
-    USEROPT_GUNNER_INVERTY:b=yes
     USEROPT_GUNNER_VIEW_SENSE:i=100
     USEROPT_GUNNER_VIEW_ZOOM_SENS:i=50
     USEROPT_HELPERS_MODE:i=3
@@ -1156,7 +1161,7 @@ settings{
   invertYSubmarine:b=no
   cameraInvertY:b=no
   isXChgSticks:b=no
-  secondaryInvert:b=yes
+  secondaryInvert:b=no
   secondaryXChgSticks:b=no
   zoomForTurret:b=no
   isVibration:b=no
