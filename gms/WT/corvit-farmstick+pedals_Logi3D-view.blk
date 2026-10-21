@@ -857,21 +857,21 @@ controls{
     }
 
     head_pos_x{
-      axisId:i=12
-      innerDeadzone:r=0.1
+      axisId:i=11
+      innerDeadzone:r=0.2
       nonlinearity:r=1
       relative:b=yes
     }
 
     head_pos_y{
       axisId:i=13
-      innerDeadzone:r=0.1
+      innerDeadzone:r=0.2
       nonlinearity:r=1
     }
 
     head_pos_z{
       axisId:i=12
-      innerDeadzone:r=0.1
+      innerDeadzone:r=0.2
       nonlinearity:r=1
     }
 
