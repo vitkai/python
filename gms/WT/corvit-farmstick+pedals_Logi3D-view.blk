@@ -523,15 +523,15 @@ controls{
     }
 
     ID_TACTICAL_MAP{
-      keyboardKey:i=209
-    }
-
-    ID_TACTICAL_MAP{
       mouseButton:i=4
     }
 
     ID_TACTICAL_MAP{
       joyButton:i=37
+    }
+
+    ID_TACTICAL_MAP{
+      keyboardKey:i=50
     }
 
     ID_TANK_NIGHT_VISION{
