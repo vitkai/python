@@ -392,6 +392,11 @@ controls{
       keyboardKey:i=19
     }
 
+    ID_RELOAD_GUNS{
+      keyboardKey:i=29
+      keyboardKey:i=19
+    }
+
     ID_ROCKETS{
       keyboardKey:i=42
       keyboardKey:i=30
@@ -818,13 +823,13 @@ controls{
     }
 
     brake_left{
-      axisId:i=8
+      axisId:i=14
       innerDeadzone:r=0
       relSens:r=0.81
     }
 
     brake_right{
-      axisId:i=9
+      axisId:i=15
       relSens:r=0.81
     }
 
@@ -857,21 +862,21 @@ controls{
     }
 
     head_pos_x{
-      axisId:i=11
-      innerDeadzone:r=0.2
+      axisId:i=8
+      innerDeadzone:r=0.3
       nonlinearity:r=1
       relative:b=yes
     }
 
     head_pos_y{
-      axisId:i=13
-      innerDeadzone:r=0.2
+      axisId:i=10
+      innerDeadzone:r=0.3
       nonlinearity:r=1
     }
 
     head_pos_z{
-      axisId:i=12
-      innerDeadzone:r=0.2
+      axisId:i=9
+      innerDeadzone:r=0.3
       nonlinearity:r=1
     }
 
@@ -902,7 +907,7 @@ controls{
     }
 
     helicopter_pedals{
-      axisId:i=10
+      axisId:i=16
       innerDeadzone:r=0
       nonlinearity:r=0.5
       kMul:r=1.2
@@ -930,7 +935,7 @@ controls{
     }
 
     human_uav_yaw{
-      axisId:i=10
+      axisId:i=16
       innerDeadzone:r=0
       nonlinearity:r=0.5
       kMul:r=1.05
@@ -949,7 +954,7 @@ controls{
     }
 
     rudder{
-      axisId:i=10
+      axisId:i=16
       nonlinearity:r=0.5
       kMul:r=1.18
     }
@@ -978,13 +983,13 @@ controls{
     }
 
     turret_x{
-      axisId:i=12
+      axisId:i=9
       innerDeadzone:r=0.05
       relSens:r=0.25
     }
 
     turret_y{
-      axisId:i=11
+      axisId:i=8
       innerDeadzone:r=0.05
       relSens:r=0.25
     }
@@ -1049,22 +1054,22 @@ controls{
 
     joystick{
       connected:b=yes
-      devId:t="10F5:7012"
-      axesOffset:i=8
-      name:t="VelocityOne Rudder"
-      buttonsOffset:i=33
-      buttonsCount:i=0
-      axesCount:i=3
-    }
-
-    joystick{
-      connected:b=yes
       devId:t="046D:C215"
-      axesOffset:i=11
+      axesOffset:i=8
       name:t="Logitech Extreme 3D"
       buttonsOffset:i=33
       buttonsCount:i=16
       axesCount:i=6
+    }
+
+    joystick{
+      connected:b=yes
+      devId:t="10F5:7012"
+      axesOffset:i=14
+      name:t="VelocityOne Rudder"
+      buttonsOffset:i=49
+      buttonsCount:i=0
+      axesCount:i=3
     }
 
     joystick{
